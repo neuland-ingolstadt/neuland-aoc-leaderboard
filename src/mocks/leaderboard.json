@@ -1,0 +1,151 @@
+{
+  "event": "2025",
+  "owner_id": 999000,
+  "members": {
+    "1001": {
+      "id": 1001,
+      "name": "Alice (The Pro)",
+      "stars": 24,
+      "local_score": 240,
+      "global_score": 150,
+      "last_star_ts": 1765515900,
+      "completion_day_level": {
+        "1": { "1": { "get_star_ts": 1764565300 }, "2": { "get_star_ts": 1764565400 } },
+        "2": { "1": { "get_star_ts": 1764651700 }, "2": { "get_star_ts": 1764651800 } },
+        "3": { "1": { "get_star_ts": 1764738100 }, "2": { "get_star_ts": 1764738250 } },
+        "4": { "1": { "get_star_ts": 1764824500 }, "2": { "get_star_ts": 1764824600 } },
+        "5": { "1": { "get_star_ts": 1764910900 }, "2": { "get_star_ts": 1764911100 } },
+        "12": { "1": { "get_star_ts": 1765515800 }, "2": { "get_star_ts": 1765515900 } }
+      }
+    },
+    "1002": {
+      "id": 1002,
+      "name": "Bob (Morning Person)",
+      "stars": 24,
+      "local_score": 200,
+      "global_score": 0,
+      "last_star_ts": 1765530000,
+      "completion_day_level": {
+        "1": { "1": { "get_star_ts": 1764572400 }, "2": { "get_star_ts": 1764573000 } },
+        "2": { "1": { "get_star_ts": 1764658800 }, "2": { "get_star_ts": 1764660000 } },
+        "3": { "1": { "get_star_ts": 1764745200 }, "2": { "get_star_ts": 1764746000 } },
+        "4": { "1": { "get_star_ts": 1764831600 }, "2": { "get_star_ts": 1764833000 } },
+        "5": { "1": { "get_star_ts": 1764918000 }, "2": { "get_star_ts": 1764920000 } },
+        "12": { "1": { "get_star_ts": 1765522800 }, "2": { "get_star_ts": 1765530000 } }
+      }
+    },
+    "1003": {
+      "id": 1003,
+      "name": "Charlie (The Struggle)",
+      "stars": 12,
+      "local_score": 110,
+      "global_score": 0,
+      "last_star_ts": 1765550000,
+      "completion_day_level": {
+        "1": { "1": { "get_star_ts": 1764566000 }, "2": { "get_star_ts": 1764600000 } },
+        "2": { "1": { "get_star_ts": 1764653000 }, "2": { "get_star_ts": 1764690000 } },
+        "3": { "1": { "get_star_ts": 1764740000 }, "2": { "get_star_ts": 1764780000 } },
+        "12": { "1": { "get_star_ts": 1765540000 }, "2": { "get_star_ts": 1765550000 } }
+      }
+    },
+    "1004": {
+      "id": 1004,
+      "name": "Dave (Quitter)",
+      "stars": 6,
+      "local_score": 50,
+      "global_score": 0,
+      "last_star_ts": 1764740000,
+      "completion_day_level": {
+        "1": { "1": { "get_star_ts": 1764567000 }, "2": { "get_star_ts": 1764568000 } },
+        "2": { "1": { "get_star_ts": 1764654000 }, "2": { "get_star_ts": 1764655000 } },
+        "3": { "1": { "get_star_ts": 1764739000 }, "2": { "get_star_ts": 1764740000 } }
+      }
+    },
+    "1005": {
+      "id": 1005,
+      "name": null,
+      "stars": 10,
+      "local_score": 85,
+      "global_score": 0,
+      "last_star_ts": 1764925000,
+      "completion_day_level": {
+        "1": { "1": { "get_star_ts": 1764580000 }, "2": { "get_star_ts": 1764585000 } },
+        "2": { "1": { "get_star_ts": 1764670000 }, "2": { "get_star_ts": 1764672000 } },
+        "3": { "1": { "get_star_ts": 1764750000 }, "2": { "get_star_ts": 1764755000 } },
+        "4": { "1": { "get_star_ts": 1764840000 }, "2": { "get_star_ts": 1764842000 } },
+        "5": { "1": { "get_star_ts": 1764920000 }, "2": { "get_star_ts": 1764925000 } }
+      }
+    },
+    "1006": {
+      "id": 1006,
+      "name": "Frank (Part 1 Only)",
+      "stars": 5,
+      "local_score": 40,
+      "global_score": 0,
+      "last_star_ts": 1764915000,
+      "completion_day_level": {
+        "1": { "1": { "get_star_ts": 1764566500 } },
+        "2": { "1": { "get_star_ts": 1764653500 } },
+        "3": { "1": { "get_star_ts": 1764739500 } },
+        "4": { "1": { "get_star_ts": 1764826000 } },
+        "5": { "1": { "get_star_ts": 1764915000 } }
+      }
+    },
+    "1007": {
+      "id": 1007,
+      "name": "Grace (Late Starter)",
+      "stars": 8,
+      "local_score": 60,
+      "global_score": 0,
+      "last_star_ts": 1764850000,
+      "completion_day_level": {
+        "3": { "1": { "get_star_ts": 1764760000 }, "2": { "get_star_ts": 1764761000 } },
+        "4": { "1": { "get_star_ts": 1764828000 }, "2": { "get_star_ts": 1764829000 } },
+        "5": { "1": { "get_star_ts": 1764914000 }, "2": { "get_star_ts": 1764916000 } },
+        "12": { "1": { "get_star_ts": 1765520000 }, "2": { "get_star_ts": 1765525000 } }
+      }
+    },
+    "1008": {
+      "id": 1008,
+      "name": "Heidi (Night Owl)",
+      "stars": 24,
+      "local_score": 180,
+      "global_score": 0,
+      "last_star_ts": 1765580000,
+      "completion_day_level": {
+        "1": { "1": { "get_star_ts": 1764610000 }, "2": { "get_star_ts": 1764611000 } },
+        "2": { "1": { "get_star_ts": 1764700000 }, "2": { "get_star_ts": 1764702000 } },
+        "3": { "1": { "get_star_ts": 1764790000 }, "2": { "get_star_ts": 1764791000 } },
+        "12": { "1": { "get_star_ts": 1765575000 }, "2": { "get_star_ts": 1765580000 } }
+      }
+    },
+    "1009": {
+      "id": 1009,
+      "name": "Ivan (Erratic)",
+      "stars": 14,
+      "local_score": 95,
+      "global_score": 0,
+      "last_star_ts": 1765530000,
+      "completion_day_level": {
+        "1": { "1": { "get_star_ts": 1764569000 }, "2": { "get_star_ts": 1764569500 } },
+        "3": { "1": { "get_star_ts": 1764741000 }, "2": { "get_star_ts": 1764742000 } },
+        "5": { "1": { "get_star_ts": 1764912000 }, "2": { "get_star_ts": 1764913000 } },
+        "12": { "1": { "get_star_ts": 1765528000 }, "2": { "get_star_ts": 1765530000 } }
+      }
+    },
+    "1010": {
+      "id": 1010,
+      "name": "Judy (Slow & Steady)",
+      "stars": 18,
+      "local_score": 140,
+      "global_score": 0,
+      "last_star_ts": 1765560000,
+      "completion_day_level": {
+        "1": { "1": { "get_star_ts": 1764590000 }, "2": { "get_star_ts": 1764600000 } },
+        "2": { "1": { "get_star_ts": 1764680000 }, "2": { "get_star_ts": 1764685000 } },
+        "3": { "1": { "get_star_ts": 1764760000 }, "2": { "get_star_ts": 1764770000 } },
+        "12": { "1": { "get_star_ts": 1765550000 }, "2": { "get_star_ts": 1765560000 } }
+      }
+    }
+  }
+}
