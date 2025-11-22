@@ -7,7 +7,6 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -62,7 +61,7 @@ export default function Chart({ members, lastUpdated }: Props) {
                                 cursor={false}
                                 content={<ChartTooltipContent hideLabel />}
                             />
-                            <Bar dataKey="local_score" fill="#238192" radius={5} />
+                            <Bar dataKey="local_score" fill="var(--accent)" radius={5} />
                         </BarChart>
                     </ChartContainer>
                 </CardContent>
