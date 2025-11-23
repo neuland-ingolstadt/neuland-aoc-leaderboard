@@ -102,7 +102,7 @@ export default function Header() {
                         </CardHeader>
                         <CardContent>
                           <CopyCodeInput
-                            code={"CODEAUSTAUSCHEN"}
+                            code={"CODEAUSTAUSCHEN"} // TODO: get invite code from .env file
                           ></CopyCodeInput>
                         </CardContent>
                       </Card>
