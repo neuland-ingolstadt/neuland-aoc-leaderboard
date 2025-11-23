@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
     <body
-        className={`${sora.variable} ${azeret.variable}`}
+        className={`${sora.variable} ${azeret.variable} font-sora`}
     >
     <ThemeProvider
         attribute={"class"}

@@ -15,9 +15,12 @@ export default async function Page() {
     const fetchedData: Leaderboard = await test.json();
     const currentTime = new Date();
 
-    const members = Object.values(fetchedData.members);
+    const members = Object.values(fetchedData.members).sort((a, b) => b.local_score - a.local_score);
 
     return (
-        <Chart members={members} lastUpdated={currentTime}/>
+        <div>
+            <h1 className={"text-4xl font-bold text-center font-mono"}>Willkommen zum Neuland Leaderboard für den Advent Of Code 2025</h1>
+            <Chart members={members} lastUpdated={currentTime}/>
+        </div>
     )
 }
