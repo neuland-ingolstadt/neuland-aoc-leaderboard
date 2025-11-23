@@ -4,7 +4,7 @@
   "members": {
     "1001": {
       "id": 1001,
-      "name": "Alice (The Pro)",
+      "name": "SparkyPixel",
       "stars": 24,
       "local_score": 240,
       "global_score": 150,
@@ -20,7 +20,7 @@
     },
     "1002": {
       "id": 1002,
-      "name": "Bob (Morning Person)",
+      "name": "Bob",
       "stars": 24,
       "local_score": 200,
       "global_score": 0,
@@ -36,7 +36,7 @@
     },
     "1003": {
       "id": 1003,
-      "name": "Charlie (The Struggle)",
+      "name": "Charlie",
       "stars": 12,
       "local_score": 110,
       "global_score": 0,
@@ -50,7 +50,7 @@
     },
     "1004": {
       "id": 1004,
-      "name": "Dave (Quitter)",
+      "name": "Dave",
       "stars": 6,
       "local_score": 50,
       "global_score": 0,
@@ -78,7 +78,7 @@
     },
     "1006": {
       "id": 1006,
-      "name": "Frank (Part 1 Only)",
+      "name": "Frank",
       "stars": 5,
       "local_score": 40,
       "global_score": 0,
@@ -93,7 +93,7 @@
     },
     "1007": {
       "id": 1007,
-      "name": "Grace (Late Starter)",
+      "name": "Grace",
       "stars": 8,
       "local_score": 60,
       "global_score": 0,
@@ -107,7 +107,7 @@
     },
     "1008": {
       "id": 1008,
-      "name": "Heidi (Night Owl)",
+      "name": "Heidi",
       "stars": 24,
       "local_score": 180,
       "global_score": 0,
@@ -121,7 +121,7 @@
     },
     "1009": {
       "id": 1009,
-      "name": "Ivan (Erratic)",
+      "name": "Ivan",
       "stars": 14,
       "local_score": 95,
       "global_score": 0,
@@ -135,7 +135,7 @@
     },
     "1010": {
       "id": 1010,
-      "name": "Judy (Slow & Steady)",
+      "name": "Judy",
       "stars": 18,
       "local_score": 140,
       "global_score": 0,
