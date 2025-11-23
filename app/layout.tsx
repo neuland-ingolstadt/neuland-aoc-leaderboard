@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Sora, Azeret_Mono } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import {ThemeProvider} from "@/src/components/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const sora = Sora({
+    subsets: ["latin"],
+    weight: ["200", "400", "700"],
+    variable: "--font-sora"
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const azeret = Azeret_Mono ({
+    subsets: ["latin"],
+    weight: ["200", "400", "600", "800"],
+    variable: "--font-azeret"
+})
 
 export const metadata: Metadata = {
   title: "Neuland Advent Of Code Leaderboard",
@@ -25,15 +27,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-      <ThemeProvider
-          attribute={"class"}
-          defaultTheme={"dark"}
-          enableSystem={false}
-          disableTransitionOnChange
-          >
+    <body
+        className={`${sora.variable} ${azeret.variable}`}
+    >
+    <ThemeProvider
+        attribute={"class"}
+        defaultTheme={"dark"}
+        enableSystem={false}
+        disableTransitionOnChange
+    >
         {children}
       </ThemeProvider>
       </body>
