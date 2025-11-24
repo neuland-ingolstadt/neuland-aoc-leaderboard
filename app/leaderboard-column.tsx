@@ -1,0 +1,33 @@
+"use client"
+
+import { LeaderboardMember } from "@/src/types/leaderboard"
+import { ColumnDef } from "@tanstack/react-table"
+
+
+export const columns: ColumnDef<LeaderboardMember>[] = [
+  {
+    accessorKey: "name",
+    header: "Username",
+    cell: ({row}) => {
+      const name = row.getValue("name") ?? "((Kein Name))";
+      return name;
+    }
+  },
+  {
+    accessorKey: "local_score",
+    header: "Score",
+  },
+  {
+    accessorKey: "stars",
+    header: "Sterne",
+  },
+  {
+    accessorKey: "last_star_ts",
+    header: "Zeitpunkt neuste Einreichung",
+    cell: ({row}) => {
+      const timestamp = parseInt(row.getValue("last_star_ts"));
+      const date = new Date(timestamp);
+      return date.toLocaleTimeString("de-DE")+ " " + date.toLocaleDateString("de-DE") ;
+    }
+  },
+]
