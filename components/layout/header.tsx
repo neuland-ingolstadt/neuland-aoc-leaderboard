@@ -1,8 +1,20 @@
 import { CopyCodeInput } from "@/src/components/CopyCodeInput";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
 export default function Header() {
   return (
@@ -41,7 +53,8 @@ export default function Header() {
               Wir bieten dir eine geschlossene Rangliste, der du beitreten
               kannst, um dich mit anderen Neuland Mitgliedern zu messen.{" "}
               <strong className={"text-white"}>
-                Der Gewinner erhält eine große 3D-gedruckte Ente als Preis.
+                Der Teilnehmer, der am Ende auf Platz 1 landet, erhält einen
+                kleinen Preis.
               </strong>
             </CardDescription>
           </CardHeader>
@@ -49,7 +62,9 @@ export default function Header() {
             <div>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button size={"lg"} className={"hover:cursor-pointer"}>Los geht's</Button>
+                  <Button size={"lg"} className={"hover:cursor-pointer"}>
+                    Los geht's
+                  </Button>
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
