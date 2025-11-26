@@ -9,13 +9,14 @@ import {
 import { Leaderboard, LeaderboardMember } from "@/src/types/leaderboard";
 import { LeaderboardTable } from "./leaderboard-data-table";
 import { columns } from "./leaderboard-column";
+import StarScoreChart from "./star-score-chart";
 
 const highScoreMember: LeaderboardMember = {
   id: 1,
   completion_day_level: {},
   last_star_ts: 211,
   local_score: 203,
-  name: "SparkyPixel",
+  name: "Nerd203",
   stars: 7,
 };
 
@@ -24,7 +25,7 @@ const highStarsMember: LeaderboardMember = {
   completion_day_level: {},
   last_star_ts: 102,
   local_score: 203,
-  name: "Pimpermann",
+  name: "Nerd104",
   stars: 7,
 };
 
@@ -35,6 +36,9 @@ export default async function Home() {
   const parsedData: Leaderboard = await data.json();
 
   const memberList = Object.values(parsedData.members);
+  const memberListSorted = memberList.slice().sort((a, b) => {
+    return a.local_score - b.local_score;
+  });
 
   return (
     <>
@@ -67,7 +71,14 @@ export default async function Home() {
             <CardHeader>
               <CardTitle>⏰ Neuste Lösung</CardTitle>
               <CardDescription>
-                {"Am " + new Date(newestCommitMember.last_star_ts).toLocaleDateString("de-DE") + " um " + new Date(newestCommitMember.last_star_ts).toLocaleTimeString("de-DE")}
+                {"Am " +
+                  new Date(newestCommitMember.last_star_ts).toLocaleDateString(
+                    "de-DE"
+                  ) +
+                  " um " +
+                  new Date(newestCommitMember.last_star_ts).toLocaleTimeString(
+                    "de-DE"
+                  )}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -75,6 +86,15 @@ export default async function Home() {
             </CardContent>
           </Card>
         </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Verhältnis Anzahl Punkte / Sterne</CardTitle>
+            <CardDescription></CardDescription>
+          </CardHeader>
+          <CardContent>
+            <StarScoreChart members={memberListSorted}></StarScoreChart>
+          </CardContent>
+        </Card>
         <LeaderboardTable
           columns={columns}
           data={memberList}
