@@ -3,14 +3,12 @@ import { Leaderboard } from "../types/leaderboard";
 export default function transformStarData(leaderboardData: Leaderboard) {
   const tsStart = 1764543600;
   const members = leaderboardData.members;
-  const numDays = 30;
+  const numDays = 10;
 
   const history = [];
 
   for (let i = 1; i <= numDays; i++) {
     const tsEndOfTheDay = tsStart + 86400 * i; // i Tage drauf addieren
-
-    const memberDataList = [];
 
     const dataPoint: any = {
       // Nur workaround

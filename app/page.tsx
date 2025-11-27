@@ -12,6 +12,7 @@ import { columns } from "./leaderboard-column";
 import StarScoreChart from "./star-score-chart";
 import transformStarData from "@/src/lib/transform-star-data";
 import { StarHistoryChart } from "./star-history-chart";
+import { ChartBarStacked } from "./star-challenge-chart";
 
 const highScoreMember: LeaderboardMember = {
   id: 1,
@@ -104,6 +105,7 @@ export default async function Home() {
           data={memberList}
         ></LeaderboardTable>
         <StarHistoryChart chartData={starHistory}></StarHistoryChart>
+        <ChartBarStacked leaderboardData={parsedData}></ChartBarStacked>
       </div>
     </>
   );
