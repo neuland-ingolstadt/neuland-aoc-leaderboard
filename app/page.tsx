@@ -10,6 +10,9 @@ import { Leaderboard, LeaderboardMember } from "@/src/types/leaderboard";
 import { LeaderboardTable } from "./leaderboard-data-table";
 import { columns } from "./leaderboard-column";
 import StarScoreChart from "./star-score-chart";
+import transformStarData from "@/src/lib/transform-star-data";
+import { StarHistoryChart } from "./star-history-chart";
+import { ChartBarStacked } from "./star-challenge-chart";
 
 const highScoreMember: LeaderboardMember = {
   id: 1,
@@ -39,6 +42,8 @@ export default async function Home() {
   const memberListSorted = memberList.slice().sort((a, b) => {
     return a.local_score - b.local_score;
   });
+
+  const starHistory = transformStarData(parsedData);
 
   return (
     <>
@@ -99,6 +104,8 @@ export default async function Home() {
           columns={columns}
           data={memberList}
         ></LeaderboardTable>
+        <StarHistoryChart chartData={starHistory}></StarHistoryChart>
+        <ChartBarStacked leaderboardData={parsedData}></ChartBarStacked>
       </div>
     </>
   );
