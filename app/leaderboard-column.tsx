@@ -6,7 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 export const columns: ColumnDef<LeaderboardMember>[] = [
   {
     accessorKey: "name",
-    header: "Username",
+    header: "Name",
     cell: ({ row }) => {
       const name = row.getValue("name") ?? "((Kein Name))";
       return name;
