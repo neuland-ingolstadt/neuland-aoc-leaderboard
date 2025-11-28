@@ -1,19 +1,24 @@
 import { Leaderboard } from "../types/leaderboard";
 
-export default function transformStarData(leaderboardData: Leaderboard) {
-  const tsStart = 1764543600;
+type DataPoint = {
+  label: string;
+  [id: string]: number | string;
+};
+
+export type TransformStarDataReturnType = DataPoint[];
+
+export default function transformStarData(
+  leaderboardData: Leaderboard,
+  startDate: Date,
+  endDate: Date
+): TransformStarDataReturnType {
   const members = leaderboardData.members;
-  const numDays = 10;
 
-  const history = [];
+  let history: TransformStarDataReturnType = [];
 
-  for (let i = 1; i <= numDays; i++) {
-    const tsEndOfTheDay = tsStart + 86400 * i; // i Tage drauf addieren
-
-    const dataPoint: any = {
-      // Nur workaround
-      label: `Dez ${i}`,
-      ts: tsEndOfTheDay,
+  for (let i = startDate; i <= endDate; i.setHours(i.getHours() + 12)) {
+    const dataPoint: DataPoint = {
+      label: `Tag ${i.getDate()}`,
     };
 
     // Für jedes Mitglied zusammenfassen, welche / wie viele Sterne vor dem Enddatum geholt wurden
@@ -21,19 +26,18 @@ export default function transformStarData(leaderboardData: Leaderboard) {
       let starCount = 0;
 
       Object.values(member.completion_day_level).forEach((level) => {
-        // console.log("----> " + level["1"].get_star_ts);
-        if (level["1"] && level["1"].get_star_ts < tsEndOfTheDay) {
+        if (level["1"] && new Date(level["1"].get_star_ts * 1000) < i) {
           starCount++;
         }
 
-        if (level["2"] && level["2"].get_star_ts < tsEndOfTheDay) {
+        if (level["2"] && new Date(level["2"].get_star_ts * 1000) < i) {
           starCount++;
         }
       });
 
-      const name = member.name || "Anonym " + Math.random() * 100;
+      const name = member.name || "Anonym";
 
-      dataPoint[name] = starCount === 0 ? null : starCount;
+      dataPoint[name] = starCount;
     });
     history.push(dataPoint);
   }

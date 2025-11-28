@@ -1,7 +1,6 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
-import { CartesianGrid, Dot, Line, LineChart, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
 import {
   Card,
@@ -17,38 +16,73 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-
-export const description = "A line chart with dots and colors";
-
-const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 90, fill: "var(--color-other)" },
-];
-
-const chartConfig = {} satisfies ChartConfig;
+import transformStarData, {
+  TransformStarDataReturnType,
+} from "@/src/lib/transform-star-data";
+import { useEffect, useState } from "react";
+import { Leaderboard } from "@/src/types/leaderboard";
 
 interface props {
-  chartData: any;
+  leaderboard: Leaderboard;
+  startDate: Date;
+  endDate: Date;
 }
 
-export function StarHistoryChart({ chartData }: props) {
+const chartConfig = {
+  height: 400,
+};
+
+type DateDisplay = {
+  start: string;
+  end: string;
+};
+
+export function StarHistoryChart({ leaderboard, startDate, endDate }: props) {
+  const [formattedChartData, setFormattedChartData] =
+    useState<TransformStarDataReturnType | null>(null);
+
+  const [dateDisplay, setDateDisplay] = useState<DateDisplay | null>(null);
+
+  useEffect(() => {
+    setDateDisplay({
+      start: startDate.toLocaleDateString("de-DE"),
+      end: endDate.toLocaleDateString("de-DE"),
+    });
+    if (leaderboard && leaderboard.members) {
+      const data: TransformStarDataReturnType = transformStarData(
+        leaderboard,
+        startDate,
+        endDate
+      );
+
+      setFormattedChartData(data);
+    }
+  }, [leaderboard, startDate, endDate]);
+
+  // Check if no data
+  if (!formattedChartData) {
+    return (
+      <Card>
+        <CardContent>Lade Diagramm...</CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>Entwicklung Anzahl Sterne</CardTitle>
-        <CardDescription>1. Dezember - 24. Dezember</CardDescription>
+        <CardDescription>
+          {dateDisplay?.start + " - " + dateDisplay?.end}
+        </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer className="w-full" config={{}}>
           <LineChart
             accessibilityLayer
-            data={chartData}
+            data={formattedChartData}
             margin={{
               top: 24,
-              left: 24,
               right: 24,
             }}
           >
@@ -69,9 +103,10 @@ export function StarHistoryChart({ chartData }: props) {
                 value.length > 15 ? value.slice(0, 7) + "..." : value
               }
             />
+            <YAxis></YAxis>
 
-            {Object.keys(chartData[0]).map((name) => {
-              if (name == "label" || name == "ts") return;
+            {Object.keys(formattedChartData[0]).map((name) => {
+              if (name == "label") return;
 
               const randomColor = `#${Math.floor(Math.random() * 16777215)
                 .toString(16)
@@ -83,12 +118,19 @@ export function StarHistoryChart({ chartData }: props) {
                   dataKey={name}
                   stroke={randomColor}
                   strokeWidth={5}
+                  dot={false}
                 />
               );
             })}
           </LineChart>
         </ChartContainer>
       </CardContent>
+      <CardFooter>
+        <p>
+          Die Darstellung der Historie erfolgt in Halbtagesschritten
+          (12-Stunden-Intervall)
+        </p>
+      </CardFooter>
     </Card>
   );
 }
