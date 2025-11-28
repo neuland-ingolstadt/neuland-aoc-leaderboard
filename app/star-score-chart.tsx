@@ -44,30 +44,45 @@ export default function StarScoreChart({ members }: Props) {
       <BarChart
         accessibilityLayer
         data={members}
-        layout="vertical"
-        margin={{
-          right: 60,
-        }}
       >
-        <CartesianGrid horizontal={false} />
-        <YAxis
+        <CartesianGrid vertical={false} />
+        <XAxis
           dataKey="name"
-          type="category"
           tickLine={false}
           tickMargin={10}
           axisLine={false}
-          width={100}
+          tickFormatter={(value: string) =>
+            value
+              ? value.length > 11
+                ? value.slice(0, 11) + "..."
+                : value
+              : "<Kein Name>"
+          }
         />
-        <XAxis type="number" hide />
+        <YAxis
+          type="number"
+          tickLine={false}
+          axisLine={false}
+          tickMargin={10}
+        />
         <ChartTooltip
           cursor={false}
           content={<ChartTooltipContent indicator="line" />}
         />
         <ChartLegend content={<ChartLegendContent />} />
-        <Bar dataKey="local_score" layout="vertical" radius={4} fill="#56EF34">
+        <Bar dataKey="local_score" radius={[4, 4, 0, 0]} fill="#56EF34">
           <LabelList
             dataKey="local_score"
-            position="right"
+            position="top"
+            offset={8}
+            className="fill-foreground"
+            fontSize={12}
+          />
+        </Bar>
+        <Bar dataKey="stars" radius={[4, 4, 0, 0]} fill="#2e4c28">
+          <LabelList
+            dataKey="stars"
+            position="top"
             offset={8}
             className="fill-foreground"
             fontSize={12}
