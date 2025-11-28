@@ -46,7 +46,7 @@ export default function StarScoreChart({ members }: Props) {
         data={members}
         layout="vertical"
         margin={{
-          right: 30,
+          right: 60,
         }}
       >
         <CartesianGrid horizontal={false} />
@@ -67,15 +67,6 @@ export default function StarScoreChart({ members }: Props) {
         <Bar dataKey="local_score" layout="vertical" radius={4} fill="#56EF34">
           <LabelList
             dataKey="local_score"
-            position="right"
-            offset={8}
-            className="fill-foreground"
-            fontSize={12}
-          />
-        </Bar>
-        <Bar dataKey="stars" layout="vertical" radius={4} fill="#2e4c28">
-          <LabelList
-            dataKey="stars"
             position="right"
             offset={8}
             className="fill-foreground"
