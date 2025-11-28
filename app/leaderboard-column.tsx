@@ -25,7 +25,7 @@ export const columns: ColumnDef<LeaderboardMember>[] = [
     header: "Zuletzt Lösung eingereicht",
     cell: ({ row }) => {
       const timestamp = parseInt(row.getValue("last_star_ts"));
-      const date = new Date(timestamp);
+      const date = new Date(timestamp * 1000);
       return (
         date.toLocaleTimeString("de-DE") +
         " " +
