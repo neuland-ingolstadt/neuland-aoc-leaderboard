@@ -16,6 +16,8 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 
+import Image from "next/image";
+
 export default function Header() {
   return (
     <div
@@ -23,6 +25,13 @@ export default function Header() {
       className={"flex flex-col items-center gap-20 px-80 py-10 pt-30"}
     >
       <div className="flex flex-col items-center gap-5">
+        <Image
+          src="/img/neuland_icon.svg"
+          alt="Neuland Logo"
+          width={64}
+          height={64}
+          className="brightness-0 invert"
+        />
         <p className="text-2xl">Neuland Leaderboard</p>
         <h1
           className={"text-7xl font-azeret font-semibold text-center text-accent"}
