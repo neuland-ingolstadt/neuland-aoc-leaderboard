@@ -20,18 +20,14 @@ export default function Header() {
   return (
     <div
       id="header-section"
-      className={"flex flex-col items-center gap-10 px-100 py-10"}
+      className={"flex flex-col items-center gap-20 px-80 py-10 pt-30"}
     >
-      <Badge className={"px-3 py-1 text-lg"} variant={"outline"}>
-        Advent Of Code 2025 🎄
-      </Badge>
-      <h1
-        className={"text-7xl font-azeret font-semibold text-center text-accent"}
-      >
-        Neuland
-        <br />
-        Leaderboard
-      </h1>
+      <div className="flex flex-col items-center gap-5">
+        <p className="text-2xl">Neuland Leaderboard</p>
+        <h1
+          className={"text-7xl font-azeret font-semibold text-center text-accent"}
+        >Advent Of <br />Code 2025</h1>
+      </div>
       <div className={"w-full grid grid-cols-2 gap-5"}>
         <Card>
           <CardHeader>
@@ -129,6 +125,6 @@ export default function Header() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </div >
   );
 }
