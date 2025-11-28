@@ -11,6 +11,7 @@ import { LeaderboardTable } from "./leaderboard-data-table";
 import { columns } from "./leaderboard-column";
 import StarScoreChart from "./star-score-chart";
 import { StarHistoryChart } from "./star-history-chart";
+import { ChartBarStacked } from "./star-challenge-chart";
 
 const highScoreMember: LeaderboardMember = {
   id: 1,
