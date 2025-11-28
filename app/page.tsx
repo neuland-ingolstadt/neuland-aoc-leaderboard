@@ -43,7 +43,7 @@ export default async function Home() {
 
   const memberList = Object.values(parsedData.members);
   const memberListSorted = memberList.slice().sort((a, b) => {
-    return a.local_score - b.local_score;
+    return b.local_score - a.local_score;
   });
 
   return (
@@ -101,10 +101,15 @@ export default async function Home() {
             <StarScoreChart members={memberListSorted}></StarScoreChart>
           </CardContent>
         </Card>
-        <LeaderboardTable
-          columns={columns}
-          data={memberList}
-        ></LeaderboardTable>
+        <Card>
+          <CardContent>
+            <LeaderboardTable
+              columns={columns}
+              data={memberListSorted}
+            ></LeaderboardTable>
+          </CardContent>
+        </Card>
+
         <StarHistoryChart
           leaderboard={parsedData}
           startDate={startDate}
