@@ -1,9 +1,9 @@
 import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -14,29 +14,9 @@ import StarScoreChart from "./star-score-chart";
 import { StarHistoryChart } from "./star-history-chart";
 import { StarChallengeChart } from "./star-challenge-chart";
 
-const highScoreMember: LeaderboardMember = {
-  id: 1,
-  completion_day_level: {},
-  last_star_ts: 211,
-  local_score: 203,
-  name: "Nerd203",
-  stars: 7,
-};
-
-const highStarsMember: LeaderboardMember = {
-  id: 1,
-  completion_day_level: {},
-  last_star_ts: 102,
-  local_score: 203,
-  name: "Nerd104",
-  stars: 7,
-};
-
-const newestCommitMember: LeaderboardMember = highStarsMember;
-
 // Start and end date to display statistics for
 const startDate = new Date("2025-12-1");
-const endDate = new Date("2025-12-12");
+const endDate = new Date("2025-12-5");
 
 export default async function Home() {
   const data = await fetch("http://localhost:3000/api/leaderboard");
@@ -57,8 +37,8 @@ export default async function Home() {
 
   return (
     <>
-      <Header></Header>
-      <div className={"grid grid-cols-1 gap-4 px-40"}>
+      <Header />
+      <div className={"grid grid-cols-1 gap-4 px-80 pt-20"}>
         <div className={"grid grid-cols-3 gap-4"}>
           <Card className={"grow"}>
             <CardHeader>
@@ -110,6 +90,36 @@ export default async function Home() {
             <StarScoreChart members={memberListSortedByScore}></StarScoreChart>
           </CardContent>
         </Card>
+
+        <div className={"grid grid-cols-2 gap-4"}>
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                Verhältnis Lösungen erster Teil / zweiter Teil
+              </CardTitle>
+              <CardDescription>
+                Wie oft wurde insgesamt der erste Teil und der zweite Teil eines Rätselsgelöst (alle Teilnehmer zusammen)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <StarChallengeChart leaderboardData={parsedData}></StarChallengeChart>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Verlauf der Sterne</CardTitle>
+              <CardDescription>{startDate.toLocaleDateString("de-DE") + " bis " + endDate.toLocaleDateString("de-DE")}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <StarHistoryChart
+                leaderboard={parsedData}
+                startDate={startDate}
+                endDate={endDate}
+              ></StarHistoryChart>
+            </CardContent>
+          </Card>
+        </div>
+
         <Card>
           <CardHeader>
             <CardTitle>Liste aller Teilnehmer</CardTitle>
@@ -121,36 +131,8 @@ export default async function Home() {
             ></LeaderboardTable>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Verlauf der Sterne</CardTitle>
-            <CardDescription>{startDate.toLocaleDateString("de-DE") + " bis " + endDate.toLocaleDateString("de-DE")}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <StarHistoryChart
-              leaderboard={parsedData}
-              startDate={startDate}
-              endDate={endDate}
-            ></StarHistoryChart>
-          </CardContent>
-          <CardFooter>
-            Die Daten werden in Halbtagesschritten angezeigt.
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>
-              Verhältnis Lösungen erster Teil / zweiter Teil
-            </CardTitle>
-            <CardDescription>
-              Wie oft wurde insgesamt der erste Teil und der zweite Teil eines Rätselsgelöst (alle Teilnehmer zusammen)
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <StarChallengeChart leaderboardData={parsedData}></StarChallengeChart>
-          </CardContent>
-        </Card>
       </div>
+      <Footer />
     </>
   );
 }
