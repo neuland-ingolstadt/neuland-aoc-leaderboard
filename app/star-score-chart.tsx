@@ -9,14 +9,28 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { BarChart, Bar, XAxis, YAxis } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  LabelList,
+  Cell,
+} from "recharts";
+import { stringToColor } from "@/src/lib/color-utils";
 
 const chartConfig = {
   stars: {
     label: "Sterne",
+    color: "var(--accent-muted)",
   },
   local_score: {
     label: "Punkte",
+    color: "var(--accent)",
+  },
+  label: {
+    color: "var(--background)",
   },
 } satisfies ChartConfig;
 
@@ -26,28 +40,49 @@ export interface Props {
 
 export default function StarScoreChart({ members }: Props) {
   return (
-    <>
-      <ChartContainer config={chartConfig}>
-        <BarChart data={members}>
-          <ChartTooltip content={<ChartTooltipContent />} />
-          <ChartLegend content={<ChartLegendContent />} />
-          <Bar dataKey="local_score" fill="var(--accent)" radius={5}></Bar>
-          <Bar dataKey="stars" fill="var(--accent-muted)" radius={5}></Bar>
-          <XAxis
-            dataKey="name"
-            tickLine={false}
-            tickMargin={10}
-            axisLine={false}
-            tickFormatter={(value: string) =>
-              value
-                ? value.length > 11
-                  ? value.slice(0, 11) + "..."
-                  : value
-                : "<Kein Name>"
-            }
+    <ChartContainer config={chartConfig}>
+      <BarChart
+        accessibilityLayer
+        data={members}
+        layout="vertical"
+        margin={{
+          right: 30,
+        }}
+      >
+        <CartesianGrid horizontal={false} />
+        <YAxis
+          dataKey="name"
+          type="category"
+          tickLine={false}
+          tickMargin={10}
+          axisLine={false}
+          width={100}
+        />
+        <XAxis type="number" hide />
+        <ChartTooltip
+          cursor={false}
+          content={<ChartTooltipContent indicator="line" />}
+        />
+        <ChartLegend content={<ChartLegendContent />} />
+        <Bar dataKey="local_score" layout="vertical" radius={4} fill="#56EF34">
+          <LabelList
+            dataKey="local_score"
+            position="right"
+            offset={8}
+            className="fill-foreground"
+            fontSize={12}
           />
-        </BarChart>
-      </ChartContainer>
-    </>
+        </Bar>
+        <Bar dataKey="stars" layout="vertical" radius={4} fill="#2e4c28">
+          <LabelList
+            dataKey="stars"
+            position="right"
+            offset={8}
+            className="fill-foreground"
+            fontSize={12}
+          />
+        </Bar>
+      </BarChart>
+    </ChartContainer>
   );
 }

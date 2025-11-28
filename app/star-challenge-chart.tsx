@@ -41,7 +41,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ChartBarStacked({ leaderboardData }: props) {
+export function StarChallengeChart({ leaderboardData }: props) {
   const members = Object.values(leaderboardData.members);
 
   const nrChallenges = 12;
@@ -80,38 +80,30 @@ export function ChartBarStacked({ leaderboardData }: props) {
   console.log(chartData);
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Bar Chart - Stacked + Legend</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="challenge"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-            />
-            <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-            <ChartLegend content={<ChartLegendContent />} />
-            <Bar
-              dataKey="starsChallengeOne"
-              stackId="a"
-              fill="#132999"
-              radius={[0, 0, 4, 4]}
-            />
-            <Bar
-              dataKey="starsChallengeTwo"
-              stackId="a"
-              fill="#932999"
-              radius={[4, 4, 0, 0]}
-            />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+    <ChartContainer config={chartConfig}>
+      <BarChart accessibilityLayer data={chartData}>
+        <CartesianGrid vertical={false} />
+        <XAxis
+          dataKey="challenge"
+          tickLine={false}
+          tickMargin={10}
+          axisLine={false}
+        />
+        <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+        <ChartLegend content={<ChartLegendContent />} />
+        <Bar
+          dataKey="starsChallengeOne"
+          stackId="a"
+          fill="#1f2b1cff"
+          radius={[0, 0, 4, 4]}
+        />
+        <Bar
+          dataKey="starsChallengeTwo"
+          stackId="a"
+          fill="#56EF34"
+          radius={[4, 4, 0, 0]}
+        />
+      </BarChart>
+    </ChartContainer>
   );
 }
