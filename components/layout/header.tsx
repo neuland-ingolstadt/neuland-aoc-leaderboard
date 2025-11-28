@@ -35,7 +35,7 @@ export default function Header() {
         <p className="text-2xl">Neuland Leaderboard</p>
         <h1
           className={"text-7xl font-azeret font-semibold text-center text-accent"}
-        >Advent Of <br />Code 2025</h1>
+        >Advent Of<br />Code 2025</h1>
       </div>
       <div className={"w-full grid grid-cols-2 gap-5"}>
         <Card>
