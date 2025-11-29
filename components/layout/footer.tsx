@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function Footer() {
     return (
-        <div className="w-full border-t border-border py-4 mt-8">
-            <div className="container w-200 mx-auto px-4 flex flex-col md:flex-row justify-center items-center gap-4 text-sm text-muted-foreground">
+        <div className="w-full border-t border-border mt-8">
+            <div className="container max-w-200 mx-auto px-4 py-4 flex flex-col md:flex-row justify-center items-center gap-4 text-sm text-muted-foreground">
                 <Image
                     src="/img/neuland_logo.svg"
                     alt="Neuland Logo"
