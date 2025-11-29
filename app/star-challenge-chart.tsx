@@ -1,15 +1,7 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
@@ -76,8 +68,6 @@ export function StarChallengeChart({ leaderboardData }: props) {
 
     chartData.push(dataPoint);
   }
-
-  console.log(chartData);
 
   return (
     <ChartContainer config={chartConfig}>
