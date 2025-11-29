@@ -43,7 +43,7 @@ export async function getLeaderboardData(): Promise<Leaderboard> {
 
         console.log("Fetched new data");
 
-        return cachedData!;
+        return cachedData;
     } catch (error) {
         console.error("Error fetching leaderboard data:", error);
         if (cachedData) {
