@@ -55,40 +55,58 @@ export default async function Home() {
                 <CardHeader>
                   <CardTitle className="truncate">🥇 Aktuell 1. Platz</CardTitle>
                   <CardDescription className="truncate">
-                    {memberListSortedByScore[0].local_score + " Punkten"}
+                    {memberListSortedByScore[0] && memberListSortedByScore[0].local_score > 0
+                      ? memberListSortedByScore[0].local_score + " Punkten"
+                      : "Noch nicht genügend Daten"}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className={"text-3xl truncate"}>{memberListSortedByScore[0].name}</p>
+                  <p className={"text-3xl truncate"}>
+                    {memberListSortedByScore[0] && memberListSortedByScore[0].local_score > 0
+                      ? memberListSortedByScore[0].name
+                      : "-"}
+                  </p>
                 </CardContent>
               </Card>
               <Card className={"grow overflow-hidden"}>
                 <CardHeader>
                   <CardTitle className="truncate">⭐ Meiste Sterne</CardTitle>
                   <CardDescription className="truncate">
-                    {memberListSortedByStars[0].stars + " Sterne"}
+                    {memberListSortedByStars[0] && memberListSortedByStars[0].stars > 0
+                      ? memberListSortedByStars[0].stars + " Sterne"
+                      : "Noch nicht genügend Daten"}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className={"text-3xl truncate"}>{memberListSortedByStars[0].name}</p>
+                  <p className={"text-3xl truncate"}>
+                    {memberListSortedByStars[0] && memberListSortedByStars[0].stars > 0
+                      ? memberListSortedByStars[0].name
+                      : "-"}
+                  </p>
                 </CardContent>
               </Card>
               <Card className={"grow overflow-hidden"}>
                 <CardHeader>
                   <CardTitle className="text-nowrap truncate">⏰ Neuste Lösung</CardTitle>
                   <CardDescription className="text-nowrap truncate">
-                    {"Am " +
+                    {memberListSortedByLastStar[0] && memberListSortedByLastStar[0].last_star_ts > 0
+                      ? "Am " +
                       new Date(memberListSortedByLastStar[0].last_star_ts * 1000).toLocaleDateString(
                         "de-DE"
                       ) +
                       " um " +
                       new Date(memberListSortedByLastStar[0].last_star_ts * 1000).toLocaleTimeString(
                         "de-DE"
-                      )}
+                      )
+                      : "Noch nicht genügend Daten"}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className={"text-3xl truncate"}>{memberListSortedByLastStar[0].name}</p>
+                  <p className={"text-3xl truncate"}>
+                    {memberListSortedByLastStar[0] && memberListSortedByLastStar[0].last_star_ts > 0
+                      ? memberListSortedByLastStar[0].name
+                      : "-"}
+                  </p>
                 </CardContent>
               </Card>
             </div>
