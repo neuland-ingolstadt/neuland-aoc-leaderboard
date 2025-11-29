@@ -2,7 +2,7 @@ import { Leaderboard } from "@/src/types/leaderboard";
 
 let cachedData: Leaderboard | null = null;
 let lastFetchTime: number = 0;
-const CACHE_DURATION_MS = 15 * 60 * 1000;
+const CACHE_DURATION_MS = 20 * 60 * 1000; // 20 minutes
 
 export async function getLeaderboardData(): Promise<Leaderboard> {
     const now = Date.now();
@@ -41,7 +41,7 @@ export async function getLeaderboardData(): Promise<Leaderboard> {
         };
         lastFetchTime = Date.now();
 
-        return cachedData;
+        return cachedData!;
     } catch (error) {
         console.error("Error fetching leaderboard data:", error);
         if (cachedData) {
