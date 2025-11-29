@@ -122,7 +122,7 @@ export default function Header() {
                         </CardHeader>
                         <CardContent>
                           <CopyCodeInput
-                            code={"CODEAUSTAUSCHEN"} // TODO: get invite code from .env file
+                            code={process.env.AOC_INVITE_CODE || "CODE NICHT VERFÜGBAR"} // TODO: get invite code from .env file
                           ></CopyCodeInput>
                         </CardContent>
                       </Card>
