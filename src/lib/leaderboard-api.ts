@@ -41,8 +41,6 @@ export async function getLeaderboardData(): Promise<Leaderboard> {
         };
         lastFetchTime = Date.now();
 
-        console.log("Fetched new data");
-
         return cachedData;
     } catch (error) {
         console.error("Error fetching leaderboard data:", error);
