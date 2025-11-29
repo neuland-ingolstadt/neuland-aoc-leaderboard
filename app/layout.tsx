@@ -18,6 +18,9 @@ const azeret = Azeret_Mono({
 
 export const metadata: Metadata = {
   title: "Neuland Advent Of Code Leaderboard",
+  icons: {
+    icon: "/img/neuland_icon.svg",
+  },
 };
 
 export default function RootLayout({
