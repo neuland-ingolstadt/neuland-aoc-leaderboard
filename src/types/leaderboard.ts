@@ -2,6 +2,7 @@ export interface Leaderboard {
     event: string;
     owner_id: number;
     members: MemberList;
+    lastUpdated?: string;
 }
 
 export interface MemberList {

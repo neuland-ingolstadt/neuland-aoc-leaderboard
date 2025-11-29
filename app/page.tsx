@@ -16,14 +16,15 @@ import { StarHistoryChart } from "./star-history-chart";
 import { StarChallengeChart } from "./star-challenge-chart";
 import { LastUpdatedBadge } from "@/components/ui/last-updated-badge";
 
+import { getLeaderboardData } from "@/src/lib/leaderboard-api";
+
 // Start and end date to display statistics for
 const startDate = new Date("2025-12-1");
 const endDate = new Date("2025-12-24");
 
 export default async function Home() {
-  const data = await fetch("http://localhost:3000/api/leaderboard");
-  const parsedData: Leaderboard = await data.json();
-  const lastUpdated = new Date("2025-11-28T21:29:00"); // TODO: Get actual last updated time from API
+  const parsedData: Leaderboard = await getLeaderboardData();
+  const lastUpdated = parsedData.lastUpdated ? new Date(parsedData.lastUpdated) : new Date();
 
   const memberList = Object.values(parsedData.members);
   const memberListSortedByScore = memberList.slice().sort((a, b) => {
@@ -48,7 +49,7 @@ export default async function Home() {
       <div className={"px-1 md:px-5 xl:px-40 2xl:px-80"}>
         <div className="bg-black p-4 md:p-6 border rounded-lg">
           <div className={"flex flex-col gap-4"}>
-            <div><h2>Leaderboard</h2><LastUpdatedBadge date={lastUpdated} /></div>
+            <div className={"flex justify-between"}><h2>Leaderboard</h2><LastUpdatedBadge date={lastUpdated} /></div>
             <div className={"flex flex-col md:grid md:grid-cols-3 gap-4"}>
               <Card className={"grow overflow-hidden"}>
                 <CardHeader>

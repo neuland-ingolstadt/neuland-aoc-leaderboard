@@ -13,7 +13,7 @@ export function LastUpdatedBadge({ date, className }: LastUpdatedBadgeProps) {
     let colorClass = "bg-red-500";
     if (diffInMinutes < 60) {
         colorClass = "bg-green-500";
-    } else if (diffInMinutes <= 300) { // 5 hours = 300 minutes
+    } else if (diffInMinutes <= 300) {
         colorClass = "bg-yellow-500";
     }
 
@@ -23,7 +23,7 @@ export function LastUpdatedBadge({ date, className }: LastUpdatedBadgeProps) {
                 <span className={cn("animate-ping absolute inline-flex h-full w-full rounded-full opacity-75", colorClass)}></span>
                 <span className={cn("relative inline-flex rounded-full h-2 w-2", colorClass)}></span>
             </span>
-            <span>Vor {diffInMinutes} Minuten aktualisiert</span>
+            <span>Vor {diffInMinutes} Minute(n) aktualisiert</span>
         </Badge>
     );
 }
