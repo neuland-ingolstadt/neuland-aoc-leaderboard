@@ -107,7 +107,7 @@ export default async function Home() {
               <Card>
                 <CardHeader>
                   <CardTitle>
-                    Verhältnis Lösungen erster Teil / zweiter Teil
+                    Lösungen erster Teil / zweiter Teil
                   </CardTitle>
                   <CardDescription>
                     Wie oft wurde insgesamt der erste Teil und der zweite Teil eines Rätsels gelöst (alle Teilnehmer zusammen)
