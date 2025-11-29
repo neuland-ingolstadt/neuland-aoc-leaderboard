@@ -113,8 +113,8 @@ export default async function Home() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Punkte & Sterne pro Teilnehmer</CardTitle>
-                <CardDescription></CardDescription>
+                <CardTitle>Punkte pro Teilnehmer</CardTitle>
+                <CardDescription>Der Punktestand legt die Platzierung fest</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="hidden md:block">
