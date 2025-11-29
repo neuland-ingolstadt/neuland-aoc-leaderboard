@@ -22,7 +22,7 @@ export default function Header() {
   return (
     <div
       id="header-section"
-      className={"flex flex-col items-center gap-20 px-80 py-10 pt-30"}
+      className={"flex flex-col items-center gap-20 px-1 md:px-5 xl:px-40 2xl:px-80 py-10 pt-30"}
     >
       <div className="flex flex-col items-center gap-5">
         <Image
@@ -34,10 +34,10 @@ export default function Header() {
         />
         <p className="text-2xl">Neuland Leaderboard</p>
         <h1
-          className={"text-7xl font-azeret font-semibold text-center text-accent"}
+          className={"lg:text-7xl text-5xl font-azeret font-semibold text-center text-accent"}
         >Advent Of<br />Code 2025</h1>
       </div>
-      <div className={"w-full grid grid-cols-2 gap-5"}>
+      <div className={"w-full grid md:grid-cols-2 gap-5"}>
         <Card>
           <CardHeader>
             <CardTitle className={"text-xl"}>Über den Advent Of Code</CardTitle>

@@ -11,13 +11,14 @@ import { Leaderboard, LeaderboardMember } from "@/src/types/leaderboard";
 import { LeaderboardTable } from "./leaderboard-data-table";
 import { columns } from "./leaderboard-column";
 import StarScoreChart from "./star-score-chart";
+import StarScoreChartHorizontal from "./star-score-chart-horizontal";
 import { StarHistoryChart } from "./star-history-chart";
 import { StarChallengeChart } from "./star-challenge-chart";
 import { LastUpdatedBadge } from "@/components/ui/last-updated-badge";
 
 // Start and end date to display statistics for
 const startDate = new Date("2025-12-1");
-const endDate = new Date("2025-12-5");
+const endDate = new Date("2025-12-24");
 
 export default async function Home() {
   const data = await fetch("http://localhost:3000/api/leaderboard");
@@ -40,43 +41,37 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <div className={"px-80"}>
-        <Card className="bg-black">
-          <CardHeader>
-            <CardTitle className="flex gap-2 text-xl"><h2>Leaderboard</h2> <LastUpdatedBadge date={lastUpdated} /></CardTitle>
-            <CardDescription className="text-xl">
-
-            </CardDescription>
-          </CardHeader>
-          <CardContent className={"flex flex-col gap-4"}>
-            {/* ... (existing content) */}
-            <div className={"grid grid-cols-3 gap-4"}>
-              <Card className={"grow"}>
+      <div className={"px-1 md:px-5 xl:px-40 2xl:px-80"}>
+        <div className="bg-black p-4 md:p-6 border rounded-lg">
+          <div className={"flex flex-col gap-4"}>
+            <div><h2>Leaderboard</h2><LastUpdatedBadge date={lastUpdated} /></div>
+            <div className={"flex flex-col md:grid md:grid-cols-3 gap-4"}>
+              <Card className={"grow overflow-hidden"}>
                 <CardHeader>
-                  <CardTitle>🥇 Aktuell 1. Platz</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="truncate">🥇 Aktuell 1. Platz</CardTitle>
+                  <CardDescription className="truncate">
                     {memberListSortedByScore[0].local_score + " Punkten"}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className={"text-3xl"}>{memberListSortedByScore[0].name}</p>
+                  <p className={"text-3xl truncate"}>{memberListSortedByScore[0].name}</p>
                 </CardContent>
               </Card>
-              <Card className={"grow"}>
+              <Card className={"grow overflow-hidden"}>
                 <CardHeader>
-                  <CardTitle>⭐ Meiste Sterne</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="truncate">⭐ Meiste Sterne</CardTitle>
+                  <CardDescription className="truncate">
                     {memberListSortedByStars[0].stars + " Sterne"}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className={"text-3xl"}>{memberListSortedByStars[0].name}</p>
+                  <p className={"text-3xl truncate"}>{memberListSortedByStars[0].name}</p>
                 </CardContent>
               </Card>
-              <Card className={"grow"}>
+              <Card className={"grow overflow-hidden"}>
                 <CardHeader>
-                  <CardTitle>⏰ Neuste Lösung</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="text-nowrap truncate">⏰ Neuste Lösung</CardTitle>
+                  <CardDescription className="text-nowrap truncate">
                     {"Am " +
                       new Date(memberListSortedByLastStar[0].last_star_ts * 1000).toLocaleDateString(
                         "de-DE"
@@ -88,27 +83,34 @@ export default async function Home() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className={"text-3xl"}>{memberListSortedByLastStar[0].name}</p>
+                  <p className={"text-3xl truncate"}>{memberListSortedByLastStar[0].name}</p>
                 </CardContent>
               </Card>
             </div>
+
             <Card>
               <CardHeader>
-                <CardTitle>Verhältnis Anzahl Punkte / Sterne</CardTitle>
+                <CardTitle>Punkte & Sterne pro Teilnehmer</CardTitle>
                 <CardDescription></CardDescription>
               </CardHeader>
               <CardContent>
-                <StarScoreChart members={memberListSortedByScore}></StarScoreChart>
+                <div className="hidden md:block">
+                  <StarScoreChart members={memberListSortedByScore}></StarScoreChart>
+                </div>
+                <div className="block md:hidden">
+                  <StarScoreChartHorizontal members={memberListSortedByScore}></StarScoreChartHorizontal>
+                </div>
               </CardContent>
             </Card>
-            <div className={"grid grid-cols-2 gap-4"}>
+
+            <div className={"grid lg:grid-cols-2 gap-4"}>
               <Card>
                 <CardHeader>
                   <CardTitle>
                     Verhältnis Lösungen erster Teil / zweiter Teil
                   </CardTitle>
                   <CardDescription>
-                    Wie oft wurde insgesamt der erste Teil und der zweite Teil eines Rätselsgelöst (alle Teilnehmer zusammen)
+                    Wie oft wurde insgesamt der erste Teil und der zweite Teil eines Rätsels gelöst (alle Teilnehmer zusammen)
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -120,7 +122,7 @@ export default async function Home() {
                   <CardTitle>Verlauf der Sterne</CardTitle>
                   <CardDescription>{startDate.toLocaleDateString("de-DE") + " bis " + endDate.toLocaleDateString("de-DE")}</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="">
                   <StarHistoryChart
                     leaderboard={parsedData}
                     startDate={startDate}
@@ -140,8 +142,8 @@ export default async function Home() {
                 ></LeaderboardTable>
               </CardContent>
             </Card>
-          </CardContent>
-        </Card>
+          </div>
+        </div >
       </div >
       <Footer />
     </>

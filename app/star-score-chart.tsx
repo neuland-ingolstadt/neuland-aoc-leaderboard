@@ -6,8 +6,6 @@ import {
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart";
 import {
   BarChart,
@@ -21,10 +19,7 @@ import {
 import { stringToColor } from "@/src/lib/color-utils";
 
 const chartConfig = {
-  stars: {
-    label: "Sterne",
-    color: "var(--accent-muted)",
-  },
+
   local_score: {
     label: "Punkte",
     color: "var(--accent)",
@@ -49,7 +44,7 @@ export default function StarScoreChart({ members }: Props) {
         <XAxis
           dataKey="name"
           tickLine={false}
-          tickMargin={10}
+          tickMargin={0}
           axisLine={false}
           tickFormatter={(value: string) =>
             value
@@ -63,11 +58,7 @@ export default function StarScoreChart({ members }: Props) {
           type="number"
           tickLine={false}
           axisLine={false}
-          tickMargin={10}
-        />
-        <ChartTooltip
-          cursor={false}
-          content={<ChartTooltipContent indicator="line" />}
+          tickMargin={0}
         />
         <ChartLegend content={<ChartLegendContent />} />
         <Bar dataKey="local_score" radius={[4, 4, 0, 0]} fill="#56EF34">
@@ -79,15 +70,7 @@ export default function StarScoreChart({ members }: Props) {
             fontSize={12}
           />
         </Bar>
-        <Bar dataKey="stars" radius={[4, 4, 0, 0]} fill="#2e4c28">
-          <LabelList
-            dataKey="stars"
-            position="top"
-            offset={8}
-            className="fill-foreground"
-            fontSize={12}
-          />
-        </Bar>
+
       </BarChart>
     </ChartContainer>
   );

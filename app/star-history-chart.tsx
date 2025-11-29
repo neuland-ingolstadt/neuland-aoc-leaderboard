@@ -9,6 +9,8 @@ import {
 import {
   ChartConfig,
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
@@ -26,25 +28,13 @@ interface props {
 }
 
 const chartConfig = {
-  height: 400,
-};
-
-type DateDisplay = {
-  start: string;
-  end: string;
 };
 
 export function StarHistoryChart({ leaderboard, startDate, endDate }: props) {
   const [formattedChartData, setFormattedChartData] =
     useState<TransformStarDataReturnType | null>(null);
 
-  const [dateDisplay, setDateDisplay] = useState<DateDisplay | null>(null);
-
   useEffect(() => {
-    setDateDisplay({
-      start: startDate.toLocaleDateString("de-DE"),
-      end: endDate.toLocaleDateString("de-DE"),
-    });
     if (leaderboard && leaderboard.members) {
       const data: TransformStarDataReturnType = transformStarData(
         leaderboard,
@@ -65,15 +55,20 @@ export function StarHistoryChart({ leaderboard, startDate, endDate }: props) {
     );
   }
 
+  if (formattedChartData.length == 0) {
+    return (
+      <Card>
+        <CardContent>Keine Daten verfügbar</CardContent>
+      </Card>
+    );
+  }
+
   return (
     <ChartContainer config={{}}>
       <LineChart
         accessibilityLayer
         data={formattedChartData}
-        margin={{
-          top: 24,
-          right: 24,
-        }}
+        margin={{ left: 0, right: 0 }}
       >
         <CartesianGrid vertical={true} />
         <ChartTooltip
@@ -86,13 +81,18 @@ export function StarHistoryChart({ leaderboard, startDate, endDate }: props) {
           dataKey="label"
           type="category"
           tickLine={false}
-          tickMargin={5}
+          tickMargin={10}
           axisLine={false}
           tickFormatter={(value: string) =>
             value.length > 15 ? value.slice(0, 7) + "..." : value
           }
         />
-        <YAxis></YAxis>
+        <YAxis
+          tickLine={false}
+          axisLine={false}
+          tickMargin={0}
+          width={30}
+        />
 
         {Object.keys(formattedChartData[0]).map((name) => {
           if (name == "label") return;
