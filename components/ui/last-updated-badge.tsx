@@ -26,9 +26,9 @@ export function LastUpdatedBadge({ date, className }: LastUpdatedBadgeProps) {
     const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / 60000);
 
     let colorClass = "bg-red-500";
-    if (diffInMinutes < 60) {
+    if (diffInMinutes < 20) {
         colorClass = "bg-green-500";
-    } else if (diffInMinutes <= 300) {
+    } else if (diffInMinutes <= 60) {
         colorClass = "bg-yellow-500";
     }
 
