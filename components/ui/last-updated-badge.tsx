@@ -23,7 +23,7 @@ export function LastUpdatedBadge({ date, className }: LastUpdatedBadgeProps) {
                 <span className={cn("animate-ping absolute inline-flex h-full w-full rounded-full opacity-75", colorClass)}></span>
                 <span className={cn("relative inline-flex rounded-full h-2 w-2", colorClass)}></span>
             </span>
-            <span>Vor {diffInMinutes} Minute(n) aktualisiert</span>
+            <span>Vor {diffInMinutes} {diffInMinutes === 1 ? "Minute" : "Minuten"} aktualisiert</span>
         </Badge>
     );
 }
