@@ -60,7 +60,6 @@ export default function StarScoreChart({ members }: Props) {
           axisLine={false}
           tickMargin={0}
         />
-        <ChartLegend content={<ChartLegendContent />} />
         <Bar dataKey="local_score" radius={[4, 4, 0, 0]} fill="#56EF34">
           <LabelList
             dataKey="local_score"
