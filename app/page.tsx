@@ -20,11 +20,12 @@ import { getLeaderboardData } from "@/src/lib/leaderboard-api";
 
 // Start and end date to display statistics for
 const startDate = new Date("2025-12-1");
-const endDate = new Date("2025-12-24");
+const endDate = new Date();
 
 export default async function Home() {
   const parsedData: Leaderboard = await getLeaderboardData();
-  const lastUpdated = parsedData.lastUpdated ? new Date(parsedData.lastUpdated) : new Date();
+  const lastUpdated = parsedData.lastUpdated ? new Date(parsedData.lastUpdated) : new Date("2025-11-1");
+  console.log(lastUpdated);
 
   const memberList = Object.values(parsedData.members);
   const memberListSortedByScore = memberList.slice().sort((a, b) => {
