@@ -1,8 +1,5 @@
-"use client";
-
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
 
 interface LastUpdatedBadgeProps {
     date: Date;
@@ -10,19 +7,7 @@ interface LastUpdatedBadgeProps {
 }
 
 export function LastUpdatedBadge({ date, className }: LastUpdatedBadgeProps) {
-    const [now, setNow] = useState(new Date());
-
-    useEffect(() => {
-        // Update 'now' immediately to match client time (hydration fix)
-        setNow(new Date());
-
-        const interval = setInterval(() => {
-            setNow(new Date());
-        }, 60000); // Update every minute
-
-        return () => clearInterval(interval);
-    }, []);
-
+    const now = new Date();
     const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / 60000);
 
     let colorClass = "bg-red-500";
