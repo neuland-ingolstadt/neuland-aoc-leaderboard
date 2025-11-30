@@ -2,7 +2,6 @@ FROM node:24-alpine AS base
 
 ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1 \
-    NEXT_SHARP_PATH=/app/node_modules/sharp \
     PNPM_HOME="/pnpm" 
 ENV PATH="${PNPM_HOME}:${PATH}"
 
@@ -47,8 +46,6 @@ RUN addgroup -S nextjs && \
 COPY --from=builder --chown=nextjs:nextjs /app/public ./public
 COPY --from=builder --chown=nextjs:nextjs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nextjs /app/.next/static ./.next/static
-# Ensure sharp is available in the final image
-COPY --from=builder --chown=nextjs:nextjs /app/node_modules/sharp ./node_modules/sharp
 
 USER nextjs
 
