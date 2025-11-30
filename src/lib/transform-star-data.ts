@@ -14,7 +14,7 @@ export default function transformStarData(
 ): TransformStarDataReturnType {
   const members = leaderboardData.members;
 
-  let history: TransformStarDataReturnType = [];
+  const history: TransformStarDataReturnType = [];
 
   for (let i = startDate; i <= endDate; i.setHours(i.getHours() + 12)) {
     const dataPoint: DataPoint = {

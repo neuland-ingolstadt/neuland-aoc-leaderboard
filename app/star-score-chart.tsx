@@ -4,8 +4,6 @@ import { LeaderboardMember } from "@/src/types/leaderboard";
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
 } from "@/components/ui/chart";
 import {
   BarChart,
@@ -14,9 +12,7 @@ import {
   YAxis,
   CartesianGrid,
   LabelList,
-  Cell,
 } from "recharts";
-import { stringToColor } from "@/src/lib/color-utils";
 
 const chartConfig = {
 

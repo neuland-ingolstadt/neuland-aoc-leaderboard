@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Leaderboard, LeaderboardMember } from "@/src/types/leaderboard";
+import { Leaderboard } from "@/src/types/leaderboard";
 import { LeaderboardTable } from "./leaderboard-data-table";
 import { columns } from "./leaderboard-column";
 import StarScoreChart from "./star-score-chart";

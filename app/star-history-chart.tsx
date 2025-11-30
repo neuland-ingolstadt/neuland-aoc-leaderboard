@@ -7,10 +7,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import {
-  ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
@@ -26,9 +23,6 @@ interface props {
   startDate: Date;
   endDate: Date;
 }
-
-const chartConfig = {
-};
 
 export function StarHistoryChart({ leaderboard, startDate, endDate }: props) {
   const [formattedChartData, setFormattedChartData] =
