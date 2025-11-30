@@ -167,6 +167,7 @@ export default async function Home() {
               </CardContent>
             </Card>
           </div>
+          <p className="pt-5 text-[9px] text-center text-muted-foreground">Daten zuletzt vom AoC Server geladen: {lastUpdated.toString()}</p>
         </div >
       </div >
       <Footer />
