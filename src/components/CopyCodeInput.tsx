@@ -14,11 +14,10 @@ export function CopyCodeInput({ code }: CopyCodeInputProps) {
     const [hasCopied, setHasCopied] = React.useState(false)
 
     const onCopy = async () => {
-        // Fallback for non-secure contexts (e.g. mobile dev via IP)
         if (!navigator?.clipboard) {
             const textArea = document.createElement("textarea");
             textArea.value = code;
-            textArea.style.position = "fixed"; // Avoid scrolling to bottom
+            textArea.style.position = "fixed";
             textArea.style.left = "-9999px";
             textArea.style.top = "0";
             document.body.appendChild(textArea);

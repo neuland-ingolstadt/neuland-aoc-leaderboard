@@ -25,7 +25,6 @@ const endDate = new Date();
 export default async function Home() {
   const parsedData: Leaderboard = await getLeaderboardData();
   const lastUpdated = parsedData.lastUpdated ? new Date(parsedData.lastUpdated) : new Date("2025-11-1");
-  console.log(lastUpdated);
 
   const memberList = Object.values(parsedData.members);
   const memberListSortedByScore = memberList.slice().sort((a, b) => {
@@ -43,7 +42,7 @@ export default async function Home() {
   return (
     <>
       <div className="absolute inset-0 h-full w-full -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0, 0, 0, 0)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
         <div className="absolute right-0 top-0 w-[800px] h-[800px] bg-green-500/15 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3"></div>
       </div>
       <Header />
