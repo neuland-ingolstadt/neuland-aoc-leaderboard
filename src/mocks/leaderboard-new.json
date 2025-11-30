@@ -1,0 +1,48 @@
+{
+    "event": "2025",
+    "num_days": 12,
+    "members": {
+        "3291406": {
+            "last_star_ts": 0,
+            "stars": 0,
+            "id": 3291406,
+            "completion_day_level": {},
+            "name": "Kevin Königseder",
+            "local_score": 0
+        },
+        "5119569": {
+            "last_star_ts": 0,
+            "stars": 0,
+            "id": 5119569,
+            "completion_day_level": {},
+            "local_score": 0,
+            "name": "Nico Märtin"
+        },
+        "5186780": {
+            "id": 5186780,
+            "last_star_ts": 0,
+            "stars": 0,
+            "completion_day_level": {},
+            "local_score": 0,
+            "name": "Josias Erd"
+        },
+        "2306999": {
+            "last_star_ts": 0,
+            "stars": 0,
+            "id": 2306999,
+            "name": "Robert Eggl",
+            "local_score": 0,
+            "completion_day_level": {}
+        },
+        "4754950": {
+            "last_star_ts": 0,
+            "stars": 0,
+            "id": 4754950,
+            "completion_day_level": {},
+            "name": "Stormfox2",
+            "local_score": 0
+        }
+    },
+    "owner_id": 5119569,
+    "day1_ts": 1764565200
+}

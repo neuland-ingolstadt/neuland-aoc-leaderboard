@@ -1,5 +1,4 @@
 import { CopyCodeInput } from "@/src/components/CopyCodeInput";
-import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -17,8 +16,14 @@ import {
 } from "../ui/dialog";
 
 import Image from "next/image";
+import { Badge } from "../ui/badge";
 
 export default function Header() {
+  const today = new Date();
+  const endDate = new Date('2025-12-24');
+  const diffTime = Math.abs(endDate - today);
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
   return (
     <div
       id="header-section"
@@ -36,18 +41,14 @@ export default function Header() {
         <h1
           className={"lg:text-7xl text-5xl font-azeret font-semibold text-center text-accent"}
         >Advent Of<br />Code 2025</h1>
+        <Badge variant={"secondary"} className="">{diffDays} Tage übrig</Badge>
       </div>
       <div className={"w-full grid md:grid-cols-2 gap-5"}>
         <Card>
           <CardHeader>
             <CardTitle className={"text-xl"}>Über den Advent Of Code</CardTitle>
             <CardDescription>
-              Der Advent of Code (AoC) ist ein jährliches globales Event in Form
-              eines Adventskalenders für Programmierer, der von Eric Wastl
-              erstellt wird. Statt Schokolade gibt es jeden Tag kleine,
-              weihnachtlich verpackte Programmierrätsel, die man in einer
-              beliebigen Sprache lösen kann. Es geht um Spaß, Problemlösung und
-              oft auch darum, neue Technologien zu lernen.
+              Der Advent of Code (AoC) ist ein jährliches globales Event in Form eines Adventskalenders für Programmierer. Statt Schokolade gibt es 12 Programmierrätsel, die man in einer beliebigen Sprache lösen kann. Es geht um den Spaß an der Problemlösung - jeder ist herzlich dazu eingeladen, sich an den Rätseln zu versuchen.
             </CardDescription>
           </CardHeader>
         </Card>
@@ -55,12 +56,7 @@ export default function Header() {
           <CardHeader>
             <CardTitle className={"text-xl"}>Mitmachen</CardTitle>
             <CardDescription>
-              Wir bieten dir eine geschlossene Rangliste, der du beitreten
-              kannst, um dich mit anderen Neuland Mitgliedern zu messen.{" "}
-              <strong className={"text-white"}>
-                Der Teilnehmer, der am Ende auf Platz 1 landet, erhält einen
-                kleinen Preis.
-              </strong>
+              Neuland stellt euch ein vereinsinternes Leaderboard zur Verfügung, auf dem ihr euch mit anderen Mitgliedern messen könnt. <strong>Das Mitglied, welches am Ende auf Platz 1 landet, kann sich über einen kleinen Preis freuen 👀</strong>
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -79,12 +75,9 @@ export default function Header() {
                   </DialogHeader>
                   <div className={"grid gap-5"}>
                     <div className={"flex gap-3 items-start"}>
-                      <Badge variant={"outline"} className={"text-xl w-10"}>
-                        1
-                      </Badge>
                       <Card className={"grow bg-background"}>
                         <CardHeader>
-                          <CardTitle>Anmelden bei Advent Of Code</CardTitle>
+                          <CardTitle>1. Anmelden bei Advent Of Code</CardTitle>
                           <CardDescription>
                             Melde dich auf der{" "}
                             <a
@@ -100,12 +93,9 @@ export default function Header() {
                       </Card>
                     </div>
                     <div className={"flex gap-3 items-start"}>
-                      <Badge variant={"outline"} className={"text-xl w-10"}>
-                        2
-                      </Badge>
                       <Card className={"grow"}>
                         <CardHeader>
-                          <CardTitle>Einladungscode eingeben</CardTitle>
+                          <CardTitle>2. Einladungscode eingeben</CardTitle>
                           <CardDescription>
                             Navigiere auf der AoC-Website zur{" "}
                             <a
@@ -117,7 +107,7 @@ export default function Header() {
                             >
                               Leaderboard-Page
                             </a>{" "}
-                            und trage den untenstehenden Einladungscode ein.
+                            und trage den untenstehenden Einladungscode ein. <strong>Fertig!</strong> Du tauchst innerhalb der nächsten Minuten auf dem Leaderboard auf.
                           </CardDescription>
                         </CardHeader>
                         <CardContent>

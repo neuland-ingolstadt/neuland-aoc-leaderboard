@@ -14,6 +14,27 @@ export function CopyCodeInput({ code }: CopyCodeInputProps) {
     const [hasCopied, setHasCopied] = React.useState(false)
 
     const onCopy = async () => {
+        // Fallback for non-secure contexts (e.g. mobile dev via IP)
+        if (!navigator?.clipboard) {
+            const textArea = document.createElement("textarea");
+            textArea.value = code;
+            textArea.style.position = "fixed"; // Avoid scrolling to bottom
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                setHasCopied(true);
+                setTimeout(() => setHasCopied(false), 2000);
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            document.body.removeChild(textArea);
+            return;
+        }
+
         try {
             await navigator.clipboard.writeText(code)
             setHasCopied(true)
@@ -22,7 +43,7 @@ export function CopyCodeInput({ code }: CopyCodeInputProps) {
                 setHasCopied(false)
             }, 2000)
         } catch (err) {
-            // Error while copying
+            console.error("Failed to copy:", err)
         }
     }
 
@@ -40,7 +61,7 @@ export function CopyCodeInput({ code }: CopyCodeInputProps) {
                     size="icon"
                     variant="outline"
                     onClick={onCopy}
-                    className="absolute right-0 top-1/2 h-8 w-8 -translate-y-1/2"
+                    className="absolute right-0 top-1/2 h-8 w-8 -translate-y-1/2 z-10"
                     disabled={hasCopied}
                 >
                     {hasCopied ? (
