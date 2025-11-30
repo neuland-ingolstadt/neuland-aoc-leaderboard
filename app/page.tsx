@@ -18,6 +18,8 @@ import { LastUpdatedBadge } from "@/components/ui/last-updated-badge";
 
 import { getLeaderboardData } from "@/src/lib/leaderboard-api";
 
+export const dynamic = 'force-dynamic';
+
 // Start and end date to display statistics for
 const startDate = new Date("2025-12-1");
 const endDate = new Date();

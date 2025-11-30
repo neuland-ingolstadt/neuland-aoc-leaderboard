@@ -12,12 +12,8 @@ export async function getLeaderboardData(): Promise<Leaderboard> {
         return cachedData;
     }
 
-    const leaderboardUrl = process.env.AOC_LEADERBOARD_URL;
-    const sessionToken = process.env.AOC_SESSION_TOKEN;
-
-    if (!leaderboardUrl || !sessionToken) {
-        throw new Error("AOC_LEADERBOARD_URL or AOC_SESSION_TOKEN not configured");
-    }
+    const leaderboardUrl = process.env.AOC_LEADERBOARD_URL as string;
+    const sessionToken = process.env.AOC_SESSION_TOKEN as string;
 
     try {
         const response = await fetch(leaderboardUrl, {
