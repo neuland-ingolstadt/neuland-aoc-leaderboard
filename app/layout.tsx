@@ -17,7 +17,7 @@ const azeret = Azeret_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Neuland Advent Of Code Leaderboard",
+  title: "Neuland Leaderboard: Advent Of Code",
   icons: {
     icon: "/img/neuland_icon.svg",
   },
