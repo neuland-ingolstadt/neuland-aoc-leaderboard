@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 
 export default function Footer() {
     return (
@@ -9,7 +10,7 @@ export default function Footer() {
                     alt="Neuland Icon"
                     width={100}
                     height={100}
-                    className="h-8 w-auto brightness-0 invert"
+                    className="h-8 w-auto brightness-0 dark:invert"
                 />
                 <div className="flex flex-col gap-2">
                     <p className="text-center md:text-left">
@@ -20,6 +21,7 @@ export default function Footer() {
                         Advent of Code ist eine eingetragene Marke in den Vereinigten Staaten. Die Designelemente, Sprache, Stile und das Konzept von Advent of Code sind das alleinige Eigentum von Advent of Code und dürfen nicht ohne ausdrückliche schriftliche Genehmigung von Advent of Code vervielfältigt oder von einer anderen Person oder Organisation verwendet werden.
                     </p>
                 </div>
+                <ModeToggle />
             </div>
         </div>
     );

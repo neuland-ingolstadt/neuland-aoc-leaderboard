@@ -43,12 +43,12 @@ export default async function Home() {
   return (
     <>
       <div className="absolute inset-0 h-full w-full -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0, 0, 0, 0)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
         <div className="absolute right-0 top-0 w-[800px] h-[800px] bg-green-500/15 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3"></div>
       </div>
       <Header />
       <div className={"px-1 md:px-5 xl:px-40 2xl:px-80"}>
-        <div className="bg-black p-4 md:p-6 border rounded-lg">
+        <div className="bg-background p-4 md:p-6 border rounded-lg">
           <div className={"flex flex-col gap-4"}>
             <div className={"flex justify-between"}><h2>Leaderboard</h2><LastUpdatedBadge date={lastUpdated} /></div>
             <div className={"flex flex-col md:grid md:grid-cols-3 gap-4"}>

@@ -21,7 +21,7 @@ import { Badge } from "../ui/badge";
 export default function Header() {
   const today = new Date();
   const endDate = new Date('2025-12-24');
-  const diffTime = Math.abs(endDate - today);
+  const diffTime = Math.abs(endDate.getTime() - today.getTime());
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
   return (
@@ -35,7 +35,7 @@ export default function Header() {
           alt="Neuland Logo"
           width={64}
           height={64}
-          className="brightness-0 invert"
+          className="brightness-0 dark:invert"
         />
         <p className="text-2xl">Neuland Leaderboard</p>
         <h1

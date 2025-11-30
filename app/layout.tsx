@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className={`${sora.variable} ${azeret.variable} font-sora`}>
         <ThemeProvider
           attribute={"class"}
-          defaultTheme={"dark"}
+          defaultTheme={"light"}
           enableSystem={false}
           disableTransitionOnChange
         >
