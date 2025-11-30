@@ -1,4 +1,5 @@
 import { Leaderboard } from "@/src/types/leaderboard";
+import data from "@/src/mocks/leaderboard-new.json";
 
 let cachedData: Leaderboard | null = null;
 let lastFetchTime: number = 0;
@@ -42,11 +43,14 @@ export async function getLeaderboardData(): Promise<Leaderboard> {
         lastFetchTime = Date.now();
 
         return cachedData!;
+
+
     } catch (error) {
         console.error("Error fetching leaderboard data:", error);
         if (cachedData) {
             return cachedData;
         }
-        throw error;
+        // Fallback to mock data if fetch fails (e.g. during build)
+        return data as unknown as Leaderboard;
     }
 }
