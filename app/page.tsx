@@ -43,6 +43,25 @@ export default async function Home() {
   const startDate = new Date("2025-12-1");
   const endDate = new Date();
 
+  let mostStarsText: string;
+  let mostStarsName: string;
+
+  if (
+    memberListSortedByStars.length > 1 &&
+    memberListSortedByStars[0].stars === memberListSortedByStars[1].stars
+  ) {
+    mostStarsText = memberListSortedByStars[0].stars.toString();
+    mostStarsName = "Unentschieden";
+  } else {
+    mostStarsText = memberListSortedByStars[0].stars + " Sterne";
+    mostStarsName = memberListSortedByStars[0].name || "Kein Name";
+  }
+
+  if (memberListSortedByStars[0].stars === 0) {
+    mostStarsName = "-";
+    mostStarsText = "Nicht genügend Daten";
+  }
+
   return (
     <>
       <div className="absolute inset-0 h-full w-full -z-10 overflow-hidden pointer-events-none">
@@ -83,19 +102,11 @@ export default async function Home() {
                 <CardHeader>
                   <CardTitle className="truncate">⭐ Meiste Sterne</CardTitle>
                   <CardDescription className="truncate">
-                    {memberListSortedByStars[0] &&
-                    memberListSortedByStars[0].stars > 0
-                      ? memberListSortedByStars[0].stars + " Sterne"
-                      : "Noch nicht genügend Daten"}
+                    {mostStarsText}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className={"text-3xl truncate"}>
-                    {memberListSortedByStars[0] &&
-                    memberListSortedByStars[0].stars > 0
-                      ? memberListSortedByStars[0].name
-                      : "-"}
-                  </p>
+                  <p className={"text-3xl truncate"}>{mostStarsName}</p>
                 </CardContent>
               </Card>
               <Card className={"grow overflow-hidden"}>
