@@ -50,7 +50,7 @@ export default async function Home() {
     memberListSortedByStars.length > 1 &&
     memberListSortedByStars[0].stars === memberListSortedByStars[1].stars
   ) {
-    mostStarsText = memberListSortedByStars[0].stars.toString();
+    mostStarsText = memberListSortedByStars[0].stars + " Sterne";
     mostStarsName = "Unentschieden";
   } else {
     mostStarsText = memberListSortedByStars[0].stars + " Sterne";
