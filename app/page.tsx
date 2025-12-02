@@ -18,15 +18,13 @@ import { LastUpdatedBadge } from "@/components/ui/last-updated-badge";
 
 import { getLeaderboardData } from "@/src/lib/leaderboard-api";
 
-export const dynamic = 'force-dynamic';
-
-// Start and end date to display statistics for
-const startDate = new Date("2025-12-1");
-const endDate = new Date();
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const parsedData: Leaderboard = await getLeaderboardData();
-  const lastUpdated = parsedData.lastUpdated ? new Date(parsedData.lastUpdated) : new Date("2025-11-1");
+  const lastUpdated = parsedData.lastUpdated
+    ? new Date(parsedData.lastUpdated)
+    : new Date("2025-11-1");
 
   const memberList = Object.values(parsedData.members);
   const memberListSortedByScore = memberList.slice().sort((a, b) => {
@@ -41,6 +39,10 @@ export default async function Home() {
     return b.last_star_ts - a.last_star_ts;
   });
 
+  // Start and end date to display statistics for
+  const startDate = new Date("2025-12-1");
+  const endDate = new Date();
+
   return (
     <>
       <div className="absolute inset-0 h-full w-full -z-10 overflow-hidden pointer-events-none">
@@ -51,20 +53,27 @@ export default async function Home() {
       <div className={"px-1 md:px-5 xl:px-40 2xl:px-80"}>
         <div className="bg-background p-4 md:p-6 border rounded-lg">
           <div className={"flex flex-col gap-4"}>
-            <div className={"flex justify-between"}><h2>Leaderboard</h2><LastUpdatedBadge date={lastUpdated} /></div>
+            <div className={"flex justify-between"}>
+              <h2>Leaderboard</h2>
+              <LastUpdatedBadge date={lastUpdated} />
+            </div>
             <div className={"flex flex-col md:grid md:grid-cols-3 gap-4"}>
               <Card className={"grow overflow-hidden"}>
                 <CardHeader>
-                  <CardTitle className="truncate">🥇 Aktuell 1. Platz</CardTitle>
+                  <CardTitle className="truncate">
+                    🥇 Aktuell 1. Platz
+                  </CardTitle>
                   <CardDescription className="truncate">
-                    {memberListSortedByScore[0] && memberListSortedByScore[0].local_score > 0
+                    {memberListSortedByScore[0] &&
+                    memberListSortedByScore[0].local_score > 0
                       ? memberListSortedByScore[0].local_score + " Punkten"
                       : "Noch nicht genügend Daten"}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className={"text-3xl truncate"}>
-                    {memberListSortedByScore[0] && memberListSortedByScore[0].local_score > 0
+                    {memberListSortedByScore[0] &&
+                    memberListSortedByScore[0].local_score > 0
                       ? memberListSortedByScore[0].name
                       : "-"}
                   </p>
@@ -74,14 +83,16 @@ export default async function Home() {
                 <CardHeader>
                   <CardTitle className="truncate">⭐ Meiste Sterne</CardTitle>
                   <CardDescription className="truncate">
-                    {memberListSortedByStars[0] && memberListSortedByStars[0].stars > 0
+                    {memberListSortedByStars[0] &&
+                    memberListSortedByStars[0].stars > 0
                       ? memberListSortedByStars[0].stars + " Sterne"
                       : "Noch nicht genügend Daten"}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className={"text-3xl truncate"}>
-                    {memberListSortedByStars[0] && memberListSortedByStars[0].stars > 0
+                    {memberListSortedByStars[0] &&
+                    memberListSortedByStars[0].stars > 0
                       ? memberListSortedByStars[0].name
                       : "-"}
                   </p>
@@ -89,23 +100,27 @@ export default async function Home() {
               </Card>
               <Card className={"grow overflow-hidden"}>
                 <CardHeader>
-                  <CardTitle className="text-nowrap truncate">⏰ Neuste Lösung</CardTitle>
+                  <CardTitle className="text-nowrap truncate">
+                    ⏰ Neuste Lösung
+                  </CardTitle>
                   <CardDescription className="text-nowrap truncate">
-                    {memberListSortedByLastStar[0] && memberListSortedByLastStar[0].last_star_ts > 0
+                    {memberListSortedByLastStar[0] &&
+                    memberListSortedByLastStar[0].last_star_ts > 0
                       ? "Am " +
-                      new Date(memberListSortedByLastStar[0].last_star_ts * 1000).toLocaleDateString(
-                        "de-DE"
-                      ) +
-                      " um " +
-                      new Date(memberListSortedByLastStar[0].last_star_ts * 1000).toLocaleTimeString(
-                        "de-DE"
-                      )
+                        new Date(
+                          memberListSortedByLastStar[0].last_star_ts * 1000
+                        ).toLocaleDateString("de-DE") +
+                        " um " +
+                        new Date(
+                          memberListSortedByLastStar[0].last_star_ts * 1000
+                        ).toLocaleTimeString("de-DE")
                       : "Noch nicht genügend Daten"}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className={"text-3xl truncate"}>
-                    {memberListSortedByLastStar[0] && memberListSortedByLastStar[0].last_star_ts > 0
+                    {memberListSortedByLastStar[0] &&
+                    memberListSortedByLastStar[0].last_star_ts > 0
                       ? memberListSortedByLastStar[0].name
                       : "-"}
                   </p>
@@ -116,14 +131,20 @@ export default async function Home() {
             <Card>
               <CardHeader>
                 <CardTitle>Punkte pro Teilnehmer</CardTitle>
-                <CardDescription>Der Punktestand legt die Platzierung fest</CardDescription>
+                <CardDescription>
+                  Der Punktestand legt die Platzierung fest
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="hidden md:block">
-                  <StarScoreChart members={memberListSortedByScore}></StarScoreChart>
+                  <StarScoreChart
+                    members={memberListSortedByScore}
+                  ></StarScoreChart>
                 </div>
                 <div className="block md:hidden">
-                  <StarScoreChartHorizontal members={memberListSortedByScore}></StarScoreChartHorizontal>
+                  <StarScoreChartHorizontal
+                    members={memberListSortedByScore}
+                  ></StarScoreChartHorizontal>
                 </div>
               </CardContent>
             </Card>
@@ -131,21 +152,26 @@ export default async function Home() {
             <div className={"grid lg:grid-cols-2 gap-4"}>
               <Card>
                 <CardHeader>
-                  <CardTitle>
-                    Lösungen erster Teil / zweiter Teil
-                  </CardTitle>
+                  <CardTitle>Lösungen erster Teil / zweiter Teil</CardTitle>
                   <CardDescription>
-                    Wie oft wurde insgesamt der erste Teil und der zweite Teil eines Rätsels gelöst (alle Teilnehmer zusammen)
+                    Wie oft wurde insgesamt der erste Teil und der zweite Teil
+                    eines Rätsels gelöst (alle Teilnehmer zusammen)
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <StarChallengeChart leaderboardData={parsedData}></StarChallengeChart>
+                  <StarChallengeChart
+                    leaderboardData={parsedData}
+                  ></StarChallengeChart>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
                   <CardTitle>Verlauf der Sterne</CardTitle>
-                  <CardDescription>{startDate.toLocaleDateString("de-DE") + " bis " + endDate.toLocaleDateString("de-DE")}</CardDescription>
+                  <CardDescription>
+                    {startDate.toLocaleDateString("de-DE") +
+                      " bis " +
+                      endDate.toLocaleDateString("de-DE")}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="">
                   <StarHistoryChart
@@ -168,9 +194,11 @@ export default async function Home() {
               </CardContent>
             </Card>
           </div>
-          <p className="pt-5 text-[9px] text-center text-muted-foreground">Daten zuletzt vom AoC Server geladen: {lastUpdated.toString()}</p>
-        </div >
-      </div >
+          <p className="pt-5 text-[9px] text-center text-muted-foreground">
+            Daten zuletzt vom AoC Server geladen: {lastUpdated.toString()}
+          </p>
+        </div>
+      </div>
       <Footer />
     </>
   );
