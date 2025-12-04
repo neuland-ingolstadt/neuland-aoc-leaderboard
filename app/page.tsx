@@ -24,7 +24,7 @@ export default async function Home() {
   const parsedData: Leaderboard = await getLeaderboardData();
   const lastUpdated = parsedData.lastUpdated
     ? new Date(parsedData.lastUpdated)
-    : new Date("2025-11-1");
+    : new Date();
 
   const memberList = Object.values(parsedData.members);
   const memberListSortedByScore = memberList.slice().sort((a, b) => {
@@ -85,7 +85,7 @@ export default async function Home() {
                   <CardDescription className="truncate">
                     {memberListSortedByScore[0] &&
                     memberListSortedByScore[0].local_score > 0
-                      ? memberListSortedByScore[0].local_score + " Punkten"
+                      ? memberListSortedByScore[0].local_score + " Punkte"
                       : "Noch nicht genügend Daten"}
                   </CardDescription>
                 </CardHeader>
@@ -124,7 +124,9 @@ export default async function Home() {
                         " um " +
                         new Date(
                           memberListSortedByLastStar[0].last_star_ts * 1000
-                        ).toLocaleTimeString("de-DE")
+                        ).toLocaleTimeString("de-DE", {
+                          timeZone: "Europe/Berlin",
+                        })
                       : "Noch nicht genügend Daten"}
                   </CardDescription>
                 </CardHeader>
@@ -206,7 +208,10 @@ export default async function Home() {
             </Card>
           </div>
           <p className="pt-5 text-[9px] text-center text-muted-foreground">
-            Daten zuletzt vom AoC Server geladen: {lastUpdated.toString()}
+            Daten zuletzt vom AoC Server geladen:{" "}
+            {lastUpdated.toLocaleTimeString("de-DE", {
+              timeZone: "Europe/Berlin",
+            })}
           </p>
         </div>
       </div>
