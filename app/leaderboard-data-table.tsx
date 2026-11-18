@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import { flexRender, useTable } from "@tanstack/react-table";
 
 import {
   Table,
@@ -15,20 +10,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { LeaderboardMember } from "@/src/types/leaderboard";
+import { columns, tableFeaturesConfig } from "./leaderboard-column";
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+interface DataTableProps {
+  columns: typeof columns;
+  data: LeaderboardMember[];
 }
 
-export function LeaderboardTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
-  const table = useReactTable({
+export function LeaderboardTable({ columns, data }: DataTableProps) {
+  const table = useTable({
+    features: tableFeaturesConfig,
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
   });
 
   return (
@@ -55,11 +49,8 @@ export function LeaderboardTable<TData, TValue>({
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
+              <TableRow key={row.id}>
+                {row.getAllCells().map((cell) => (
                   <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>

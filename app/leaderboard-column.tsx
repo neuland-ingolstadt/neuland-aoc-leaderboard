@@ -1,27 +1,27 @@
 "use client";
 
 import { LeaderboardMember } from "@/src/types/leaderboard";
-import { ColumnDef } from "@tanstack/react-table";
+import { createColumnHelper, tableFeatures } from "@tanstack/react-table";
 
-export const columns: ColumnDef<LeaderboardMember>[] = [
-  {
-    accessorKey: "name",
+export const tableFeaturesConfig = tableFeatures({});
+
+const helper = createColumnHelper<typeof tableFeaturesConfig, LeaderboardMember>();
+
+export const columns = helper.columns([
+  helper.accessor("name", {
     header: "Name",
     cell: ({ row }) => {
       const name = row.getValue("name") ?? "((Kein Name))";
       return name;
     },
-  },
-  {
-    accessorKey: "local_score",
+  }),
+  helper.accessor("local_score", {
     header: "Punkte",
-  },
-  {
-    accessorKey: "stars",
+  }),
+  helper.accessor("stars", {
     header: "Sterne",
-  },
-  {
-    accessorKey: "last_star_ts",
+  }),
+  helper.accessor("last_star_ts", {
     header: "Zuletzt Lösung eingereicht",
     cell: ({ row }) => {
       const timestamp = parseInt(row.getValue("last_star_ts"));
@@ -33,5 +33,5 @@ export const columns: ColumnDef<LeaderboardMember>[] = [
         date.toLocaleDateString("de-DE")
       );
     },
-  },
-];
+  }),
+]);
