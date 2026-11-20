@@ -16,7 +16,7 @@ export default function Footer() {
                 />
                 <div className="flex flex-col gap-2">
                     <p className="text-center md:text-left">
-                        Neuland e.V. steht in keiner Verbindung mit dem Advent of Code Wettbewerb und ist nicht für den Inhalt des Wettbewerbs verantwortlich sondern bietet
+                        Neuland Ingolstadt e.V. steht in keiner Verbindung mit dem Advent of Code Wettbewerb und ist nicht für den Inhalt des Wettbewerbs verantwortlich sondern bietet
                         nur das Leaderboard mit Preisverleihung an.
                     </p>
                     <p className="text-center md:text-left text-xs opacity-50">
