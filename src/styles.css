@@ -147,3 +147,25 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 40%22 preserveAspectRatio=%22none%22%3E%3Cpath fill=%22%2323ff88%22 d=%22M6 3 L60 5 L130 1 L194 3 L200 10 L195 16 L200 23 L196 29 L200 35 L193 38 L130 39 L60 36 L8 39 L0 32 L5 26 L0 20 L6 14 L1 8 Z%22/%3E%3C/svg%3E");
   }
 }
+
+@keyframes top-glow-drift {
+  0% {
+    transform: translate3d(-4%, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(5%, 8%, 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(-4%, 0, 0) scale(1);
+  }
+}
+
+.top-glow-blob {
+  animation: top-glow-drift 24s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-glow-blob {
+    animation: none;
+  }
+}

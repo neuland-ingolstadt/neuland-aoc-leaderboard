@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "@tanstack/react-router";
+import { TopGlow } from "@/src/components/top-glow";
 import { SnowBackground } from "@/src/components/snow-background";
 import { Lock } from "lucide-react";
 import { InfoCards } from "@/components/layout/header";
@@ -44,7 +45,7 @@ export function CountdownLock({
     <main className="relative min-h-screen grid lg:grid-cols-2 content-center items-center gap-12 px-4 py-12 md:px-10 xl:px-20 overflow-hidden">
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <SnowBackground />
-        <div className="absolute left-0 top-1/2 size-[900px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--accent)_22%,transparent),transparent)]"></div>
+        <TopGlow />
       </div>
       <div className="flex flex-col items-center gap-10">
         <div className="flex flex-col items-center gap-5 text-center">

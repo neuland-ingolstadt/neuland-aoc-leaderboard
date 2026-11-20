@@ -12,6 +12,7 @@ import { RankProgression } from "@/src/components/dashboard/rank-progression";
 import { SubmissionHeatmap } from "@/src/components/dashboard/submission-heatmap";
 import { LastUpdatedBadge } from "@/components/ui/last-updated-badge";
 
+import { TopGlow } from "@/src/components/top-glow";
 import { SnowBackground } from "@/src/components/snow-background";
 import { CountdownLock } from "@/src/components/countdown-lock";
 import type { Leaderboard } from "@/src/types/leaderboard";
@@ -56,7 +57,7 @@ function Dashboard({
     <>
       <div className="absolute inset-0 h-full w-full -z-10 overflow-hidden pointer-events-none">
         <SnowBackground />
-        <div className="absolute right-0 top-0 size-[1100px] translate-x-1/3 -translate-y-1/3 bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--accent)_22%,transparent),transparent)]"></div>
+        <TopGlow />
       </div>
       <Header inviteCode={inviteCode} />
       <div className={"px-1 md:px-5 xl:px-40 2xl:px-80"}>
