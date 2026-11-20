@@ -213,14 +213,12 @@ export default function Header({ inviteCode }: { inviteCode: string }) {
         <p className="text-2xl">Neuland Leaderboard</p>
         <h1
           className={
-            "lg:text-7xl text-5xl font-plex-mono font-semibold text-center"
+            "lg:text-7xl text-5xl font-plex-mono font-semibold text-center leading-[1.45]"
           }
         >
-          <span className="accent-marker">
-            Advent Of
-            <br />
-            Code 2026
-          </span>
+          <span className="accent-marker-line marker-a">Advent Of</span>
+          <br />
+          <span className="accent-marker-line marker-b">Code 2026</span>
         </h1>
         <div className="flex items-center gap-2.5 border bg-background px-4 py-2.5">
           <span className="font-plex-mono text-2xl font-semibold leading-none tabular-nums">

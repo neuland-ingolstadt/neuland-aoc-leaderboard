@@ -146,6 +146,41 @@
   .dark .accent-marker {
     background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 40%22 preserveAspectRatio=%22none%22%3E%3Cpath fill=%22%2323ff88%22 d=%22M6 3 L60 5 L130 1 L194 3 L200 10 L195 16 L200 23 L196 29 L200 35 L193 38 L130 39 L60 36 L8 39 L0 32 L5 26 L0 20 L6 14 L1 8 Z%22/%3E%3C/svg%3E");
   }
+
+  /* Per-line variant of the marker: each line gets its own hand-drawn shape and
+     a slight tilt so stacked lines don't look copy-pasted */
+  .accent-marker-line {
+    position: relative;
+    display: inline-block;
+    isolation: isolate;
+    padding: 0.05em 0.45em;
+    color: oklch(0 0 0);
+  }
+
+  .accent-marker-line::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: #b6fad0;
+    -webkit-mask: var(--marker-shape) no-repeat 0 0 / 100% 100%;
+    mask: var(--marker-shape) no-repeat 0 0 / 100% 100%;
+    transform: rotate(var(--marker-tilt, 0deg));
+  }
+
+  .dark .accent-marker-line::before {
+    background-color: #23ff88;
+  }
+
+  .accent-marker-line.marker-a {
+    --marker-tilt: -0.6deg;
+    --marker-shape: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 40%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M6 3 L60 5 L130 1 L194 3 L200 10 L195 16 L200 23 L196 29 L200 35 L193 38 L130 39 L60 36 L8 39 L0 32 L5 26 L0 20 L6 14 L1 8 Z%22/%3E%3C/svg%3E");
+  }
+
+  .accent-marker-line.marker-b {
+    --marker-tilt: 0.7deg;
+    --marker-shape: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 40%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M2 6 L45 1 L100 4 L160 0 L198 5 L200 12 L194 19 L199 26 L197 33 L190 39 L140 37 L85 40 L30 37 L4 40 L0 30 L6 22 L1 15 Z%22/%3E%3C/svg%3E");
+  }
 }
 
 @keyframes top-glow-drift {
