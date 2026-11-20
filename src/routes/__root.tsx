@@ -29,7 +29,7 @@ function RootComponent() {
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <HeadContent />
       </head>
-      <body className="font-sora">
+      <body className="font-plex-sans">
         <ThemeProvider>
           <Outlet />
         </ThemeProvider>

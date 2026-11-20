@@ -38,7 +38,7 @@ export default function Header({ inviteCode }: { inviteCode: string }) {
         />
         <p className="text-2xl">Neuland Leaderboard</p>
         <h1
-          className={"lg:text-7xl text-5xl font-azeret font-semibold text-center text-accent"}
+          className={"lg:text-7xl text-5xl font-plex-mono font-semibold text-center text-accent"}
         >Advent Of<br />Code 2025</h1>
         <Badge variant={"secondary"} className="">{diffDays} Tage übrig</Badge>
       </div>

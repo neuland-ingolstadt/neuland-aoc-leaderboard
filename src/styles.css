@@ -1,12 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@fontsource/sora/latin-200.css";
-@import "@fontsource/sora/latin-400.css";
-@import "@fontsource/sora/latin-700.css";
-@import "@fontsource/azeret-mono/latin-200.css";
-@import "@fontsource/azeret-mono/latin-400.css";
-@import "@fontsource/azeret-mono/latin-600.css";
-@import "@fontsource/azeret-mono/latin-800.css";
+@import "@fontsource/ibm-plex-sans/latin-300.css";
+@import "@fontsource/ibm-plex-sans/latin-400.css";
+@import "@fontsource/ibm-plex-sans/latin-600.css";
+@import "@fontsource/ibm-plex-sans/latin-700.css";
+@import "@fontsource/ibm-plex-mono/latin-400.css";
+@import "@fontsource/ibm-plex-mono/latin-600.css";
+@import "@fontsource/ibm-plex-mono/latin-700.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -46,8 +46,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-sora: "Sora", ui-sans-serif, system-ui, sans-serif;
-  --font-azeret: "Azeret Mono", ui-monospace, monospace;
+  --font-plex-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-plex-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
 
 :root {
@@ -64,7 +64,7 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(71.409% 0.21106 135.934);
+  --accent: oklch(0.72 0.2 152);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
@@ -98,8 +98,8 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.899 0.248 134.446);
-  --accent-muted: oklch(67.088% 0.18108 134.088);
+  --accent: #23ff88;
+  --accent-muted: oklch(0.7 0.18 152);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
