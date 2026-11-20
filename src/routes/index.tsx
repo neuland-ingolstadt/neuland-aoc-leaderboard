@@ -7,9 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { LeaderboardTable } from "@/src/components/dashboard/leaderboard-data-table";
-import { columns } from "@/src/components/dashboard/leaderboard-column";
 import { ScorePodium } from "@/src/components/dashboard/score-podium";
+import { RankProgression } from "@/src/components/dashboard/rank-progression";
 import { SubmissionHeatmap } from "@/src/components/dashboard/submission-heatmap";
 import { LastUpdatedBadge } from "@/components/ui/last-updated-badge";
 
@@ -29,8 +28,13 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const data = Route.useLoaderData();
-  if (data.locked) return <CountdownLock unlockAt={data.unlockAt} inviteCode={data.inviteCode} />;
-  return <Dashboard parsedData={data.leaderboard} inviteCode={data.inviteCode} />;
+  if (data.locked)
+    return (
+      <CountdownLock unlockAt={data.unlockAt} inviteCode={data.inviteCode} />
+    );
+  return (
+    <Dashboard parsedData={data.leaderboard} inviteCode={data.inviteCode} />
+  );
 }
 
 function Dashboard({
@@ -53,11 +57,11 @@ function Dashboard({
     <>
       <div className="absolute inset-0 h-full w-full -z-10 overflow-hidden pointer-events-none">
         <SnowBackground />
-        <div className="absolute right-0 top-0 w-[800px] h-[800px] bg-accent/15 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3"></div>
+        <div className="absolute right-0 top-0 size-[1100px] translate-x-1/3 -translate-y-1/3 bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--accent)_22%,transparent),transparent)]"></div>
       </div>
       <Header inviteCode={inviteCode} />
       <div className={"px-1 md:px-5 xl:px-40 2xl:px-80"}>
-        <div className="bg-background p-4 md:p-6 border rounded-lg">
+        <div>
           <div className={"flex flex-col gap-4"}>
             <div className={"flex justify-between"}>
               <h2>Leaderboard</h2>
@@ -77,6 +81,19 @@ function Dashboard({
 
             <Card>
               <CardHeader>
+                <CardTitle>Rangverlauf</CardTitle>
+                <CardDescription>
+                  Platzierung der Top 10 nach jedem Rätseltag. Wähle einen Namen
+                  aus, um den Verlauf hervorzuheben
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <RankProgression leaderboard={parsedData} />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
                 <CardTitle>Lösungen pro Tag und Uhrzeit</CardTitle>
                 <CardDescription>
                   Jedes Feld ist eine Stunde (deutsche Zeit): Je kräftiger das
@@ -85,18 +102,6 @@ function Dashboard({
               </CardHeader>
               <CardContent>
                 <SubmissionHeatmap leaderboard={parsedData} />
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Liste aller Teilnehmer</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <LeaderboardTable
-                  columns={columns}
-                  data={memberListSortedByScore}
-                ></LeaderboardTable>
               </CardContent>
             </Card>
           </div>
