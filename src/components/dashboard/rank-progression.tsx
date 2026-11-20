@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Leaderboard } from "@/src/types/leaderboard";
 
 interface Props {
   leaderboard: Leaderboard;
   days?: number;
-  top?: number;
 }
 
 interface Series {
@@ -21,10 +21,12 @@ const MARGIN_TOP = 12;
 const MARGIN_BOTTOM = 36;
 const MARGIN_LEFT = 40;
 const WIDE_BREAKPOINT = 560;
+// A steep climb: a place gained on each of the last few days
+const CLIMB_DAYS = 3;
 
 // Re-creates the AoC local scoring (N - position points per star) day by day
 // to get the cumulative score and the rank after each puzzle day.
-function computeSeries(leaderboard: Leaderboard, days: number, top: number) {
+function computeSeries(leaderboard: Leaderboard, days: number) {
   const members = Object.values(leaderboard.members);
   const n = members.length;
   const gained = new Map(members.map((m) => [m.id, Array(days).fill(0)]));
@@ -83,16 +85,91 @@ function computeSeries(leaderboard: Leaderboard, days: number, top: number) {
       ranks: ranks.get(m.id)!,
       points: cumulative.get(m.id)!,
     }))
-    .sort((a, b) => a.ranks[lastDay - 1] - b.ranks[lastDay - 1])
-    .slice(0, top);
+    .sort((a, b) => a.ranks[lastDay - 1] - b.ranks[lastDay - 1]);
 
   return { lastDay, series };
 }
 
-export function RankProgression({ leaderboard, days = 12, top = 10 }: Props) {
+// Places gained over the last CLIMB_DAYS days, or 0 unless the rank improved
+// on every single one of those days
+const climbGain = (s: Series) => {
+  const recent = s.ranks.slice(-(CLIMB_DAYS + 1));
+  if (recent.length < CLIMB_DAYS + 1) return 0;
+  const climbing = recent.every((rank, i) => i === 0 || rank < recent[i - 1]);
+  return climbing ? recent[0] - recent[recent.length - 1] : 0;
+};
+
+function ClimbFlame({ gain }: { gain: number }) {
+  return (
+    <span className="group relative ml-1 inline-block align-[-0.125em]">
+      <Flame className="size-[1em] text-orange-500" aria-hidden />
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1.5 -translate-x-1/2 whitespace-nowrap border bg-popover px-2 py-1 text-xs font-normal text-popover-foreground opacity-0 shadow-md transition-opacity group-hover:opacity-100"
+      >
+        Steiler Aufstieg: +{gain} Plätze in {CLIMB_DAYS} Tagen
+      </span>
+    </span>
+  );
+}
+
+function ChartLabel({
+  x,
+  y,
+  name,
+  isActive,
+  gain,
+  onSelect,
+}: {
+  x: number;
+  y: number;
+  name: string;
+  isActive: boolean;
+  gain: number;
+  onSelect: () => void;
+}) {
+  const textRef = useRef<SVGTextElement>(null);
+  const [textWidth, setTextWidth] = useState(0);
+  const label = name.length > 16 ? name.slice(0, 16) + "…" : name;
+
+  useLayoutEffect(() => {
+    setTextWidth(textRef.current?.getComputedTextLength() ?? 0);
+  }, [label, isActive]);
+
+  return (
+    <g className="cursor-pointer" onClick={onSelect} onMouseEnter={onSelect}>
+      <text
+        ref={textRef}
+        x={x}
+        y={y}
+        dy={4}
+        fontSize={12}
+        fontWeight={isActive ? 600 : 400}
+        fill={isActive ? "var(--foreground)" : "currentColor"}
+      >
+        {label}
+      </text>
+      {gain > 0 && (
+        <Flame
+          x={x + textWidth + 4}
+          y={y - 6}
+          width={12}
+          height={12}
+          className="text-orange-500"
+        >
+          <title>
+            Steiler Aufstieg: +{gain} Plätze in {CLIMB_DAYS} Tagen
+          </title>
+        </Flame>
+      )}
+    </g>
+  );
+}
+
+export function RankProgression({ leaderboard, days = 12 }: Props) {
   const { lastDay, series } = useMemo(
-    () => computeSeries(leaderboard, days, top),
-    [leaderboard, days, top],
+    () => computeSeries(leaderboard, days),
+    [leaderboard, days],
   );
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
@@ -246,19 +323,14 @@ export function RankProgression({ leaderboard, days = 12, top = 10 }: Props) {
                       />
                     ))}
                   {wide && (
-                    <text
+                    <ChartLabel
                       x={x(lastDay) + 12}
                       y={y(s.ranks[lastDay - 1])}
-                      dy={4}
-                      fontSize={12}
-                      fontWeight={isActive ? 600 : 400}
-                      fill={isActive ? "var(--foreground)" : "currentColor"}
-                      className="cursor-pointer"
-                      onClick={() => setSelected(s.id)}
-                      onMouseEnter={() => setSelected(s.id)}
-                    >
-                      {s.name.length > 16 ? s.name.slice(0, 16) + "…" : s.name}
-                    </text>
+                      name={s.name}
+                      isActive={isActive}
+                      gain={climbGain(s)}
+                      onSelect={() => setSelected(s.id)}
+                    />
                   )}
                 </g>
               );
@@ -269,14 +341,15 @@ export function RankProgression({ leaderboard, days = 12, top = 10 }: Props) {
 
       <p className="text-sm">
         <span className="accent-marker font-semibold">{active.name}</span>
+        {climbGain(active) > 0 && <ClimbFlame gain={climbGain(active)} />}
         <span className="text-muted-foreground">
           {" "}
-          · Platz {finalRank} nach Tag {lastDay} · {active.points[lastDay - 1]}{" "}
-          Punkte · Rekord: Platz {Math.min(...active.ranks)}
+          · Aktuell Platz {finalRank} · {active.points[lastDay - 1]} Punkte ·
+          Rekord: Platz {Math.min(...active.ranks)}
         </span>
       </p>
 
-      <div className="flex flex-wrap gap-1.5">
+      <div className={cn("flex flex-wrap gap-1.5", wide && "hidden")}>
         {series.map((s) => (
           <button
             key={s.id}
@@ -286,11 +359,12 @@ export function RankProgression({ leaderboard, days = 12, top = 10 }: Props) {
             className={cn(
               "border px-2 py-1 text-xs transition-colors",
               s.id === active.id
-                ? "bg-accent border-accent text-black"
+                ? "bg-muted-foreground/20 border-muted-foreground/40 text-foreground"
                 : "hover:bg-muted",
             )}
           >
             {s.ranks[lastDay - 1]}. {s.name}
+            {climbGain(s) > 0 && <ClimbFlame gain={climbGain(s)} />}
           </button>
         ))}
       </div>

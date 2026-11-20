@@ -91,8 +91,8 @@ function Dashboard({
               <CardHeader>
                 <CardTitle>Rangverlauf</CardTitle>
                 <CardDescription>
-                  Platzierung der Top 10 nach jedem Rätseltag. Wähle einen Namen
-                  aus, um den Verlauf hervorzuheben
+                  Platzierung aller Teilnehmenden nach jedem Rätseltag. Wähle
+                  einen Namen aus, um den Verlauf hervorzuheben
                 </CardDescription>
               </CardHeader>
               <CardContent>
