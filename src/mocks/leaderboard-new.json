@@ -1,48 +1,1716 @@
 {
-    "event": "2025",
-    "num_days": 12,
-    "members": {
-        "3291406": {
-            "last_star_ts": 0,
-            "stars": 0,
-            "id": 3291406,
-            "completion_day_level": {},
-            "name": "Kevin Königseder",
-            "local_score": 0
+  "event": "2026",
+  "num_days": 12,
+  "members": {
+    "3536685": {
+      "last_star_ts": 1796915209,
+      "stars": 10,
+      "id": 3536685,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796164028,
+            "star_index": 68349
+          },
+          "2": {
+            "get_star_ts": 1796165417,
+            "star_index": 45228
+          }
         },
-        "5119569": {
-            "last_star_ts": 0,
-            "stars": 0,
-            "id": 5119569,
-            "completion_day_level": {},
-            "local_score": 0,
-            "name": "Nico Märtin"
+        "4": {
+          "1": {
+            "get_star_ts": 1796431271,
+            "star_index": 74632
+          },
+          "2": {
+            "get_star_ts": 1796433678,
+            "star_index": 40052
+          }
         },
-        "5186780": {
-            "id": 5186780,
-            "last_star_ts": 0,
-            "stars": 0,
-            "completion_day_level": {},
-            "local_score": 0,
-            "name": "Josias Erd"
+        "6": {
+          "1": {
+            "get_star_ts": 1796561522,
+            "star_index": 55266
+          },
+          "2": {
+            "get_star_ts": 1796565747,
+            "star_index": 30599
+          }
         },
-        "2306999": {
-            "last_star_ts": 0,
-            "stars": 0,
-            "id": 2306999,
-            "name": "Robert Eggl",
-            "local_score": 0,
-            "completion_day_level": {}
+        "7": {
+          "1": {
+            "get_star_ts": 1796663039,
+            "star_index": 91592
+          },
+          "2": {
+            "get_star_ts": 1796666493,
+            "star_index": 83501
+          }
         },
-        "4754950": {
-            "last_star_ts": 0,
-            "stars": 0,
-            "id": 4754950,
-            "completion_day_level": {},
-            "name": "Stormfox2",
-            "local_score": 0
+        "8": {
+          "1": {
+            "get_star_ts": 1796767975,
+            "star_index": 71106
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796915209,
+            "star_index": 67960
+          }
         }
+      },
+      "name": "Lena Fischer",
+      "local_score": 106
     },
-    "owner_id": 5119569,
-    "day1_ts": 1764565200
+    "3927066": {
+      "last_star_ts": 1796714043,
+      "stars": 13,
+      "id": 3927066,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796108863,
+            "star_index": 38430
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796195688,
+            "star_index": 88140
+          },
+          "2": {
+            "get_star_ts": 1796200671,
+            "star_index": 81513
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796277285,
+            "star_index": 67325
+          },
+          "2": {
+            "get_star_ts": 1796283297,
+            "star_index": 46897
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796368560,
+            "star_index": 46970
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796466451,
+            "star_index": 99466
+          },
+          "2": {
+            "get_star_ts": 1796466706,
+            "star_index": 52056
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796537579,
+            "star_index": 69911
+          },
+          "2": {
+            "get_star_ts": 1796538919,
+            "star_index": 29908
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796638255,
+            "star_index": 2769
+          },
+          "2": {
+            "get_star_ts": 1796648184,
+            "star_index": 56217
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796714043,
+            "star_index": 69902
+          }
+        }
+      },
+      "name": "Jonas Weber",
+      "local_score": 227
+    },
+    "3583594": {
+      "last_star_ts": 1796870581,
+      "stars": 11,
+      "id": 3583594,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796103618,
+            "star_index": 57264
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796309416,
+            "star_index": 51778
+          },
+          "2": {
+            "get_star_ts": 1796318729,
+            "star_index": 82633
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796362655,
+            "star_index": 48737
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796564503,
+            "star_index": 32982
+          },
+          "2": {
+            "get_star_ts": 1796567302,
+            "star_index": 74297
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796668047,
+            "star_index": 77625
+          },
+          "2": {
+            "get_star_ts": 1796672475,
+            "star_index": 50533
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796754987,
+            "star_index": 47691
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796866727,
+            "star_index": 98398
+          },
+          "2": {
+            "get_star_ts": 1796870581,
+            "star_index": 4819
+          }
+        }
+      },
+      "name": "Mia Schneider",
+      "local_score": 153
+    },
+    "3883322": {
+      "last_star_ts": 1796587781,
+      "stars": 9,
+      "id": 3883322,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796102216,
+            "star_index": 15023
+          },
+          "2": {
+            "get_star_ts": 1796106368,
+            "star_index": 31949
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796295278,
+            "star_index": 29220
+          },
+          "2": {
+            "get_star_ts": 1796296863,
+            "star_index": 23914
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796362359,
+            "star_index": 65294
+          },
+          "2": {
+            "get_star_ts": 1796363060,
+            "star_index": 81972
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796586998,
+            "star_index": 52589
+          },
+          "2": {
+            "get_star_ts": 1796587781,
+            "star_index": 62981
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796545242,
+            "star_index": 21617
+          }
+        }
+      },
+      "name": "Felix Wagner",
+      "local_score": 151
+    },
+    "3787507": {
+      "last_star_ts": 1796804128,
+      "stars": 15,
+      "id": 3787507,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796131230,
+            "star_index": 58074
+          },
+          "2": {
+            "get_star_ts": 1796132271,
+            "star_index": 68246
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796205973,
+            "star_index": 25839
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796276535,
+            "star_index": 50020
+          },
+          "2": {
+            "get_star_ts": 1796278859,
+            "star_index": 5072
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796374040,
+            "star_index": 72479
+          },
+          "2": {
+            "get_star_ts": 1796376254,
+            "star_index": 12085
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796448625,
+            "star_index": 14303
+          },
+          "2": {
+            "get_star_ts": 1796450342,
+            "star_index": 16325
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796534412,
+            "star_index": 29488
+          },
+          "2": {
+            "get_star_ts": 1796535157,
+            "star_index": 53106
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796626818,
+            "star_index": 17138
+          },
+          "2": {
+            "get_star_ts": 1796627156,
+            "star_index": 60947
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796795286,
+            "star_index": 79838
+          },
+          "2": {
+            "get_star_ts": 1796804128,
+            "star_index": 46483
+          }
+        }
+      },
+      "name": "Emma Becker",
+      "local_score": 295
+    },
+    "3002657": {
+      "last_star_ts": 1796796522,
+      "stars": 17,
+      "id": 3002657,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796105643,
+            "star_index": 84351
+          },
+          "2": {
+            "get_star_ts": 1796106229,
+            "star_index": 68623
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796189040,
+            "star_index": 83084
+          },
+          "2": {
+            "get_star_ts": 1796190366,
+            "star_index": 13906
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796284334,
+            "star_index": 55573
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796363206,
+            "star_index": 31802
+          },
+          "2": {
+            "get_star_ts": 1796366101,
+            "star_index": 43099
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796451513,
+            "star_index": 41711
+          },
+          "2": {
+            "get_star_ts": 1796458591,
+            "star_index": 1450
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796557830,
+            "star_index": 13676
+          },
+          "2": {
+            "get_star_ts": 1796561648,
+            "star_index": 9692
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796622899,
+            "star_index": 45794
+          },
+          "2": {
+            "get_star_ts": 1796633138,
+            "star_index": 87360
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796707812,
+            "star_index": 20750
+          },
+          "2": {
+            "get_star_ts": 1796715924,
+            "star_index": 61414
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796795964,
+            "star_index": 83226
+          },
+          "2": {
+            "get_star_ts": 1796796522,
+            "star_index": 55247
+          }
+        }
+      },
+      "name": "Noah Hoffmann",
+      "local_score": 348
+    },
+    "3856436": {
+      "last_star_ts": 1796282198,
+      "stars": 6,
+      "id": 3856436,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796103521,
+            "star_index": 14047
+          },
+          "2": {
+            "get_star_ts": 1796110179,
+            "star_index": 85363
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796195144,
+            "star_index": 14825
+          },
+          "2": {
+            "get_star_ts": 1796196286,
+            "star_index": 25992
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796281589,
+            "star_index": 73673
+          },
+          "2": {
+            "get_star_ts": 1796282198,
+            "star_index": 64663
+          }
+        }
+      },
+      "name": "Sophie Koch",
+      "local_score": 117
+    },
+    "3934243": {
+      "last_star_ts": 0,
+      "stars": 0,
+      "id": 3934243,
+      "completion_day_level": {},
+      "name": "Paul Richter",
+      "local_score": 0
+    },
+    "3220436": {
+      "last_star_ts": 1796623176,
+      "stars": 11,
+      "id": 3220436,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796107184,
+            "star_index": 45680
+          },
+          "2": {
+            "get_star_ts": 1796107764,
+            "star_index": 78915
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796196833,
+            "star_index": 24739
+          },
+          "2": {
+            "get_star_ts": 1796197728,
+            "star_index": 17333
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796381372,
+            "star_index": 12350
+          },
+          "2": {
+            "get_star_ts": 1796386727,
+            "star_index": 46407
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796466176,
+            "star_index": 32024
+          },
+          "2": {
+            "get_star_ts": 1796470340,
+            "star_index": 20581
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796545032,
+            "star_index": 59112
+          },
+          "2": {
+            "get_star_ts": 1796546029,
+            "star_index": 62113
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796623176,
+            "star_index": 14048
+          }
+        }
+      },
+      "name": "Hannah Klein",
+      "local_score": 181
+    },
+    "3974459": {
+      "last_star_ts": 1796459336,
+      "stars": 6,
+      "id": 3974459,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796110485,
+            "star_index": 73187
+          },
+          "2": {
+            "get_star_ts": 1796111215,
+            "star_index": 56520
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796286929,
+            "star_index": 99774
+          },
+          "2": {
+            "get_star_ts": 1796288766,
+            "star_index": 18162
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796451468,
+            "star_index": 12949
+          },
+          "2": {
+            "get_star_ts": 1796459336,
+            "star_index": 3699
+          }
+        }
+      },
+      "name": "Luca Wolf",
+      "local_score": 102
+    },
+    "3782206": {
+      "last_star_ts": 1796846521,
+      "stars": 16,
+      "id": 3782206,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796164291,
+            "star_index": 90882
+          },
+          "2": {
+            "get_star_ts": 1796164998,
+            "star_index": 61787
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796247528,
+            "star_index": 56449
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796332286,
+            "star_index": 9220
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796483067,
+            "star_index": 58906
+          },
+          "2": {
+            "get_star_ts": 1796485668,
+            "star_index": 66257
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796500943,
+            "star_index": 9040
+          },
+          "2": {
+            "get_star_ts": 1796502252,
+            "star_index": 59827
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796543810,
+            "star_index": 63334
+          },
+          "2": {
+            "get_star_ts": 1796554975,
+            "star_index": 47078
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796691565,
+            "star_index": 98934
+          },
+          "2": {
+            "get_star_ts": 1796693329,
+            "star_index": 13916
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796757164,
+            "star_index": 7166
+          },
+          "2": {
+            "get_star_ts": 1796757293,
+            "star_index": 54431
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796845703,
+            "star_index": 24777
+          },
+          "2": {
+            "get_star_ts": 1796846521,
+            "star_index": 57118
+          }
+        }
+      },
+      "name": "Marie Schröder",
+      "local_score": 183
+    },
+    "3356929": {
+      "last_star_ts": 1796637761,
+      "stars": 12,
+      "id": 3356929,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796135431,
+            "star_index": 84924
+          },
+          "2": {
+            "get_star_ts": 1796137321,
+            "star_index": 10003
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796195297,
+            "star_index": 34520
+          },
+          "2": {
+            "get_star_ts": 1796197018,
+            "star_index": 94437
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796370890,
+            "star_index": 72437
+          },
+          "2": {
+            "get_star_ts": 1796375355,
+            "star_index": 69678
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796458469,
+            "star_index": 33515
+          },
+          "2": {
+            "get_star_ts": 1796462085,
+            "star_index": 56654
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796542982,
+            "star_index": 15283
+          },
+          "2": {
+            "get_star_ts": 1796551249,
+            "star_index": 46885
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796631219,
+            "star_index": 23136
+          },
+          "2": {
+            "get_star_ts": 1796637761,
+            "star_index": 2437
+          }
+        }
+      },
+      "name": "Elias Neumann",
+      "local_score": 194
+    },
+    "3301572": {
+      "last_star_ts": 1796802934,
+      "stars": 12,
+      "id": 3301572,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796136500,
+            "star_index": 19565
+          },
+          "2": {
+            "get_star_ts": 1796140208,
+            "star_index": 79971
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796195050,
+            "star_index": 80479
+          },
+          "2": {
+            "get_star_ts": 1796195515,
+            "star_index": 41308
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796386021,
+            "star_index": 34833
+          },
+          "2": {
+            "get_star_ts": 1796386618,
+            "star_index": 57970
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796382912,
+            "star_index": 14413
+          },
+          "2": {
+            "get_star_ts": 1796386070,
+            "star_index": 92076
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796462434,
+            "star_index": 30678
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796567632,
+            "star_index": 48827
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796799687,
+            "star_index": 99621
+          },
+          "2": {
+            "get_star_ts": 1796802934,
+            "star_index": 10936
+          }
+        }
+      },
+      "name": "Lea Schwarz",
+      "local_score": 171
+    },
+    "3738171": {
+      "last_star_ts": 1796810465,
+      "stars": 14,
+      "id": 3738171,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796107199,
+            "star_index": 54803
+          },
+          "2": {
+            "get_star_ts": 1796108933,
+            "star_index": 84066
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796220860,
+            "star_index": 11849
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796274504,
+            "star_index": 76742
+          },
+          "2": {
+            "get_star_ts": 1796277435,
+            "star_index": 81978
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796474995,
+            "star_index": 35630
+          },
+          "2": {
+            "get_star_ts": 1796478366,
+            "star_index": 42833
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796548268,
+            "star_index": 56957
+          },
+          "2": {
+            "get_star_ts": 1796548430,
+            "star_index": 81601
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796627201,
+            "star_index": 76810
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796726812,
+            "star_index": 41733
+          },
+          "2": {
+            "get_star_ts": 1796729325,
+            "star_index": 31662
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796808828,
+            "star_index": 98208
+          },
+          "2": {
+            "get_star_ts": 1796810465,
+            "star_index": 80277
+          }
+        }
+      },
+      "name": "Ben Zimmermann",
+      "local_score": 236
+    },
+    "3888976": {
+      "last_star_ts": 1796732031,
+      "stars": 11,
+      "id": 3888976,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796110028,
+            "star_index": 69649
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796365159,
+            "star_index": 24760
+          },
+          "2": {
+            "get_star_ts": 1796366947,
+            "star_index": 70149
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796451192,
+            "star_index": 55927
+          },
+          "2": {
+            "get_star_ts": 1796453208,
+            "star_index": 34168
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796550158,
+            "star_index": 5463
+          },
+          "2": {
+            "get_star_ts": 1796552211,
+            "star_index": 73812
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796627441,
+            "star_index": 80901
+          },
+          "2": {
+            "get_star_ts": 1796630475,
+            "star_index": 33996
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796726674,
+            "star_index": 70119
+          },
+          "2": {
+            "get_star_ts": 1796732031,
+            "star_index": 61305
+          }
+        }
+      },
+      "name": "Clara Braun",
+      "local_score": 198
+    },
+    "3442727": {
+      "last_star_ts": 1796808693,
+      "stars": 12,
+      "id": 3442727,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796108078,
+            "star_index": 39028
+          },
+          "2": {
+            "get_star_ts": 1796114673,
+            "star_index": 55186
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796195001,
+            "star_index": 97791
+          },
+          "2": {
+            "get_star_ts": 1796195286,
+            "star_index": 35157
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796290686,
+            "star_index": 28254
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796467594,
+            "star_index": 93763
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796623119,
+            "star_index": 96397
+          },
+          "2": {
+            "get_star_ts": 1796625751,
+            "star_index": 78406
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796722397,
+            "star_index": 58903
+          },
+          "2": {
+            "get_star_ts": 1796727085,
+            "star_index": 22362
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796804479,
+            "star_index": 47900
+          },
+          "2": {
+            "get_star_ts": 1796808693,
+            "star_index": 68791
+          }
+        }
+      },
+      "name": "Tim Krüger",
+      "local_score": 219
+    },
+    "3581381": {
+      "last_star_ts": 1796758410,
+      "stars": 9,
+      "id": 3581381,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796179774,
+            "star_index": 41496
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796192313,
+            "star_index": 35796
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796324387,
+            "star_index": 41801
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796365974,
+            "star_index": 15460
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796476368,
+            "star_index": 80483
+          },
+          "2": {
+            "get_star_ts": 1796479428,
+            "star_index": 33347
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796682861,
+            "star_index": 1253
+          },
+          "2": {
+            "get_star_ts": 1796686597,
+            "star_index": 26963
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796758410,
+            "star_index": 79757
+          }
+        }
+      },
+      "name": "Johanna Hartmann",
+      "local_score": 110
+    },
+    "3530955": {
+      "last_star_ts": 1796626432,
+      "stars": 10,
+      "id": 3530955,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796104502,
+            "star_index": 78979
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796206335,
+            "star_index": 45254
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796278954,
+            "star_index": 92379
+          },
+          "2": {
+            "get_star_ts": 1796279514,
+            "star_index": 42710
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796456606,
+            "star_index": 96421
+          },
+          "2": {
+            "get_star_ts": 1796467967,
+            "star_index": 84603
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796543668,
+            "star_index": 17093
+          },
+          "2": {
+            "get_star_ts": 1796551977,
+            "star_index": 87639
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796621819,
+            "star_index": 45097
+          },
+          "2": {
+            "get_star_ts": 1796626432,
+            "star_index": 54215
+          }
+        }
+      },
+      "name": "Max Lange",
+      "local_score": 188
+    },
+    "3917958": {
+      "last_star_ts": 1796800728,
+      "stars": 11,
+      "id": 3917958,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796102483,
+            "star_index": 85797
+          },
+          "2": {
+            "get_star_ts": 1796102965,
+            "star_index": 56614
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796386468,
+            "star_index": 81251
+          },
+          "2": {
+            "get_star_ts": 1796387686,
+            "star_index": 61524
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796452634,
+            "star_index": 80787
+          },
+          "2": {
+            "get_star_ts": 1796454525,
+            "star_index": 50327
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796545014,
+            "star_index": 89556
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796626503,
+            "star_index": 14959
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796709339,
+            "star_index": 49841
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796797955,
+            "star_index": 57437
+          },
+          "2": {
+            "get_star_ts": 1796800728,
+            "star_index": 90105
+          }
+        }
+      },
+      "name": "Nele Werner",
+      "local_score": 208
+    },
+    "3271207": {
+      "last_star_ts": 1796800466,
+      "stars": 18,
+      "id": 3271207,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796103349,
+            "star_index": 60361
+          },
+          "2": {
+            "get_star_ts": 1796103624,
+            "star_index": 77592
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796201074,
+            "star_index": 43524
+          },
+          "2": {
+            "get_star_ts": 1796202271,
+            "star_index": 75632
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796289295,
+            "star_index": 50467
+          },
+          "2": {
+            "get_star_ts": 1796291407,
+            "star_index": 47958
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796367055,
+            "star_index": 2893
+          },
+          "2": {
+            "get_star_ts": 1796367455,
+            "star_index": 47690
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796451949,
+            "star_index": 51639
+          },
+          "2": {
+            "get_star_ts": 1796452310,
+            "star_index": 97401
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796535832,
+            "star_index": 46968
+          },
+          "2": {
+            "get_star_ts": 1796537280,
+            "star_index": 33910
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796626889,
+            "star_index": 63888
+          },
+          "2": {
+            "get_star_ts": 1796629039,
+            "star_index": 2313
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796738971,
+            "star_index": 48208
+          },
+          "2": {
+            "get_star_ts": 1796740331,
+            "star_index": 55179
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796796165,
+            "star_index": 62076
+          },
+          "2": {
+            "get_star_ts": 1796800466,
+            "star_index": 6769
+          }
+        }
+      },
+      "name": "David Krause",
+      "local_score": 349
+    },
+    "3502467": {
+      "last_star_ts": 1796814784,
+      "stars": 18,
+      "id": 3502467,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796101740,
+            "star_index": 80061
+          },
+          "2": {
+            "get_star_ts": 1796101919,
+            "star_index": 4032
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796188972,
+            "star_index": 93933
+          },
+          "2": {
+            "get_star_ts": 1796189816,
+            "star_index": 39530
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796285807,
+            "star_index": 71828
+          },
+          "2": {
+            "get_star_ts": 1796290278,
+            "star_index": 72394
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796365554,
+            "star_index": 8165
+          },
+          "2": {
+            "get_star_ts": 1796367748,
+            "star_index": 16224
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796450642,
+            "star_index": 44366
+          },
+          "2": {
+            "get_star_ts": 1796454951,
+            "star_index": 57591
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796555714,
+            "star_index": 35291
+          },
+          "2": {
+            "get_star_ts": 1796556679,
+            "star_index": 51322
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796624694,
+            "star_index": 40325
+          },
+          "2": {
+            "get_star_ts": 1796625361,
+            "star_index": 94014
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796707708,
+            "star_index": 34733
+          },
+          "2": {
+            "get_star_ts": 1796710379,
+            "star_index": 1292
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796812194,
+            "star_index": 28032
+          },
+          "2": {
+            "get_star_ts": 1796814784,
+            "star_index": 29610
+          }
+        }
+      },
+      "name": "Anna Lehmann",
+      "local_score": 370
+    },
+    "3603472": {
+      "last_star_ts": 1796798295,
+      "stars": 8,
+      "id": 3603472,
+      "completion_day_level": {
+        "5": {
+          "1": {
+            "get_star_ts": 1796505274,
+            "star_index": 8558
+          },
+          "2": {
+            "get_star_ts": 1796505988,
+            "star_index": 11211
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796537368,
+            "star_index": 30999
+          },
+          "2": {
+            "get_star_ts": 1796537647,
+            "star_index": 24140
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796726606,
+            "star_index": 7517
+          },
+          "2": {
+            "get_star_ts": 1796731026,
+            "star_index": 93895
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796796983,
+            "star_index": 49119
+          },
+          "2": {
+            "get_star_ts": 1796798295,
+            "star_index": 82109
+          }
+        }
+      },
+      "name": "Simon Köhler",
+      "local_score": 145
+    },
+    "3051262": {
+      "last_star_ts": 1796755082,
+      "stars": 11,
+      "id": 3051262,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796147968,
+            "star_index": 71739
+          },
+          "2": {
+            "get_star_ts": 1796150290,
+            "star_index": 60786
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796223529,
+            "star_index": 14517
+          },
+          "2": {
+            "get_star_ts": 1796233593,
+            "star_index": 89584
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796340671,
+            "star_index": 81285
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796465716,
+            "star_index": 71327
+          },
+          "2": {
+            "get_star_ts": 1796470329,
+            "star_index": 68654
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796561615,
+            "star_index": 83945
+          },
+          "2": {
+            "get_star_ts": 1796563768,
+            "star_index": 81925
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796749032,
+            "star_index": 8125
+          },
+          "2": {
+            "get_star_ts": 1796755082,
+            "star_index": 38891
+          }
+        }
+      },
+      "name": null,
+      "local_score": 131
+    },
+    "3703052": {
+      "last_star_ts": 1796798412,
+      "stars": 18,
+      "id": 3703052,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796102095,
+            "star_index": 17638
+          },
+          "2": {
+            "get_star_ts": 1796102682,
+            "star_index": 15168
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796190369,
+            "star_index": 55836
+          },
+          "2": {
+            "get_star_ts": 1796191875,
+            "star_index": 31065
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796275284,
+            "star_index": 16276
+          },
+          "2": {
+            "get_star_ts": 1796277182,
+            "star_index": 92062
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796362107,
+            "star_index": 9757
+          },
+          "2": {
+            "get_star_ts": 1796363735,
+            "star_index": 14749
+          }
+        },
+        "5": {
+          "1": {
+            "get_star_ts": 1796447361,
+            "star_index": 10414
+          },
+          "2": {
+            "get_star_ts": 1796449223,
+            "star_index": 78239
+          }
+        },
+        "6": {
+          "1": {
+            "get_star_ts": 1796539195,
+            "star_index": 97345
+          },
+          "2": {
+            "get_star_ts": 1796540186,
+            "star_index": 95462
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796621768,
+            "star_index": 51875
+          },
+          "2": {
+            "get_star_ts": 1796622231,
+            "star_index": 5822
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796707014,
+            "star_index": 18947
+          },
+          "2": {
+            "get_star_ts": 1796715770,
+            "star_index": 58777
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796794277,
+            "star_index": 74642
+          },
+          "2": {
+            "get_star_ts": 1796798412,
+            "star_index": 97437
+          }
+        }
+      },
+      "name": "Julia Maier",
+      "local_score": 431
+    },
+    "3492873": {
+      "last_star_ts": 1796826426,
+      "stars": 12,
+      "id": 3492873,
+      "completion_day_level": {
+        "1": {
+          "1": {
+            "get_star_ts": 1796111811,
+            "star_index": 4142
+          },
+          "2": {
+            "get_star_ts": 1796113525,
+            "star_index": 38627
+          }
+        },
+        "2": {
+          "1": {
+            "get_star_ts": 1796321159,
+            "star_index": 54602
+          }
+        },
+        "3": {
+          "1": {
+            "get_star_ts": 1796348495,
+            "star_index": 49628
+          },
+          "2": {
+            "get_star_ts": 1796349031,
+            "star_index": 73973
+          }
+        },
+        "4": {
+          "1": {
+            "get_star_ts": 1796383311,
+            "star_index": 89659
+          },
+          "2": {
+            "get_star_ts": 1796386199,
+            "star_index": 58827
+          }
+        },
+        "7": {
+          "1": {
+            "get_star_ts": 1796720582,
+            "star_index": 25925
+          },
+          "2": {
+            "get_star_ts": 1796725616,
+            "star_index": 7693
+          }
+        },
+        "8": {
+          "1": {
+            "get_star_ts": 1796711778,
+            "star_index": 55349
+          },
+          "2": {
+            "get_star_ts": 1796735982,
+            "star_index": 41846
+          }
+        },
+        "9": {
+          "1": {
+            "get_star_ts": 1796826426,
+            "star_index": 20604
+          }
+        }
+      },
+      "name": null,
+      "local_score": 158
+    }
+  },
+  "owner_id": 5119569,
+  "day1_ts": 1796101200
 }
