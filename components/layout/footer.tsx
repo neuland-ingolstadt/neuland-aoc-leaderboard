@@ -1,6 +1,9 @@
+import { Link, useSearch } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 
 export default function Footer() {
+    const { dev } = useSearch({ strict: false }) as { dev?: boolean };
     return (
         <div className="w-full border-t border-border mt-8">
             <div className="container max-w-200 mx-auto px-4 py-4 flex flex-col md:flex-row justify-center items-center gap-4 text-sm text-muted-foreground">
@@ -20,7 +23,16 @@ export default function Footer() {
                         Advent of Code ist eine eingetragene Marke in den Vereinigten Staaten. Die Designelemente, Sprache, Stile und das Konzept von Advent of Code sind das alleinige Eigentum von Advent of Code und dürfen nicht ohne ausdrückliche schriftliche Genehmigung von Advent of Code vervielfältigt oder von einer anderen Person oder Organisation verwendet werden.
                     </p>
                 </div>
-                <ModeToggle />
+                <div className="flex items-center gap-2">
+                    {import.meta.env.DEV && (
+                        <Button asChild variant="outline" size="sm">
+                            <Link to="/" search={{ dev: dev ? undefined : true }}>
+                                Dev: {dev ? "Landing Page" : "Dashboard"}
+                            </Link>
+                        </Button>
+                    )}
+                    <ModeToggle />
+                </div>
             </div>
         </div>
     );

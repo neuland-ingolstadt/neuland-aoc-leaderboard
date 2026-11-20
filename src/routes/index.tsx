@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Header from "@/components/layout/header";
-import Footer from "@/components/layout/footer";
 import {
   Card,
   CardContent,
@@ -16,15 +15,33 @@ import { StarHistoryChart } from "@/src/components/dashboard/star-history-chart"
 import { StarChallengeChart } from "@/src/components/dashboard/star-challenge-chart";
 import { LastUpdatedBadge } from "@/components/ui/last-updated-badge";
 
+import { SnowBackground } from "@/src/components/snow-background";
+import { CountdownLock } from "@/src/components/countdown-lock";
+import type { Leaderboard } from "@/src/types/leaderboard";
 import { fetchDashboardData } from "@/src/server/leaderboard.functions";
 
 export const Route = createFileRoute("/")({
-  loader: () => fetchDashboardData(),
+  validateSearch: (search: Record<string, unknown>) => ({
+    dev: search.dev === true || search.dev === "true" ? true : undefined,
+  }),
+  loaderDeps: ({ search }) => ({ dev: search.dev }),
+  loader: ({ deps }) => fetchDashboardData({ data: { dev: deps.dev } }),
   component: Home,
 });
 
 function Home() {
-  const { leaderboard: parsedData, inviteCode } = Route.useLoaderData();
+  const data = Route.useLoaderData();
+  if (data.locked) return <CountdownLock unlockAt={data.unlockAt} inviteCode={data.inviteCode} />;
+  return <Dashboard parsedData={data.leaderboard} inviteCode={data.inviteCode} />;
+}
+
+function Dashboard({
+  parsedData,
+  inviteCode,
+}: {
+  parsedData: Leaderboard;
+  inviteCode: string;
+}) {
   const lastUpdated = parsedData.lastUpdated
     ? new Date(parsedData.lastUpdated)
     : new Date();
@@ -43,7 +60,7 @@ function Home() {
   });
 
   // Start and end date to display statistics for
-  const startDate = new Date("2025-12-1");
+  const startDate = new Date("2026-12-1");
   const endDate = new Date();
 
   let mostStarsText: string;
@@ -68,8 +85,8 @@ function Home() {
   return (
     <>
       <div className="absolute inset-0 h-full w-full -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
-        <div className="absolute right-0 top-0 w-[800px] h-[800px] bg-green-500/15 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3"></div>
+        <SnowBackground />
+        <div className="absolute right-0 top-0 w-[800px] h-[800px] bg-accent/15 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3"></div>
       </div>
       <Header inviteCode={inviteCode} />
       <div className={"px-1 md:px-5 xl:px-40 2xl:px-80"}>
@@ -218,7 +235,6 @@ function Home() {
           </p>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
