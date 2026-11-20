@@ -139,8 +139,17 @@ export function ScorePodium({ members }: Props) {
               <span className="relative flex-1 truncate">
                 {displayName(member)}
               </span>
-              <span className="relative font-plex-mono">
-                {member.local_score}
+              <span className="relative whitespace-nowrap font-plex-mono text-sm text-muted-foreground">
+                <span className="font-semibold text-foreground">
+                  {member.local_score}
+                </span>
+                <span className="hidden sm:inline"> Punkte</span>
+                {" · "}
+                <span className="font-semibold text-foreground">
+                  {member.stars}
+                </span>
+                <span className="hidden sm:inline"> Sterne</span>
+                <span className="sm:hidden"> ★</span>
               </span>
             </li>
           ))}
