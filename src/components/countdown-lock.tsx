@@ -68,14 +68,12 @@ export function CountdownLock({
             {values.map(({ label, value }) => (
               <div
                 key={label}
-                className="flex flex-col items-center gap-1 px-2 py-4 md:px-6 md:py-6"
+                className="flex flex-col items-center gap-1 px-2 py-3 md:px-4 md:py-4"
               >
-                <span className="font-plex-mono font-semibold text-3xl md:text-6xl tabular-nums">
+                <span className="font-plex-mono font-semibold text-2xl md:text-4xl tabular-nums">
                   {remaining === null ? "--" : String(value).padStart(2, "0")}
                 </span>
-                <span className="text-xs md:text-sm text-muted-foreground">
-                  {label}
-                </span>
+                <span className="text-xs text-muted-foreground">{label}</span>
               </div>
             ))}
           </div>
