@@ -62,7 +62,7 @@ export default function Header({ inviteCode }: { inviteCode: string }) {
             <div>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button size={"lg"} className={"hover:cursor-pointer"}>
+                  <Button size={"lg"} className={"hover:cursor-pointer bg-accent text-black hover:bg-accent/90"}>
                     Los geht's
                   </Button>
                 </DialogTrigger>
