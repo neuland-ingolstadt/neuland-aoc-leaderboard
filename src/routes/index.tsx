@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import Header from "@/components/layout/header";
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -63,16 +64,15 @@ function Dashboard({
       <div className={"px-1 md:px-5 xl:px-40 2xl:px-80"}>
         <div>
           <div className={"flex flex-col gap-4"}>
-            <div className={"flex justify-between"}>
-              <h2>Leaderboard</h2>
-              <LastUpdatedBadge date={lastUpdated} />
-            </div>
             <Card>
-              <CardHeader>
+              <CardHeader className="max-sm:grid-cols-1!">
                 <CardTitle>Rangliste</CardTitle>
                 <CardDescription>
                   Der Punktestand legt die Platzierung fest
                 </CardDescription>
+                <CardAction className="max-sm:col-start-1 max-sm:row-span-1 max-sm:row-start-auto max-sm:mt-1 max-sm:justify-self-start">
+                  <LastUpdatedBadge date={lastUpdated} />
+                </CardAction>
               </CardHeader>
               <CardContent>
                 <ScorePodium members={memberListSortedByScore} />

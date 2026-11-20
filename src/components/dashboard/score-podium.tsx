@@ -86,11 +86,7 @@ export function ScorePodium({ members }: Props) {
                 </p>
               </div>
               <div
-                className={cn(
-                  "flex items-center justify-center border",
-                  height,
-                  tone,
-                )}
+                className={cn("flex items-center justify-center", height, tone)}
               >
                 <span
                   className={cn(
@@ -111,7 +107,7 @@ export function ScorePodium({ members }: Props) {
           {rest.map(({ member, rank }) => (
             <li
               key={member.id}
-              className="relative flex items-center gap-3 px-3 py-2 border overflow-hidden"
+              className="relative flex items-center gap-3 px-3 py-2 overflow-hidden bg-muted/30"
             >
               <div
                 className="absolute inset-y-0 left-0 bg-accent/15"
