@@ -34,15 +34,42 @@ export function InfoCards({
             Der Advent of Code (AoC) ist ein jährliches globales Event in Form eines Adventskalenders für Programmierer. Statt Schokolade gibt es 12 Programmierrätsel, die man in einer beliebigen Sprache lösen kann. Es geht um den Spaß an der Problemlösung - jeder ist herzlich dazu eingeladen, sich an den Rätseln zu versuchen.
           </CardDescription>
         </CardHeader>
+        <CardContent>
+          <a
+            href="https://adventofcode.com/2026/about"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm underline underline-offset-4 hover:text-accent"
+          >
+            Mehr über den Advent of Code erfahren →
+          </a>
+        </CardContent>
       </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle className={"text-xl"}>Mitmachen</CardTitle>
+      <Card className="relative overflow-hidden">
+        <div aria-hidden className="absolute inset-0 pointer-events-none">
+          {[
+            "-right-6 -top-6 rotate-12",
+            "right-24 -top-10 -rotate-6",
+            "-right-8 -bottom-10 -rotate-12",
+            "right-20 -bottom-12 rotate-6",
+          ].map((position, i) => (
+            <img
+              key={position}
+              src={`/img/shirts/shirt-${i + 1}.png`}
+              alt=""
+              loading="lazy"
+              className={cn("absolute w-28 md:w-32 h-auto", position)}
+            />
+          ))}
+          <div className="absolute inset-0 bg-card/90 sm:hidden" />
+        </div>
+        <CardHeader className="relative z-10 sm:pr-[45%]">
+          <CardTitle className={"text-xl"}>Mitmachen und Merch abstauben</CardTitle>
           <CardDescription>
-            Neuland stellt euch ein vereinsinternes Leaderboard zur Verfügung, auf dem ihr euch mit anderen Mitgliedern messen könnt. <strong>Das Mitglied, welches am Ende auf Platz 1 landet, kann sich über einen kleinen Preis freuen 👀</strong>
+            Neuland stellt euch ein vereinsinternes Leaderboard zur Verfügung, auf dem ihr euch mit anderen Mitgliedern messen könnt. <strong>Wer am Ende auf Platz 1 landet, darf sich als Gewinn ein T-Shirt aus unserem Merch Shop selbst aussuchen.</strong>
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="relative z-10">
           <div>
             <Dialog>
               <DialogTrigger asChild>
