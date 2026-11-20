@@ -1,11 +1,10 @@
-import Image from "next/image";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 
 export default function Footer() {
     return (
         <div className="w-full border-t border-border mt-8">
             <div className="container max-w-200 mx-auto px-4 py-4 flex flex-col md:flex-row justify-center items-center gap-4 text-sm text-muted-foreground">
-                <Image
+                <img
                     src="/img/neuland_icon.svg"
                     alt="Neuland Icon"
                     width={100}

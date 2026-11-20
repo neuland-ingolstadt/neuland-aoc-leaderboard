@@ -1,5 +1,3 @@
-"use client";
-
 import { LeaderboardMember } from "@/src/types/leaderboard";
 import {
   ChartConfig,

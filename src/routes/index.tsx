@@ -1,3 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import {
@@ -7,21 +8,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Leaderboard } from "@/src/types/leaderboard";
-import { LeaderboardTable } from "./leaderboard-data-table";
-import { columns } from "./leaderboard-column";
-import StarScoreChart from "./star-score-chart";
-import StarScoreChartHorizontal from "./star-score-chart-horizontal";
-import { StarHistoryChart } from "./star-history-chart";
-import { StarChallengeChart } from "./star-challenge-chart";
+import { LeaderboardTable } from "@/src/components/dashboard/leaderboard-data-table";
+import { columns } from "@/src/components/dashboard/leaderboard-column";
+import StarScoreChart from "@/src/components/dashboard/star-score-chart";
+import StarScoreChartHorizontal from "@/src/components/dashboard/star-score-chart-horizontal";
+import { StarHistoryChart } from "@/src/components/dashboard/star-history-chart";
+import { StarChallengeChart } from "@/src/components/dashboard/star-challenge-chart";
 import { LastUpdatedBadge } from "@/components/ui/last-updated-badge";
 
-import { getLeaderboardData } from "@/src/lib/leaderboard-api";
+import { fetchDashboardData } from "@/src/server/leaderboard.functions";
 
-export const dynamic = "force-dynamic";
+export const Route = createFileRoute("/")({
+  loader: () => fetchDashboardData(),
+  component: Home,
+});
 
-export default async function Home() {
-  const parsedData: Leaderboard = await getLeaderboardData();
+function Home() {
+  const { leaderboard: parsedData, inviteCode } = Route.useLoaderData();
   const lastUpdated = parsedData.lastUpdated
     ? new Date(parsedData.lastUpdated)
     : new Date();
@@ -68,7 +71,7 @@ export default async function Home() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
         <div className="absolute right-0 top-0 w-[800px] h-[800px] bg-green-500/15 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3"></div>
       </div>
-      <Header />
+      <Header inviteCode={inviteCode} />
       <div className={"px-1 md:px-5 xl:px-40 2xl:px-80"}>
         <div className="bg-background p-4 md:p-6 border rounded-lg">
           <div className={"flex flex-col gap-4"}>

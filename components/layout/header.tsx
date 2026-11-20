@@ -15,10 +15,9 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 
-import Image from "next/image";
 import { Badge } from "../ui/badge";
 
-export default function Header() {
+export default function Header({ inviteCode }: { inviteCode: string }) {
   const today = new Date();
   const endDate = new Date('2025-12-24');
   const diffTime = Math.abs(endDate.getTime() - today.getTime());
@@ -30,7 +29,7 @@ export default function Header() {
       className={"flex flex-col items-center gap-20 px-1 md:px-5 xl:px-40 2xl:px-80 py-10 pt-30"}
     >
       <div className="flex flex-col items-center gap-5">
-        <Image
+        <img
           src="/img/neuland_icon.svg"
           alt="Neuland Logo"
           width={64}
@@ -112,7 +111,7 @@ export default function Header() {
                         </CardHeader>
                         <CardContent>
                           <CopyCodeInput
-                            code={process.env.AOC_INVITE_CODE || "CODE NICHT VERFÜGBAR"}
+                            code={inviteCode}
                           ></CopyCodeInput>
                         </CardContent>
                       </Card>

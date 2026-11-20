@@ -13,9 +13,11 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
+# build output
+/.output/
+/dist/
+.nitro/
+.tanstack/
 
 # production
 /build
@@ -39,7 +41,7 @@ bun-debug.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 #ide
 .idea
+src/routeTree.gen.ts
