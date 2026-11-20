@@ -26,7 +26,13 @@ export function InfoCards({
   className?: string;
 }) {
   return (
-    <div className={cn("w-full grid md:grid-cols-2 gap-5", className)}>
+    <div
+      id="infos"
+      className={cn(
+        "w-full grid md:grid-cols-2 gap-5 scroll-mt-4 md:scroll-mt-20",
+        className,
+      )}
+    >
       <Card>
         <CardHeader>
           <CardTitle className={"text-xl"}>Über den Advent Of Code</CardTitle>

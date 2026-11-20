@@ -13,11 +13,19 @@ import { RankProgression } from "@/src/components/dashboard/rank-progression";
 import { SubmissionHeatmap } from "@/src/components/dashboard/submission-heatmap";
 import { LastUpdatedBadge } from "@/components/ui/last-updated-badge";
 
+import { SectionNav } from "@/src/components/section-nav";
 import { TopGlow } from "@/src/components/top-glow";
 import { SnowBackground } from "@/src/components/snow-background";
 import { CountdownLock } from "@/src/components/countdown-lock";
 import type { Leaderboard } from "@/src/types/leaderboard";
 import { fetchDashboardData } from "@/src/server/leaderboard.functions";
+
+const SECTIONS = [
+  { id: "infos", label: "Infos" },
+  { id: "rangliste", label: "Rangliste" },
+  { id: "rangverlauf", label: "Rangverlauf" },
+  { id: "aktivitaet", label: "Aktivität" },
+];
 
 export const Route = createFileRoute("/")({
   validateSearch: (search: Record<string, unknown>): { dev?: true } =>
@@ -64,7 +72,7 @@ function Dashboard({
       <div className={"px-1 md:px-5 xl:px-40 2xl:px-80"}>
         <div>
           <div className={"flex flex-col gap-4"}>
-            <Card>
+            <Card id="rangliste" className="scroll-mt-4 md:scroll-mt-20">
               <CardHeader className="max-sm:grid-cols-1!">
                 <CardTitle>Rangliste</CardTitle>
                 <CardDescription>
@@ -79,7 +87,7 @@ function Dashboard({
               </CardContent>
             </Card>
 
-            <Card>
+            <Card id="rangverlauf" className="scroll-mt-4 md:scroll-mt-20">
               <CardHeader>
                 <CardTitle>Rangverlauf</CardTitle>
                 <CardDescription>
@@ -92,7 +100,7 @@ function Dashboard({
               </CardContent>
             </Card>
 
-            <Card>
+            <Card id="aktivitaet" className="scroll-mt-4 md:scroll-mt-20">
               <CardHeader>
                 <CardTitle>Lösungen pro Tag und Uhrzeit</CardTitle>
                 <CardDescription>
@@ -105,7 +113,7 @@ function Dashboard({
               </CardContent>
             </Card>
           </div>
-          <p className="pt-5 text-[9px] text-center text-muted-foreground">
+          <p className="pt-5 pb-16 md:pb-0 text-[9px] text-center text-muted-foreground">
             Daten zuletzt vom AoC Server geladen:{" "}
             {lastUpdated.toLocaleTimeString("de-DE", {
               timeZone: "Europe/Berlin",
@@ -113,6 +121,7 @@ function Dashboard({
           </p>
         </div>
       </div>
+      <SectionNav sections={SECTIONS} />
     </>
   );
 }
