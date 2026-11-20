@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { LeaderboardMember } from "@/src/types/leaderboard";
 import { cn } from "@/lib/utils";
 
@@ -12,10 +14,13 @@ const STEPS: Record<number, { height: string; tone: string }> = {
 };
 
 const MAX_NAMES_PER_STEP = 3;
+// Places shown before the rest of the ranking is collapsed
+const COLLAPSED_PLACES = 15;
 
 const displayName = (member: LeaderboardMember) => member.name || "<Kein Name>";
 
 export function ScorePodium({ members }: Props) {
+  const [expanded, setExpanded] = useState(false);
   const sorted = members.slice().sort((a, b) => b.local_score - a.local_score);
   const maxScore = sorted[0]?.local_score ?? 0;
 
@@ -47,6 +52,9 @@ export function ScorePodium({ members }: Props) {
     .filter((step) => step !== undefined);
 
   const rest = ranked.filter((r) => r.rank > 3);
+  const visibleRest = expanded ? rest : rest.slice(0, COLLAPSED_PLACES - 3);
+  const hiddenCount = rest.length - visibleRest.length;
+  const canCollapse = rest.length > COLLAPSED_PLACES - 3;
 
   return (
     <div className="flex flex-col gap-8">
@@ -80,10 +88,22 @@ export function ScorePodium({ members }: Props) {
                     + {hidden} weitere
                   </p>
                 )}
-                <p className="text-sm text-muted-foreground font-plex-mono">
-                  {stepMembers[0].local_score} Punkte
-                  {stepMembers.length === 1 && ` · ${stepMembers[0].stars} ★`}
-                </p>
+                <div className="flex flex-col items-center font-plex-mono text-sm text-muted-foreground">
+                  <p>
+                    <span className="font-semibold text-foreground">
+                      {stepMembers[0].local_score}
+                    </span>{" "}
+                    Punkte
+                  </p>
+                  {stepMembers.length === 1 && (
+                    <p>
+                      <span className="font-semibold text-foreground">
+                        {stepMembers[0].stars}
+                      </span>{" "}
+                      Sterne
+                    </p>
+                  )}
+                </div>
               </div>
               <div
                 className={cn("flex items-center justify-center", height, tone)}
@@ -104,7 +124,7 @@ export function ScorePodium({ members }: Props) {
 
       {rest.length > 0 && (
         <ol className="flex flex-col gap-1">
-          {rest.map(({ member, rank }) => (
+          {visibleRest.map(({ member, rank }) => (
             <li
               key={member.id}
               className="relative flex items-center gap-3 px-3 py-2 overflow-hidden bg-muted/30"
@@ -125,6 +145,23 @@ export function ScorePodium({ members }: Props) {
             </li>
           ))}
         </ol>
+      )}
+
+      {canCollapse && (
+        <button
+          type="button"
+          onClick={() => setExpanded((e) => !e)}
+          aria-expanded={expanded}
+          className="-mt-5 flex items-center justify-center gap-2 border py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          {expanded ? "Weniger anzeigen" : `${hiddenCount} weitere anzeigen`}
+          <ChevronDown
+            className={cn(
+              "size-4 transition-transform",
+              expanded && "rotate-180",
+            )}
+          />
+        </button>
       )}
     </div>
   );
