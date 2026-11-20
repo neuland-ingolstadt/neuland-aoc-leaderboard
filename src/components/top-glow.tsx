@@ -47,12 +47,12 @@ export function TopGlow() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-x-0 top-0 h-[560px] overflow-hidden [mask-image:linear-gradient(to_bottom,black_35%,transparent)]"
+      className="pointer-events-none absolute inset-x-0 top-0 h-[480px] overflow-hidden [mask-image:linear-gradient(to_bottom,black_35%,transparent)]"
     >
       {BLOBS.map((blob, i) => (
         <div
           key={i}
-          className="top-glow-blob absolute -top-1/4"
+          className="top-glow-blob absolute -top-1/2"
           style={{
             left: blob.left,
             width: blob.width,
