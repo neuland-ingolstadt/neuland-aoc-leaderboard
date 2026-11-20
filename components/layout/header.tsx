@@ -31,7 +31,11 @@ export function InfoCards({
         <CardHeader>
           <CardTitle className={"text-xl"}>Über den Advent Of Code</CardTitle>
           <CardDescription>
-            Der Advent of Code (AoC) ist ein jährliches globales Event in Form eines Adventskalenders für Programmierer. Statt Schokolade gibt es 12 Programmierrätsel, die man in einer beliebigen Sprache lösen kann. Es geht um den Spaß an der Problemlösung - jeder ist herzlich dazu eingeladen, sich an den Rätseln zu versuchen.
+            Der Advent of Code (AoC) ist ein jährliches globales Event in Form
+            eines Adventskalenders für Programmierer. Statt Schokolade gibt es
+            12 Programmierrätsel, die man in einer beliebigen Sprache lösen
+            kann. Es geht um den Spaß an der Problemlösung - jeder ist herzlich
+            dazu eingeladen, sich an den Rätseln zu versuchen.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -39,7 +43,7 @@ export function InfoCards({
             href="https://adventofcode.com/2026/about"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm underline underline-offset-4 hover:text-accent"
+            className="text-sm underline underline-offset-4 hover:bg-accent/25"
           >
             Mehr über den Advent of Code erfahren →
           </a>
@@ -47,34 +51,65 @@ export function InfoCards({
       </Card>
       <Card className="relative overflow-hidden">
         <div aria-hidden className="absolute inset-0 pointer-events-none">
-          {[
-            "-right-6 -top-6 rotate-12",
-            "right-24 -top-10 -rotate-6",
-            "-right-8 -bottom-10 -rotate-12",
-            "right-20 -bottom-12 rotate-6",
-          ].map((position, i) => (
-            <img
-              key={position}
-              src={`/img/shirts/shirt-${i + 1}.png`}
-              alt=""
-              loading="lazy"
-              className={cn("absolute w-28 md:w-32 h-auto", position)}
-            />
-          ))}
-          <div className="absolute inset-0 bg-card/90 sm:hidden" />
+          {/* soft green glow behind the shirts */}
+          <div className="absolute -right-10 top-1/2 hidden size-96 -translate-y-1/2 bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--accent)_22%,transparent),transparent)] sm:block" />
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-[radial-gradient(ellipse_at_bottom,color-mix(in_oklch,var(--accent)_25%,transparent),transparent_70%)] sm:hidden" />
+          {/* two staggered columns, sized by the card height so they fill the right side */}
+          <div className="absolute inset-y-0 -right-6 hidden sm:flex">
+            {[
+              [["shirt-3", "shirt-4"], "-translate-y-[3%]"],
+              [["shirt-1", "shirt-2"], "pt-[16%] -ml-8"],
+            ].map(([names, offset], i) => (
+              <div key={i} className={cn("flex h-full flex-col", offset)}>
+                {(names as string[]).map((name) => (
+                  <img
+                    key={name}
+                    src={`/img/shirts/${name}.png`}
+                    alt=""
+                    loading="lazy"
+                    className="h-[52%] w-auto max-w-none shrink-0"
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+          {/* Mobile: shirts peek in from the bottom edge */}
+          <div className="absolute inset-x-0 bottom-0 flex justify-center -space-x-6 translate-y-[40%] sm:hidden">
+            {["shirt-3", "shirt-1", "shirt-2", "shirt-4"].map((name) => (
+              <img
+                key={name}
+                src={`/img/shirts/${name}.png`}
+                alt=""
+                loading="lazy"
+                className="w-[32%] h-auto"
+              />
+            ))}
+          </div>
+          <div className="absolute inset-0 hidden sm:block bg-gradient-to-r from-card from-50% to-transparent to-85%" />
         </div>
-        <CardHeader className="relative z-10 sm:pr-[45%]">
-          <CardTitle className={"text-xl"}>Mitmachen und Merch abstauben</CardTitle>
+        <CardHeader className="relative z-10 sm:pr-[52%]">
+          <CardTitle className={"text-xl"}>
+            Mitmachen und Merch abstauben
+          </CardTitle>
           <CardDescription>
-            Neuland stellt euch ein vereinsinternes Leaderboard zur Verfügung, auf dem ihr euch mit anderen Mitgliedern messen könnt. <strong>Wer am Ende auf Platz 1 landet, darf sich als Gewinn ein T-Shirt aus unserem Merch Shop selbst aussuchen.</strong>
+            Neuland stellt euch ein vereinsinternes Leaderboard zur Verfügung,
+            auf dem ihr euch mit anderen Mitgliedern messen könnt.{" "}
+            <strong>
+              Wer am Ende auf Platz 1 landet, darf sich als Gewinn ein T-Shirt
+              aus unserem Merch Shop selbst aussuchen.
+            </strong>
           </CardDescription>
         </CardHeader>
-        <CardContent className="relative z-10">
+        <CardContent className="relative z-10 pb-24 sm:pb-0">
           <div>
             <Dialog>
               <DialogTrigger asChild>
-                <Button size={"lg"} className={"hover:cursor-pointer bg-accent text-black hover:bg-accent/90"}>
-                  Los geht's
+                <Button
+                  size={"lg"}
+                  variant="accent"
+                  className={"hover:cursor-pointer"}
+                >
+                  Mitmachen
                 </Button>
               </DialogTrigger>
               <DialogContent>
@@ -117,13 +152,13 @@ export function InfoCards({
                           >
                             Leaderboard-Page
                           </a>{" "}
-                          und trage den untenstehenden Einladungscode ein. <strong>Fertig!</strong> Du tauchst innerhalb der nächsten Minuten auf dem Leaderboard auf.
+                          und trage den untenstehenden Einladungscode ein.{" "}
+                          <strong>Fertig!</strong> Du tauchst innerhalb der
+                          nächsten Minuten auf dem Leaderboard auf.
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <CopyCodeInput
-                          code={inviteCode}
-                        ></CopyCodeInput>
+                        <CopyCodeInput code={inviteCode}></CopyCodeInput>
                       </CardContent>
                     </Card>
                   </div>
@@ -139,14 +174,16 @@ export function InfoCards({
 
 export default function Header({ inviteCode }: { inviteCode: string }) {
   const today = new Date();
-  const endDate = new Date('2026-12-24');
+  const endDate = new Date("2026-12-24");
   const diffTime = Math.abs(endDate.getTime() - today.getTime());
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
   return (
     <div
       id="header-section"
-      className={"flex flex-col items-center gap-20 px-1 md:px-5 xl:px-40 2xl:px-80 py-10 pt-30"}
+      className={
+        "flex flex-col items-center gap-20 px-1 md:px-5 xl:px-40 2xl:px-80 py-10 pt-30"
+      }
     >
       <div className="flex flex-col items-center gap-5">
         <img
@@ -158,11 +195,21 @@ export default function Header({ inviteCode }: { inviteCode: string }) {
         />
         <p className="text-2xl">Neuland Leaderboard</p>
         <h1
-          className={"lg:text-7xl text-5xl font-plex-mono font-semibold text-center text-accent"}
-        >Advent Of<br />Code 2026</h1>
-        <Badge variant={"secondary"} className="">{diffDays} Tage übrig</Badge>
+          className={
+            "lg:text-7xl text-5xl font-plex-mono font-semibold text-center"
+          }
+        >
+          <span className="accent-marker">
+            Advent Of
+            <br />
+            Code 2026
+          </span>
+        </h1>
+        <Badge variant={"secondary"} className="">
+          {diffDays} Tage übrig
+        </Badge>
       </div>
       <InfoCards inviteCode={inviteCode} />
-    </div >
+    </div>
   );
 }
