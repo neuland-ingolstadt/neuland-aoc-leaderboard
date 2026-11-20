@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { CopyCodeInput } from "@/src/components/CopyCodeInput";
 import { Button } from "../ui/button";
 import {
@@ -15,7 +16,6 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 
-import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
 
 export function InfoCards({
@@ -35,21 +35,21 @@ export function InfoCards({
             eines Adventskalenders für Programmierer. Statt Schokolade gibt es
             12 Programmierrätsel, die man in einer beliebigen Sprache lösen
             kann. Es geht um den Spaß an der Problemlösung - jeder ist herzlich
-            dazu eingeladen, sich an den Rätseln zu versuchen.
+            dazu eingeladen, sich an den Rätseln zu versuchen. Mehr darüber
+            erfährst du auf der{" "}
+            <a
+              href="https://adventofcode.com/2026/about"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-foreground"
+            >
+              offiziellen Website des Advent of Code
+            </a>
+            .
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <a
-            href="https://adventofcode.com/2026/about"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm underline underline-offset-4 hover:bg-accent/25"
-          >
-            Mehr über den Advent of Code erfahren →
-          </a>
-        </CardContent>
       </Card>
-      <Card className="relative overflow-hidden">
+      <Card className="@container relative overflow-hidden">
         <div aria-hidden className="absolute inset-0 pointer-events-none">
           {/* soft green glow behind the shirts */}
           <div className="absolute -right-10 top-1/2 hidden size-96 -translate-y-1/2 bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--accent)_22%,transparent),transparent)] sm:block" />
@@ -57,8 +57,8 @@ export function InfoCards({
           {/* two staggered columns, sized by the card height so they fill the right side */}
           <div className="absolute inset-y-0 -right-6 hidden sm:flex">
             {[
-              [["shirt-3", "shirt-4"], "-translate-y-[3%]"],
-              [["shirt-1", "shirt-2"], "pt-[16%] -ml-8"],
+              [["shirt-3", "shirt-4"], "hidden @md:flex -translate-y-[3%]"],
+              [["shirt-2"], "justify-center -ml-8 pt-[16%]"],
             ].map(([names, offset], i) => (
               <div key={i} className={cn("flex h-full flex-col", offset)}>
                 {(names as string[]).map((name) => (
@@ -74,18 +74,18 @@ export function InfoCards({
             ))}
           </div>
           {/* Mobile: shirts peek in from the bottom edge */}
-          <div className="absolute inset-x-0 bottom-0 flex justify-center -space-x-6 translate-y-[40%] sm:hidden">
-            {["shirt-3", "shirt-1", "shirt-2", "shirt-4"].map((name) => (
+          <div className="absolute inset-x-0 bottom-0 flex translate-y-[40%] justify-center -space-x-6 sm:hidden">
+            {["shirt-3", "shirt-2", "shirt-4"].map((name) => (
               <img
                 key={name}
                 src={`/img/shirts/${name}.png`}
                 alt=""
                 loading="lazy"
-                className="w-[32%] h-auto"
+                className="w-[36%] h-auto"
               />
             ))}
           </div>
-          <div className="absolute inset-0 hidden sm:block bg-gradient-to-r from-card from-50% to-transparent to-85%" />
+          <div className="absolute inset-0 hidden sm:block bg-[linear-gradient(to_right,var(--card)_0%,color-mix(in_oklch,var(--card)_95%,transparent)_30%,color-mix(in_oklch,var(--card)_82%,transparent)_42%,color-mix(in_oklch,var(--card)_58%,transparent)_52%,color-mix(in_oklch,var(--card)_32%,transparent)_62%,color-mix(in_oklch,var(--card)_11%,transparent)_74%,color-mix(in_oklch,var(--card)_0%,transparent)_88%)]" />
         </div>
         <CardHeader className="relative z-10 sm:pr-[52%]">
           <CardTitle className={"text-xl"}>
@@ -100,73 +100,84 @@ export function InfoCards({
             </strong>
           </CardDescription>
         </CardHeader>
-        <CardContent className="relative z-10 pb-24 sm:pb-0">
-          <div>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  size={"lg"}
-                  variant="accent"
-                  className={"hover:cursor-pointer"}
-                >
-                  Mitmachen
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle className={"text-2xl"}>
-                    Dem Leaderboard beitreten
-                  </DialogTitle>
-                </DialogHeader>
-                <div className={"grid gap-5"}>
-                  <div className={"flex gap-3 items-start"}>
-                    <Card className={"grow bg-background"}>
-                      <CardHeader>
-                        <CardTitle>1. Anmelden bei Advent Of Code</CardTitle>
-                        <CardDescription>
-                          Melde dich auf der{" "}
-                          <a
-                            href={"https://adventofcode.com/2026/auth/login"}
-                            target={"_blank"}
-                            className={"underline hover:cursor-pointer"}
-                          >
-                            offiziellen Website des AoC
-                          </a>{" "}
-                          an.
-                        </CardDescription>
-                      </CardHeader>
-                    </Card>
-                  </div>
-                  <div className={"flex gap-3 items-start"}>
-                    <Card className={"grow"}>
-                      <CardHeader>
-                        <CardTitle>2. Einladungscode eingeben</CardTitle>
-                        <CardDescription>
-                          Navigiere auf der AoC-Website zur{" "}
-                          <a
-                            href={
-                              "https://adventofcode.com/2026/leaderboard/private"
-                            }
-                            target={"_blank"}
-                            className={"underline"}
-                          >
-                            Leaderboard-Page
-                          </a>{" "}
-                          und trage den untenstehenden Einladungscode ein.{" "}
-                          <strong>Fertig!</strong> Du tauchst innerhalb der
-                          nächsten Minuten auf dem Leaderboard auf.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <CopyCodeInput code={inviteCode}></CopyCodeInput>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
-          </div>
+        <CardContent className="relative z-10 flex flex-1 flex-col justify-end sm:pr-[52%]">
+          <p className="text-xs text-muted-foreground">
+            Beachte die{" "}
+            <Link
+              to="/teilnahmebedingungen"
+              className="underline underline-offset-2 hover:text-foreground"
+            >
+              Teilnahmebedingungen
+            </Link>
+            .
+          </p>
         </CardContent>
+        <div className="relative z-10 px-6 pb-32 sm:pb-0 sm:pr-[52%]">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                size={"lg"}
+                variant="accent"
+                className="h-12 w-full text-base hover:cursor-pointer"
+              >
+                Mitmachen
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle className={"text-2xl"}>
+                  Dem Leaderboard beitreten
+                </DialogTitle>
+              </DialogHeader>
+              <div className={"grid gap-5"}>
+                <div className={"flex gap-3 items-start"}>
+                  <Card className={"grow bg-background"}>
+                    <CardHeader>
+                      <CardTitle>1. Anmelden bei Advent Of Code</CardTitle>
+                      <CardDescription>
+                        Melde dich auf der{" "}
+                        <a
+                          href={"https://adventofcode.com/2026/auth/login"}
+                          target={"_blank"}
+                          className={"underline hover:cursor-pointer"}
+                        >
+                          offiziellen Website des AoC
+                        </a>{" "}
+                        an.
+                      </CardDescription>
+                    </CardHeader>
+                  </Card>
+                </div>
+                <div className={"flex gap-3 items-start"}>
+                  <Card className={"grow"}>
+                    <CardHeader>
+                      <CardTitle>2. Einladungscode eingeben</CardTitle>
+                      <CardDescription>
+                        Navigiere auf der AoC-Website zur{" "}
+                        <a
+                          href={
+                            "https://adventofcode.com/2026/leaderboard/private"
+                          }
+                          target={"_blank"}
+                          className={"underline"}
+                        >
+                          Leaderboard-Page
+                        </a>{" "}
+                        und trage den untenstehenden Einladungscode ein.{" "}
+                        <strong>Fertig!</strong> Es dauert ein paar Minuten, bis
+                        dein Eintrag übernommen wird. Dann bist du mit dabei und
+                        wirst auf dem Neuland Leaderboard angezeigt.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <CopyCodeInput code={inviteCode}></CopyCodeInput>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
       </Card>
     </div>
   );
@@ -205,9 +216,14 @@ export default function Header({ inviteCode }: { inviteCode: string }) {
             Code 2026
           </span>
         </h1>
-        <Badge variant={"secondary"} className="">
-          {diffDays} Tage übrig
-        </Badge>
+        <div className="flex items-center gap-2.5 border bg-background px-4 py-2.5">
+          <span className="font-plex-mono text-2xl font-semibold leading-none tabular-nums">
+            {diffDays}
+          </span>
+          <span className="text-sm leading-none text-muted-foreground">
+            {diffDays === 1 ? "Tag" : "Tage"} übrig
+          </span>
+        </div>
       </div>
       <InfoCards inviteCode={inviteCode} />
     </div>
