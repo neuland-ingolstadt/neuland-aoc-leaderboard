@@ -18,9 +18,8 @@ import type { Leaderboard } from "@/src/types/leaderboard";
 import { fetchDashboardData } from "@/src/server/leaderboard.functions";
 
 export const Route = createFileRoute("/")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    dev: search.dev === true || search.dev === "true" ? true : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { dev?: true } =>
+    search.dev === true || search.dev === "true" ? { dev: true } : {},
   loaderDeps: ({ search }) => ({ dev: search.dev }),
   loader: ({ deps }) => fetchDashboardData({ data: { dev: deps.dev } }),
   component: Home,
