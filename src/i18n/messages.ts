@@ -21,12 +21,14 @@ const de = {
   "countdown.hours": "Stunden",
   "countdown.minutes": "Minuten",
   "countdown.seconds": "Sekunden",
+  "countdown.short.days": "Tg",
+  "countdown.short.hours": "Std",
+  "countdown.short.minutes": "Min",
+  "countdown.short.seconds": "Sek",
   "countdown.unlock": "Das Leaderboard wird am 1. Dezember freigeschaltet.",
 
   "header.title": "Neuland Leaderboard",
-  "header.daysLeft.one": "Tag übrig",
-  "header.daysLeft.other": "Tage übrig",
-  "header.over": "Der Wettbewerb ist beendet",
+  "header.endsIn": "Die Challenge endet in",
 
   "about.title": "Über den Advent Of Code",
   "about.text":
@@ -169,12 +171,14 @@ const en: Record<MessageKey, string> = {
   "countdown.hours": "Hours",
   "countdown.minutes": "Minutes",
   "countdown.seconds": "Seconds",
+  "countdown.short.days": "d",
+  "countdown.short.hours": "h",
+  "countdown.short.minutes": "min",
+  "countdown.short.seconds": "s",
   "countdown.unlock": "The leaderboard unlocks on December 1.",
 
   "header.title": "Neuland Leaderboard",
-  "header.daysLeft.one": "day left",
-  "header.daysLeft.other": "days left",
-  "header.over": "The competition has ended",
+  "header.endsIn": "The challenge ends in",
 
   "about.title": "About Advent Of Code",
   "about.text":

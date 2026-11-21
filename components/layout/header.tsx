@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { Trophy } from "lucide-react";
 import { CopyCodeInput } from "@/src/components/CopyCodeInput";
@@ -20,6 +20,8 @@ import {
 
 import { cn } from "@/lib/utils";
 import { END_AT } from "@/src/lib/unlock";
+import { splitDuration, useCountdown } from "@/src/lib/use-countdown";
+import { useRouter } from "@tanstack/react-router";
 import { useI18n } from "@/src/i18n/i18n";
 
 export function InfoCards({
@@ -197,12 +199,15 @@ export default function Header({
   // after the end of the challenge the counter, join and info cards make no sense
   ended?: boolean;
 }) {
-  const { t, plural } = useI18n();
-  const today = new Date();
-  const diffDays = Math.max(
-    0,
-    Math.ceil((END_AT - today.getTime()) / (1000 * 60 * 60 * 24)),
-  );
+  const { t } = useI18n();
+  const router = useRouter();
+  const remaining = useCountdown(END_AT);
+  const parts = splitDuration(remaining ?? 0);
+
+  // once the end is reached while the page is open, reload so the winner view takes over
+  useEffect(() => {
+    if (remaining === 0 && !ended) router.invalidate();
+  }, [remaining, ended, router]);
 
   return (
     <div
@@ -242,21 +247,38 @@ export default function Header({
           )}
         </h1>
         {!ended && (
-          <div className="flex items-center gap-2.5 border bg-background px-4 py-2.5">
-            {diffDays === 0 ? (
-              <span className="text-sm leading-none text-muted-foreground">
-                {t("header.over")}
-              </span>
-            ) : (
-              <>
-                <span className="font-plex-mono text-2xl font-semibold leading-none tabular-nums">
-                  {diffDays}
-                </span>
-                <span className="text-sm leading-none text-muted-foreground">
-                  {plural("header.daysLeft", diffDays)}
-                </span>
-              </>
-            )}
+          <div className="flex flex-col items-center gap-1.5">
+            <p className="text-sm text-muted-foreground">
+              {t("header.endsIn")}
+            </p>
+            <div
+              className="flex divide-x border bg-background"
+              role="timer"
+              aria-label={t("header.endsIn")}
+            >
+              {(
+                [
+                  ["days", "countdown.short.days"],
+                  ["hours", "countdown.short.hours"],
+                  ["minutes", "countdown.short.minutes"],
+                  ["seconds", "countdown.short.seconds"],
+                ] as const
+              ).map(([unit, labelKey]) => (
+                <div
+                  key={unit}
+                  className="flex min-w-12 flex-col items-center px-2.5 py-1.5"
+                >
+                  <span className="font-plex-mono text-lg font-semibold leading-none tabular-nums">
+                    {remaining === null
+                      ? "--"
+                      : String(parts[unit]).padStart(2, "0")}
+                  </span>
+                  <span className="mt-1 text-[10px] leading-none text-muted-foreground">
+                    {t(labelKey)}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
