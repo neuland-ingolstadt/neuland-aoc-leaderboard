@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { Flame } from "lucide-react";
+import { Mountain, Rocket, RollerCoaster, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Leaderboard } from "@/src/types/leaderboard";
 
@@ -23,6 +23,9 @@ const MARGIN_LEFT = 40;
 const WIDE_BREAKPOINT = 560;
 // A steep climb: a place gained on each of the last few days
 const CLIMB_DAYS = 3;
+// "Rock": largest allowed rank change on any single day
+const ROCK_MAX_MOVE = 1;
+const MIN_DAYS_FOR_STABILITY = 4;
 
 // Re-creates the AoC local scoring (N - position points per star) day by day
 // to get the cumulative score and the rank after each puzzle day.
@@ -99,18 +102,103 @@ const climbGain = (s: Series) => {
   return climbing ? recent[0] - recent[recent.length - 1] : 0;
 };
 
-function ClimbFlame({ gain }: { gain: number }) {
-  return (
-    <span className="group relative ml-1 inline-block align-[-0.125em]">
-      <Flame className="size-[1em] text-orange-500" aria-hidden />
+// Day-to-day rank changes (absolute)
+const rankSteps = (s: Series) =>
+  s.ranks.slice(1).map((rank, i) => Math.abs(rank - s.ranks[i]));
+
+// Sum of squared daily rank changes: lots of movement counts, but big jumps
+// count much more than many small ones
+const volatility = (s: Series) =>
+  rankSteps(s).reduce((sum, step) => sum + step * step, 0);
+
+type BadgeKey = "rocket" | "rock" | "rollercoaster";
+
+interface Badge {
+  key: BadgeKey;
+  tooltip: string;
+}
+
+const BADGE_META: Record<
+  BadgeKey,
+  { icon: LucideIcon; color: string; name: string; description: string }
+> = {
+  rocket: {
+    icon: Rocket,
+    color: "text-orange-500",
+    name: "Rakete",
+    description: `Platz an jedem der letzten ${CLIMB_DAYS} Tage verbessert`,
+  },
+  rock: {
+    icon: Mountain,
+    color: "text-sky-500",
+    name: "Fels",
+    description: `Platz ändert sich an keinem Tag um mehr als ${ROCK_MAX_MOVE}`,
+  },
+  rollercoaster: {
+    icon: RollerCoaster,
+    color: "text-fuchsia-500",
+    name: "Achterbahn",
+    description: "Unruhigster Verlauf, vor allem durch große Sprünge",
+  },
+};
+
+// Badges per member id, derived from the rank progression only
+function computeBadges(series: Series[], lastDay: number) {
+  const badges = new Map<number, Badge[]>(series.map((s) => [s.id, []]));
+
+  for (const s of series) {
+    const gain = climbGain(s);
+    if (gain > 0) {
+      badges.get(s.id)!.push({
+        key: "rocket",
+        tooltip: `Steiler Aufstieg: +${gain} Plätze in ${CLIMB_DAYS} Tagen`,
+      });
+    }
+  }
+
+  // Rock and rollercoaster need a few days of history to mean anything
+  if (lastDay >= MIN_DAYS_FOR_STABILITY) {
+    let wildest: Series | undefined;
+    for (const s of series) {
+      const steps = rankSteps(s);
+      if (Math.max(...steps) <= ROCK_MAX_MOVE) {
+        badges.get(s.id)!.push({
+          key: "rock",
+          tooltip: `Felsenfest: nie mehr als ${ROCK_MAX_MOVE} Platz Schwankung an einem Tag`,
+        });
+      } else if (!wildest || volatility(s) > volatility(wildest)) {
+        wildest = s;
+      }
+    }
+    if (wildest) {
+      badges.get(wildest.id)!.push({
+        key: "rollercoaster",
+        tooltip: `Achterbahn: größter Sprung ${Math.max(...rankSteps(wildest))} Plätze an einem Tag`,
+      });
+    }
+  }
+
+  return badges;
+}
+
+function BadgeIcons({ badges }: { badges: Badge[] }) {
+  return badges.map(({ key, tooltip }) => {
+    const { icon: Icon, color } = BADGE_META[key];
+    return (
       <span
-        role="tooltip"
-        className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1.5 -translate-x-1/2 whitespace-nowrap border bg-popover px-2 py-1 text-xs font-normal text-popover-foreground opacity-0 shadow-md transition-opacity group-hover:opacity-100"
+        key={key}
+        className="group relative ml-1 inline-block align-[-0.125em]"
       >
-        Steiler Aufstieg: +{gain} Plätze in {CLIMB_DAYS} Tagen
+        <Icon className={cn("size-[1em]", color)} aria-hidden />
+        <span
+          role="tooltip"
+          className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1.5 -translate-x-1/2 whitespace-nowrap border bg-popover px-2 py-1 text-xs font-normal text-popover-foreground opacity-0 shadow-md transition-opacity group-hover:opacity-100"
+        >
+          {tooltip}
+        </span>
       </span>
-    </span>
-  );
+    );
+  });
 }
 
 function ChartLabel({
@@ -118,14 +206,14 @@ function ChartLabel({
   y,
   name,
   isActive,
-  gain,
+  badges,
   onSelect,
 }: {
   x: number;
   y: number;
   name: string;
   isActive: boolean;
-  gain: number;
+  badges: Badge[];
   onSelect: () => void;
 }) {
   const textRef = useRef<SVGTextElement>(null);
@@ -149,19 +237,21 @@ function ChartLabel({
       >
         {label}
       </text>
-      {gain > 0 && (
-        <Flame
-          x={x + textWidth + 4}
-          y={y - 6}
-          width={12}
-          height={12}
-          className="text-orange-500"
-        >
-          <title>
-            Steiler Aufstieg: +{gain} Plätze in {CLIMB_DAYS} Tagen
-          </title>
-        </Flame>
-      )}
+      {badges.map(({ key, tooltip }, i) => {
+        const { icon: Icon, color } = BADGE_META[key];
+        return (
+          <Icon
+            key={key}
+            x={x + textWidth + 4 + i * 15}
+            y={y - 6}
+            width={12}
+            height={12}
+            className={color}
+          >
+            <title>{tooltip}</title>
+          </Icon>
+        );
+      })}
     </g>
   );
 }
@@ -170,6 +260,10 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
   const { lastDay, series } = useMemo(
     () => computeSeries(leaderboard, days),
     [leaderboard, days],
+  );
+  const badges = useMemo(
+    () => computeBadges(series, lastDay),
+    [series, lastDay],
   );
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
@@ -328,7 +422,7 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
                       y={y(s.ranks[lastDay - 1])}
                       name={s.name}
                       isActive={isActive}
-                      gain={climbGain(s)}
+                      badges={badges.get(s.id) ?? []}
                       onSelect={() => setSelected(s.id)}
                     />
                   )}
@@ -341,7 +435,7 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
 
       <p className="text-sm">
         <span className="accent-marker font-semibold">{active.name}</span>
-        {climbGain(active) > 0 && <ClimbFlame gain={climbGain(active)} />}
+        <BadgeIcons badges={badges.get(active.id) ?? []} />
         <span className="text-muted-foreground">
           {" "}
           · Aktuell Platz {finalRank} · {active.points[lastDay - 1]} Punkte ·
@@ -364,10 +458,25 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
             )}
           >
             {s.ranks[lastDay - 1]}. {s.name}
-            {climbGain(s) > 0 && <ClimbFlame gain={climbGain(s)} />}
+            <BadgeIcons badges={badges.get(s.id) ?? []} />
           </button>
         ))}
       </div>
+
+      <ul className="flex flex-col gap-1.5 border-t pt-3 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:gap-x-5">
+        {(Object.keys(BADGE_META) as BadgeKey[]).map((key) => {
+          const { icon: Icon, color, name, description } = BADGE_META[key];
+          return (
+            <li key={key} className="flex items-center gap-1.5">
+              <Icon className={cn("size-3.5 shrink-0", color)} aria-hidden />
+              <span>
+                <span className="font-medium text-foreground">{name}</span>:{" "}
+                {description}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
