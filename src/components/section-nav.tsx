@@ -46,7 +46,7 @@ export function SectionNav({ sections }: { sections: NavSection[] }) {
       aria-label="Statistiken"
       className="fixed inset-x-0 bottom-4 z-20 md:bottom-auto md:top-4 flex justify-center px-4 pointer-events-none"
     >
-      <ul className="pointer-events-auto flex gap-1 border bg-background/80 p-1 shadow-md backdrop-blur">
+      <ul className="pointer-events-auto flex max-w-full gap-0.5 border bg-background/80 p-1 shadow-md backdrop-blur">
         {sections.map(({ id, label }) => (
           <li key={id}>
             <button
@@ -54,7 +54,7 @@ export function SectionNav({ sections }: { sections: NavSection[] }) {
               onClick={() => scrollTo(id)}
               aria-current={id === activeId ? "true" : undefined}
               className={cn(
-                "px-3 py-1.5 text-xs transition-colors",
+                "px-2 py-1.5 text-xs transition-colors sm:px-3",
                 id === activeId
                   ? "bg-muted-foreground/20 text-foreground"
                   : "text-muted-foreground hover:text-foreground",
