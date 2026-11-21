@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Trophy } from "lucide-react";
 import { CopyCodeInput } from "@/src/components/CopyCodeInput";
 import { Button } from "../ui/button";
 import {
@@ -61,28 +62,30 @@ export function InfoCards({
           {/* soft green glow behind the shirts */}
           <div className="absolute -right-10 top-1/2 hidden size-96 -translate-y-1/2 bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--accent)_22%,transparent),transparent)] sm:block" />
           <div className="absolute inset-x-0 bottom-0 h-48 bg-[radial-gradient(ellipse_at_bottom,color-mix(in_oklch,var(--accent)_25%,transparent),transparent_70%)] sm:hidden" />
-          {/* two staggered columns, sized by the card height so they fill the right side */}
-          <div className="absolute inset-y-0 -right-6 hidden sm:flex">
-            {[
-              [["shirt-3", "shirt-4"], "hidden @md:flex -translate-y-[3%]"],
-              [["shirt-2"], "justify-center -ml-8 pt-[16%]"],
-            ].map(([names, offset], i) => (
-              <div key={i} className={cn("flex h-full flex-col", offset)}>
-                {(names as string[]).map((name) => (
-                  <img
-                    key={name}
-                    src={`/img/shirts/${name}.png`}
-                    alt=""
-                    loading="lazy"
-                    className="h-[52%] w-auto max-w-none shrink-0"
-                  />
-                ))}
-              </div>
-            ))}
+          {/* desktop: three shirts stacked diagonally, sized by the card height */}
+          <div className="absolute inset-y-0 right-0 hidden w-[50%] sm:block">
+            <img
+              src="/img/shirts/shirt-2.png"
+              alt=""
+              loading="lazy"
+              className="absolute -right-[4%] -top-[7%] z-0 h-[56%] w-auto max-w-none"
+            />
+            <img
+              src="/img/shirts/shirt-4.png"
+              alt=""
+              loading="lazy"
+              className="absolute left-[14%] top-[28%] z-10 h-[54%] w-auto max-w-none"
+            />
+            <img
+              src="/img/shirts/shirt-3.png"
+              alt=""
+              loading="lazy"
+              className="absolute -bottom-[3%] -left-[3%] z-20 h-[50%] w-auto max-w-none drop-shadow-[-8px_10px_16px_rgba(0,0,0,0.65)]"
+            />
           </div>
           {/* Mobile: shirts peek in from the bottom edge */}
           <div className="absolute inset-x-0 bottom-0 flex translate-y-[40%] justify-center -space-x-6 sm:hidden">
-            {["shirt-3", "shirt-2", "shirt-4"].map((name) => (
+            {["shirt-3", "shirt-4", "shirt-2"].map((name) => (
               <img
                 key={name}
                 src={`/img/shirts/${name}.png`}
@@ -125,8 +128,12 @@ export function InfoCards({
               <Button
                 size={"lg"}
                 variant="accent"
-                className="h-12 w-full text-base hover:cursor-pointer"
+                className="group h-12 w-full text-base hover:cursor-pointer"
               >
+                <Trophy
+                  className="size-5 transition-transform duration-200 group-hover:-rotate-12 group-hover:scale-110"
+                  aria-hidden
+                />
                 Mitmachen
               </Button>
             </DialogTrigger>
