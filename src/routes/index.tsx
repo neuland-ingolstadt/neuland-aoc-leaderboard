@@ -69,7 +69,7 @@ function Dashboard({
         <TopGlow />
       </div>
       <Header inviteCode={inviteCode} />
-      <div className={"px-1 md:px-5 xl:px-40 2xl:px-80"}>
+      <div className={"mx-auto w-full max-w-5xl px-1 md:px-5"}>
         <div>
           <div className={"flex flex-col gap-4"}>
             <Card id="rangliste" className="scroll-mt-4 md:scroll-mt-20">

@@ -201,7 +201,7 @@ export default function Header({ inviteCode }: { inviteCode: string }) {
     <div
       id="header-section"
       className={
-        "flex flex-col items-center gap-20 px-1 md:px-5 xl:px-40 2xl:px-80 py-10 pt-30"
+        "mx-auto flex w-full max-w-5xl flex-col items-center gap-20 px-1 md:px-5 py-10 pt-30"
       }
     >
       <div className="flex flex-col items-center gap-5">
