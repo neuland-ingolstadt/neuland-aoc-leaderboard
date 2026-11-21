@@ -19,7 +19,7 @@ const sections = [
   },
   {
     title: "3. Ermittlung der Gewinnerin oder des Gewinners",
-    text: "Gewonnen hat, wer nach dem letzten Rätseltag auf Platz 1 des Neuland Leaderboards steht. Maßgeblich ist der Punktestand auf adventofcode.com. Bei Punktgleichstand entscheidet der Verein nach eigenem Ermessen, zum Beispiel per Losverfahren.",
+    text: "Gewonnen hat, wer nach dem letzten Rätseltag (12. Dezember 2026) auf Platz 1 des Neuland Leaderboards steht. Maßgeblich ist der Punktestand auf adventofcode.com. Bei Punktgleichstand entscheidet der Verein nach eigenem Ermessen, zum Beispiel per Losverfahren.",
   },
   {
     title: "4. Gewinn",

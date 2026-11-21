@@ -17,6 +17,7 @@ import {
 } from "../ui/dialog";
 
 import { cn } from "@/lib/utils";
+import { END_AT } from "@/src/lib/unlock";
 
 export function InfoCards({
   inviteCode,
@@ -191,9 +192,10 @@ export function InfoCards({
 
 export default function Header({ inviteCode }: { inviteCode: string }) {
   const today = new Date();
-  const endDate = new Date("2026-12-24");
-  const diffTime = Math.abs(endDate.getTime() - today.getTime());
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const diffDays = Math.max(
+    0,
+    Math.ceil((END_AT - today.getTime()) / (1000 * 60 * 60 * 24)),
+  );
 
   return (
     <div
@@ -221,12 +223,20 @@ export default function Header({ inviteCode }: { inviteCode: string }) {
           <span className="accent-marker-line marker-b">Code 2026</span>
         </h1>
         <div className="flex items-center gap-2.5 border bg-background px-4 py-2.5">
-          <span className="font-plex-mono text-2xl font-semibold leading-none tabular-nums">
-            {diffDays}
-          </span>
-          <span className="text-sm leading-none text-muted-foreground">
-            {diffDays === 1 ? "Tag" : "Tage"} übrig
-          </span>
+          {diffDays === 0 ? (
+            <span className="text-sm leading-none text-muted-foreground">
+              Der Wettbewerb ist beendet
+            </span>
+          ) : (
+            <>
+              <span className="font-plex-mono text-2xl font-semibold leading-none tabular-nums">
+                {diffDays}
+              </span>
+              <span className="text-sm leading-none text-muted-foreground">
+                {diffDays === 1 ? "Tag" : "Tage"} übrig
+              </span>
+            </>
+          )}
         </div>
       </div>
       <InfoCards inviteCode={inviteCode} />
