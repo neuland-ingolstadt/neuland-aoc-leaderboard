@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
+import { Markdown } from "@/src/components/markdown";
 import { NavBar } from "@/src/components/nav-bar";
+import terms from "@/src/content/teilnahmebedingungen.md?raw";
 import { useI18n } from "@/src/i18n/i18n";
-import { messages, type Lang, type MessageKey } from "@/src/i18n/messages";
+import { messages, type Lang } from "@/src/i18n/messages";
 
 export const Route = createFileRoute("/teilnahmebedingungen")({
   head: ({ matches }) => {
@@ -21,13 +23,9 @@ export const Route = createFileRoute("/teilnahmebedingungen")({
   component: Teilnahmebedingungen,
 });
 
-const SECTIONS = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({
-  title: `terms.s${n}.title` as MessageKey,
-  text: `terms.s${n}.text` as MessageKey,
-}));
-
+// The terms are maintained in src/content/teilnahmebedingungen.md (German only)
 function Teilnahmebedingungen() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
   // keep the tab title in sync when the language is switched on this page
   useEffect(() => {
@@ -46,30 +44,15 @@ function Teilnahmebedingungen() {
           {t("terms.back")}
         </Link>
 
-        <h1 className="font-plex-mono text-2xl font-semibold break-words sm:text-3xl md:text-4xl">
-          {t("terms.title")}
-        </h1>
+        {lang !== "de" && (
+          <p className="mb-6 border bg-card px-3 py-3 text-sm text-muted-foreground md:px-4">
+            {t("terms.onlyGerman")}
+          </p>
+        )}
 
-        <p className="mt-5 border bg-card px-3 py-3 text-sm md:mt-6 md:px-4 text-muted-foreground">
-          {t("terms.notice")}
-        </p>
-
-        <div className="mt-8 flex flex-col gap-6 md:mt-10 md:gap-8">
-          {SECTIONS.map((section) => (
-            <section key={section.title} className="flex flex-col gap-2">
-              <h2 className="text-base font-semibold md:text-lg">
-                {t(section.title)}
-              </h2>
-              <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-                {t(section.text)}
-              </p>
-            </section>
-          ))}
-        </div>
-
-        <p className="mt-10 text-sm text-muted-foreground md:mt-12">
-          {t("terms.updated")}
-        </p>
+        <article lang="de">
+          <Markdown source={terms} />
+        </article>
       </main>
     </>
   );
