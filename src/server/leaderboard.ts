@@ -13,12 +13,13 @@ export async function getLeaderboardData(): Promise<Leaderboard> {
   }
 
   const leaderboardUrl = process.env.AOC_LEADERBOARD_URL as string;
-  const sessionToken = process.env.AOC_SESSION_TOKEN as string;
+  // optional: a leaderboard URL with a view_key can be read without logging in
+  const sessionToken = process.env.AOC_SESSION_TOKEN;
 
   try {
     const response = await fetch(leaderboardUrl, {
       headers: {
-        Cookie: `session=${sessionToken}`,
+        ...(sessionToken && { Cookie: `session=${sessionToken}` }),
         "User-Agent": "Neuland Ingolstadt e.V. - info@neuland-ingolstadt.de",
       },
       cache: "no-store",
