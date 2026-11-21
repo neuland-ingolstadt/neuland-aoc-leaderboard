@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { LeaderboardMember } from "@/src/types/leaderboard";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/src/i18n/i18n";
 
 interface Props {
   members: LeaderboardMember[];
@@ -17,9 +18,10 @@ const MAX_NAMES_PER_STEP = 3;
 // Places shown before the rest of the ranking is collapsed
 const COLLAPSED_PLACES = 15;
 
-const displayName = (member: LeaderboardMember) => member.name || "<Kein Name>";
-
 export function ScorePodium({ members }: Props) {
+  const { t } = useI18n();
+  const displayName = (member: LeaderboardMember) =>
+    member.name || t("common.noName");
   const [expanded, setExpanded] = useState(false);
   const sorted = members.slice().sort((a, b) => b.local_score - a.local_score);
   const maxScore = sorted[0]?.local_score ?? 0;
@@ -27,9 +29,11 @@ export function ScorePodium({ members }: Props) {
   if (maxScore === 0) {
     return (
       <div className="border px-4 py-8 text-center text-sm text-muted-foreground">
-        Noch keine Punkte vergeben.
-        <br />
-        Sobald die ersten Sterne gelöst sind, erscheint hier die Rangliste.
+        {t("ranking.empty")
+          .split("\n")
+          .map((line, i) => (
+            <p key={i}>{line}</p>
+          ))}
       </div>
     );
   }
@@ -85,7 +89,7 @@ export function ScorePodium({ members }: Props) {
                 ))}
                 {hidden > 0 && (
                   <p className="text-sm text-muted-foreground">
-                    + {hidden} weitere
+                    {t("ranking.andMore", { n: hidden })}
                   </p>
                 )}
                 <div className="flex flex-col items-center font-plex-mono text-sm text-muted-foreground">
@@ -93,14 +97,14 @@ export function ScorePodium({ members }: Props) {
                     <span className="font-semibold text-foreground">
                       {stepMembers[0].local_score}
                     </span>{" "}
-                    Punkte
+                    {t("common.points")}
                   </p>
                   {stepMembers.length === 1 && (
                     <p>
                       <span className="font-semibold text-foreground">
                         {stepMembers[0].stars}
                       </span>{" "}
-                      Sterne
+                      {t("common.stars")}
                     </p>
                   )}
                 </div>
@@ -143,12 +147,12 @@ export function ScorePodium({ members }: Props) {
                 <span className="font-semibold text-foreground">
                   {member.local_score}
                 </span>
-                <span className="hidden sm:inline"> Punkte</span>
+                <span className="hidden sm:inline"> {t("common.points")}</span>
                 {" · "}
                 <span className="font-semibold text-foreground">
                   {member.stars}
                 </span>
-                <span className="hidden sm:inline"> Sterne</span>
+                <span className="hidden sm:inline"> {t("common.stars")}</span>
                 <span className="sm:hidden"> ★</span>
               </span>
             </li>
@@ -163,7 +167,7 @@ export function ScorePodium({ members }: Props) {
           aria-expanded={expanded}
           className="-mt-5 flex items-center justify-center gap-2 border py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
-          {expanded ? "Weniger anzeigen" : `${hiddenCount} weitere anzeigen`}
+          {expanded ? t("ranking.less") : t("ranking.more", { n: hiddenCount })}
           <ChevronDown
             className={cn(
               "size-4 transition-transform",

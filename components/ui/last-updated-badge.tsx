@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/src/i18n/i18n";
 
 interface LastUpdatedBadgeProps {
     date: Date;
@@ -7,6 +8,7 @@ interface LastUpdatedBadgeProps {
 }
 
 export function LastUpdatedBadge({ date, className }: LastUpdatedBadgeProps) {
+    const { plural } = useI18n();
     const now = new Date();
     const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / 60000);
 
@@ -23,7 +25,7 @@ export function LastUpdatedBadge({ date, className }: LastUpdatedBadgeProps) {
                 <span className={cn("animate-ping absolute inline-flex h-full w-full rounded-full opacity-75", colorClass)}></span>
                 <span className={cn("relative inline-flex rounded-full h-2 w-2", colorClass)}></span>
             </span>
-            <span>Vor {diffInMinutes} {diffInMinutes === 1 ? "Minute" : "Minuten"} aktualisiert</span>
+            <span>{plural("updated", diffInMinutes)}</span>
         </Badge>
     );
 }

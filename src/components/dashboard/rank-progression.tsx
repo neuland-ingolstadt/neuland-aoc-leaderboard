@@ -1,6 +1,8 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Mountain, Rocket, RollerCoaster, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/src/i18n/i18n";
+import type { MessageKey } from "@/src/i18n/messages";
 import { Leaderboard } from "@/src/types/leaderboard";
 
 interface Props {
@@ -10,12 +12,10 @@ interface Props {
 
 interface Series {
   id: number;
-  name: string;
+  name: string; // empty if the member has no name
   ranks: number[]; // rank after each day, index 0 = day 1
   points: number[]; // cumulative points after each day
 }
-
-const displayName = (name: string | null) => name || "<Kein Name>";
 
 const MARGIN_TOP = 12;
 const MARGIN_BOTTOM = 36;
@@ -84,7 +84,7 @@ function computeSeries(leaderboard: Leaderboard, days: number) {
   const series: Series[] = members
     .map((m) => ({
       id: m.id,
-      name: displayName(m.name),
+      name: m.name ?? "",
       ranks: ranks.get(m.id)!,
       points: cumulative.get(m.id)!,
     }))
@@ -115,32 +115,31 @@ type BadgeKey = "rocket" | "rock" | "rollercoaster";
 
 interface Badge {
   key: BadgeKey;
-  tooltip: string;
+  // rocket: places gained, rock: allowed move, rollercoaster: biggest jump
+  value: number;
 }
 
-const BADGE_META: Record<
-  BadgeKey,
-  { icon: LucideIcon; color: string; name: string; description: string }
-> = {
-  rocket: {
-    icon: Rocket,
-    color: "text-orange-500",
-    name: "Rakete",
-    description: `Platz an jedem der letzten ${CLIMB_DAYS} Tage verbessert`,
-  },
-  rock: {
-    icon: Mountain,
-    color: "text-sky-500",
-    name: "Fels",
-    description: `Platz ändert sich an keinem Tag um mehr als ${ROCK_MAX_MOVE}`,
-  },
-  rollercoaster: {
-    icon: RollerCoaster,
-    color: "text-fuchsia-500",
-    name: "Achterbahn",
-    description: "Unruhigster Verlauf, vor allem durch große Sprünge",
-  },
+const BADGE_META: Record<BadgeKey, { icon: LucideIcon; color: string }> = {
+  rocket: { icon: Rocket, color: "text-orange-500" },
+  rock: { icon: Mountain, color: "text-sky-500" },
+  rollercoaster: { icon: RollerCoaster, color: "text-fuchsia-500" },
 };
+
+type Translate = (key: MessageKey, params?: Record<string, number>) => string;
+
+const badgeName = (t: Translate, key: BadgeKey) =>
+  t(`badge.${key}.name` as MessageKey);
+
+const badgeDescription = (t: Translate, key: BadgeKey) =>
+  t(`badge.${key}.description` as MessageKey, {
+    n: key === "rocket" ? CLIMB_DAYS : ROCK_MAX_MOVE,
+  });
+
+const badgeTooltip = (t: Translate, { key, value }: Badge) =>
+  t(`badge.${key}.tooltip` as MessageKey, {
+    n: key === "rocket" ? CLIMB_DAYS : key === "rock" ? ROCK_MAX_MOVE : value,
+    gain: value,
+  });
 
 // Badges per member id, derived from the rank progression only
 function computeBadges(series: Series[], lastDay: number) {
@@ -149,10 +148,7 @@ function computeBadges(series: Series[], lastDay: number) {
   for (const s of series) {
     const gain = climbGain(s);
     if (gain > 0) {
-      badges.get(s.id)!.push({
-        key: "rocket",
-        tooltip: `Steiler Aufstieg: +${gain} Plätze in ${CLIMB_DAYS} Tagen`,
-      });
+      badges.get(s.id)!.push({ key: "rocket", value: gain });
     }
   }
 
@@ -162,10 +158,7 @@ function computeBadges(series: Series[], lastDay: number) {
     for (const s of series) {
       const steps = rankSteps(s);
       if (Math.max(...steps) <= ROCK_MAX_MOVE) {
-        badges.get(s.id)!.push({
-          key: "rock",
-          tooltip: `Felsenfest: nie mehr als ${ROCK_MAX_MOVE} Platz Schwankung an einem Tag`,
-        });
+        badges.get(s.id)!.push({ key: "rock", value: ROCK_MAX_MOVE });
       } else if (!wildest || volatility(s) > volatility(wildest)) {
         wildest = s;
       }
@@ -173,7 +166,7 @@ function computeBadges(series: Series[], lastDay: number) {
     if (wildest) {
       badges.get(wildest.id)!.push({
         key: "rollercoaster",
-        tooltip: `Achterbahn: größter Sprung ${Math.max(...rankSteps(wildest))} Plätze an einem Tag`,
+        value: Math.max(...rankSteps(wildest)),
       });
     }
   }
@@ -182,7 +175,9 @@ function computeBadges(series: Series[], lastDay: number) {
 }
 
 function BadgeIcons({ badges }: { badges: Badge[] }) {
-  return badges.map(({ key, tooltip }) => {
+  const { t } = useI18n();
+  return badges.map((badge) => {
+    const { key } = badge;
     const { icon: Icon, color } = BADGE_META[key];
     return (
       <span
@@ -194,7 +189,7 @@ function BadgeIcons({ badges }: { badges: Badge[] }) {
           role="tooltip"
           className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1.5 -translate-x-1/2 whitespace-nowrap border bg-popover px-2 py-1 text-xs font-normal text-popover-foreground opacity-0 shadow-md transition-opacity group-hover:opacity-100"
         >
-          {tooltip}
+          {badgeTooltip(t, badge)}
         </span>
       </span>
     );
@@ -216,6 +211,7 @@ function ChartLabel({
   badges: Badge[];
   onSelect: () => void;
 }) {
+  const { t } = useI18n();
   const textRef = useRef<SVGTextElement>(null);
   const [textWidth, setTextWidth] = useState(0);
   const label = name.length > 16 ? name.slice(0, 16) + "…" : name;
@@ -237,7 +233,8 @@ function ChartLabel({
       >
         {label}
       </text>
-      {badges.map(({ key, tooltip }, i) => {
+      {badges.map((badge, i) => {
+        const { key } = badge;
         const { icon: Icon, color } = BADGE_META[key];
         return (
           <Icon
@@ -248,7 +245,7 @@ function ChartLabel({
             height={12}
             className={color}
           >
-            <title>{tooltip}</title>
+            <title>{badgeTooltip(t, badge)}</title>
           </Icon>
         );
       })}
@@ -257,6 +254,7 @@ function ChartLabel({
 }
 
 export function RankProgression({ leaderboard, days = 12 }: Props) {
+  const { t } = useI18n();
   const { lastDay, series } = useMemo(
     () => computeSeries(leaderboard, days),
     [leaderboard, days],
@@ -280,9 +278,7 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
 
   if (lastDay === 0 || series.length === 0) {
     return (
-      <p className="text-sm text-muted-foreground">
-        Noch nicht genügend Daten.
-      </p>
+      <p className="text-sm text-muted-foreground">{t("progression.empty")}</p>
     );
   }
 
@@ -322,6 +318,7 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
   const dayTicks = Array.from({ length: lastDay }, (_, i) => i + 1);
   const ordered = [...series.filter((s) => s.id !== active.id), active];
   const finalRank = active.ranks[lastDay - 1];
+  const nameOf = (s: Series) => s.name || t("common.noName");
 
   return (
     <div className="flex flex-col gap-4">
@@ -331,7 +328,7 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
             width={width}
             height={height}
             role="img"
-            aria-label="Verlauf der Platzierungen nach Tagen"
+            aria-label={t("progression.aria")}
             className="block"
           >
             {rankTicks.map((rank) => (
@@ -375,7 +372,7 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
               fontSize={11}
               fill="currentColor"
             >
-              Tag
+              {t("progression.axisDay")}
             </text>
             <text
               transform={`translate(10 ${MARGIN_TOP + ((maxRank - 1) * rowHeight) / 2}) rotate(-90)`}
@@ -383,7 +380,7 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
               fontSize={11}
               fill="currentColor"
             >
-              Platz
+              {t("progression.axisRank")}
             </text>
 
             {ordered.map((s) => {
@@ -420,7 +417,7 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
                     <ChartLabel
                       x={x(lastDay) + 12}
                       y={y(s.ranks[lastDay - 1])}
-                      name={s.name}
+                      name={nameOf(s)}
                       isActive={isActive}
                       badges={badges.get(s.id) ?? []}
                       onSelect={() => setSelected(s.id)}
@@ -434,12 +431,15 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
       </div>
 
       <p className="text-sm">
-        <span className="accent-marker font-semibold">{active.name}</span>
+        <span className="accent-marker font-semibold">{nameOf(active)}</span>
         <BadgeIcons badges={badges.get(active.id) ?? []} />
         <span className="text-muted-foreground">
-          {" "}
-          · Aktuell Platz {finalRank} · {active.points[lastDay - 1]} Punkte ·
-          Rekord: Platz {Math.min(...active.ranks)}
+          {" · "}
+          {t("progression.summary", {
+            rank: finalRank,
+            points: active.points[lastDay - 1],
+            best: Math.min(...active.ranks),
+          })}
         </span>
       </p>
 
@@ -457,7 +457,7 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
                 : "hover:bg-muted",
             )}
           >
-            {s.ranks[lastDay - 1]}. {s.name}
+            {s.ranks[lastDay - 1]}. {nameOf(s)}
             <BadgeIcons badges={badges.get(s.id) ?? []} />
           </button>
         ))}
@@ -465,13 +465,15 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
 
       <ul className="flex flex-col gap-1.5 border-t pt-3 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:gap-x-5">
         {(Object.keys(BADGE_META) as BadgeKey[]).map((key) => {
-          const { icon: Icon, color, name, description } = BADGE_META[key];
+          const { icon: Icon, color } = BADGE_META[key];
           return (
             <li key={key} className="flex items-center gap-1.5">
               <Icon className={cn("size-3.5 shrink-0", color)} aria-hidden />
               <span>
-                <span className="font-medium text-foreground">{name}</span>:{" "}
-                {description}
+                <span className="font-medium text-foreground">
+                  {badgeName(t, key)}
+                </span>
+                : {badgeDescription(t, key)}
               </span>
             </li>
           );

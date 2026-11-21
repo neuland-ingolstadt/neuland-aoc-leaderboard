@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/src/i18n/i18n";
 import { Leaderboard } from "@/src/types/leaderboard";
 
 interface Props {
@@ -14,6 +15,7 @@ const LEVEL_PERCENT = [8, 30, 50, 75, 100];
 const levelColor = (level: number) =>
   `color-mix(in oklch, var(--accent) ${LEVEL_PERCENT[level]}%, transparent)`;
 
+// Hours are always shown in German time, whatever the interface language
 const hourFormat = new Intl.DateTimeFormat("de-DE", {
   hour: "numeric",
   hourCycle: "h23",
@@ -21,6 +23,9 @@ const hourFormat = new Intl.DateTimeFormat("de-DE", {
 });
 
 export function SubmissionHeatmap({ leaderboard, days = 12 }: Props) {
+  const { t, plural } = useI18n();
+  const hoursLabel = (hour: number) =>
+    t("heatmap.hours", { from: hour, to: hour + 1 });
   // counts[day - 1][hour]: solved stars per puzzle day and hour of day (Berlin time)
   const counts = Array.from({ length: days }, () => HOURS.map(() => 0));
 
@@ -76,7 +81,7 @@ export function SubmissionHeatmap({ leaderboard, days = 12 }: Props) {
         key={`${day}-${hour}`}
         type="button"
         data-heatmap-cell
-        aria-label={`Tag ${day}, ${hour}–${hour + 1} Uhr: ${count} ${count === 1 ? "Lösung" : "Lösungen"}`}
+        aria-label={`${t("common.day")} ${day}, ${hoursLabel(hour)}: ${plural("heatmap.solutions", count)}`}
         className={cn(
           "block w-full cursor-pointer outline-offset-1",
           isSelected && "outline outline-2 outline-foreground",
@@ -106,7 +111,7 @@ export function SubmissionHeatmap({ leaderboard, days = 12 }: Props) {
 
   const legend = (
     <div className="flex items-center justify-end gap-1 pt-2">
-      <span className="pr-1">weniger</span>
+      <span className="pr-1">{t("heatmap.less")}</span>
       {LEVEL_PERCENT.map((_, level) => (
         <div
           key={level}
@@ -114,7 +119,7 @@ export function SubmissionHeatmap({ leaderboard, days = 12 }: Props) {
           style={{ backgroundColor: levelColor(level) }}
         />
       ))}
-      <span className="pl-1">mehr</span>
+      <span className="pl-1">{t("heatmap.more")}</span>
     </div>
   );
 
@@ -133,10 +138,10 @@ export function SubmissionHeatmap({ leaderboard, days = 12 }: Props) {
           }}
         >
           <p className="font-semibold">
-            Tag {selected.day} · {selected.hour}–{selected.hour + 1} Uhr
+            {t("common.day")} {selected.day} · {hoursLabel(selected.hour)}
           </p>
           <p className="text-muted-foreground">
-            {selected.count} {selected.count === 1 ? "Lösung" : "Lösungen"}
+            {plural("heatmap.solutions", selected.count)}
           </p>
         </div>
       )}
@@ -144,7 +149,7 @@ export function SubmissionHeatmap({ leaderboard, days = 12 }: Props) {
       <div className="sm:hidden">
         <div className="grid grid-cols-[1rem_1.25rem_repeat(12,minmax(0,1fr))] gap-0.5 items-center">
           <span className="text-center" style={{ gridColumn: "3 / -1" }}>
-            Tag
+            {t("common.day")}
           </span>
           <span style={{ gridColumn: "1 / 3" }} />
           {counts.map((_, i) => (
@@ -156,7 +161,7 @@ export function SubmissionHeatmap({ leaderboard, days = 12 }: Props) {
             className="flex items-center justify-center [writing-mode:vertical-rl] rotate-180"
             style={{ gridColumn: 1, gridRow: `3 / span ${HOURS.length}` }}
           >
-            Uhrzeit (deutsche Zeit)
+            {t("heatmap.axisTime")}
           </span>
           {HOURS.map((hour) => (
             <Fragment key={hour}>
@@ -176,7 +181,7 @@ export function SubmissionHeatmap({ leaderboard, days = 12 }: Props) {
       <div className="hidden sm:block">
         <div className="grid grid-cols-[1rem_1.25rem_repeat(24,minmax(0,1fr))] gap-1 items-center">
           <span className="text-center" style={{ gridColumn: "3 / 27" }}>
-            Uhrzeit (deutsche Zeit)
+            {t("heatmap.axisTime")}
           </span>
           <span style={{ gridColumn: "1 / 3" }} />
           {HOURS.map((hour) => (
@@ -188,7 +193,7 @@ export function SubmissionHeatmap({ leaderboard, days = 12 }: Props) {
             className="flex items-center justify-center [writing-mode:vertical-rl] rotate-180"
             style={{ gridColumn: 1, gridRow: `3 / span ${days}` }}
           >
-            Tag
+            {t("common.day")}
           </span>
           {counts.map((row, i) => (
             <Fragment key={i}>

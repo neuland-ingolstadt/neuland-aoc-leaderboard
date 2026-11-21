@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { Trophy } from "lucide-react";
 import { CopyCodeInput } from "@/src/components/CopyCodeInput";
@@ -19,6 +20,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import { END_AT } from "@/src/lib/unlock";
+import { useI18n } from "@/src/i18n/i18n";
 
 export function InfoCards({
   inviteCode,
@@ -27,6 +29,18 @@ export function InfoCards({
   inviteCode: string;
   className?: string;
 }) {
+  const { t, rich } = useI18n();
+  const externalLink =
+    (href: string, className: string) => (content: ReactNode) => (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {content}
+      </a>
+    );
   return (
     <div
       id="infos"
@@ -37,23 +51,14 @@ export function InfoCards({
     >
       <Card>
         <CardHeader>
-          <CardTitle className={"text-xl"}>Über den Advent Of Code</CardTitle>
+          <CardTitle className={"text-xl"}>{t("about.title")}</CardTitle>
           <CardDescription>
-            Der Advent of Code (AoC) ist ein jährliches globales Event in Form
-            eines Adventskalenders für Programmierer. Statt Schokolade gibt es
-            12 Programmierrätsel, die man in einer beliebigen Sprache lösen
-            kann. Es geht um den Spaß an der Problemlösung - jeder ist herzlich
-            dazu eingeladen, sich an den Rätseln zu versuchen. Mehr darüber
-            erfährst du auf der{" "}
-            <a
-              href="https://adventofcode.com/2026/about"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2 hover:text-foreground"
-            >
-              offiziellen Website des Advent of Code
-            </a>
-            .
+            {rich("about.text", {
+              link: externalLink(
+                "https://adventofcode.com/2026/about",
+                "underline underline-offset-2 hover:text-foreground",
+              ),
+            })}
           </CardDescription>
         </CardHeader>
       </Card>
@@ -98,28 +103,23 @@ export function InfoCards({
           <div className="absolute inset-0 hidden sm:block bg-[linear-gradient(to_right,var(--card)_0%,color-mix(in_oklch,var(--card)_95%,transparent)_30%,color-mix(in_oklch,var(--card)_82%,transparent)_42%,color-mix(in_oklch,var(--card)_58%,transparent)_52%,color-mix(in_oklch,var(--card)_32%,transparent)_62%,color-mix(in_oklch,var(--card)_11%,transparent)_74%,color-mix(in_oklch,var(--card)_0%,transparent)_88%)]" />
         </div>
         <CardHeader className="relative z-10 sm:pr-[52%]">
-          <CardTitle className={"text-xl"}>
-            Mitmachen und Merch abstauben
-          </CardTitle>
+          <CardTitle className={"text-xl"}>{t("join.title")}</CardTitle>
           <CardDescription>
-            Neuland stellt euch ein vereinsinternes Leaderboard zur Verfügung,
-            auf dem ihr euch mit anderen Mitgliedern messen könnt.{" "}
-            <strong>
-              Wer am Ende auf Platz 1 landet, darf sich als Gewinn ein T-Shirt
-              aus unserem Merch Shop selbst aussuchen.
-            </strong>
+            {rich("join.text", { strong: (c) => <strong>{c}</strong> })}
           </CardDescription>
         </CardHeader>
         <CardContent className="relative z-10 flex flex-1 flex-col justify-end sm:pr-[52%]">
           <p className="text-xs text-muted-foreground">
-            Beachte die{" "}
-            <Link
-              to="/teilnahmebedingungen"
-              className="underline underline-offset-2 hover:text-foreground"
-            >
-              Teilnahmebedingungen
-            </Link>
-            .
+            {rich("join.terms", {
+              link: (c) => (
+                <Link
+                  to="/teilnahmebedingungen"
+                  className="underline underline-offset-2 hover:text-foreground"
+                >
+                  {c}
+                </Link>
+              ),
+            })}
           </p>
         </CardContent>
         <div className="relative z-10 px-6 pb-32 sm:pb-0 sm:pr-[52%]">
@@ -134,30 +134,27 @@ export function InfoCards({
                   className="size-5 transition-transform duration-200 group-hover:-rotate-12 group-hover:scale-110"
                   aria-hidden
                 />
-                Mitmachen
+                {t("join.button")}
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
                 <DialogTitle className={"text-2xl"}>
-                  Dem Leaderboard beitreten
+                  {t("join.dialogTitle")}
                 </DialogTitle>
               </DialogHeader>
               <div className={"grid gap-5"}>
                 <div className={"flex gap-3 items-start"}>
                   <Card className={"grow bg-background"}>
                     <CardHeader>
-                      <CardTitle>1. Anmelden bei Advent Of Code</CardTitle>
+                      <CardTitle>{t("join.step1Title")}</CardTitle>
                       <CardDescription>
-                        Melde dich auf der{" "}
-                        <a
-                          href={"https://adventofcode.com/2026/auth/login"}
-                          target={"_blank"}
-                          className={"underline hover:cursor-pointer"}
-                        >
-                          offiziellen Website des AoC
-                        </a>{" "}
-                        an.
+                        {rich("join.step1Text", {
+                          link: externalLink(
+                            "https://adventofcode.com/2026/auth/login",
+                            "underline hover:cursor-pointer",
+                          ),
+                        })}
                       </CardDescription>
                     </CardHeader>
                   </Card>
@@ -165,26 +162,19 @@ export function InfoCards({
                 <div className={"flex gap-3 items-start"}>
                   <Card className={"grow"}>
                     <CardHeader>
-                      <CardTitle>2. Einladungscode eingeben</CardTitle>
+                      <CardTitle>{t("join.step2Title")}</CardTitle>
                       <CardDescription>
-                        Navigiere auf der AoC-Website zur{" "}
-                        <a
-                          href={
-                            "https://adventofcode.com/2026/leaderboard/private"
-                          }
-                          target={"_blank"}
-                          className={"underline"}
-                        >
-                          Leaderboard-Page
-                        </a>{" "}
-                        und trage den untenstehenden Einladungscode ein.{" "}
-                        <strong>Fertig!</strong> Es dauert ein paar Minuten, bis
-                        dein Eintrag übernommen wird. Dann bist du mit dabei und
-                        wirst auf dem Neuland Leaderboard angezeigt.
+                        {rich("join.step2Text", {
+                          link: externalLink(
+                            "https://adventofcode.com/2026/leaderboard/private",
+                            "underline",
+                          ),
+                          strong: (c) => <strong>{c}</strong>,
+                        })}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <CopyCodeInput code={inviteCode}></CopyCodeInput>
+                      <CopyCodeInput code={inviteCode || t("join.codeUnavailable")} />
                     </CardContent>
                   </Card>
                 </div>
@@ -198,6 +188,7 @@ export function InfoCards({
 }
 
 export default function Header({ inviteCode }: { inviteCode: string }) {
+  const { t, plural } = useI18n();
   const today = new Date();
   const diffDays = Math.max(
     0,
@@ -219,7 +210,7 @@ export default function Header({ inviteCode }: { inviteCode: string }) {
           height={64}
           className="brightness-0 dark:invert"
         />
-        <p className="text-2xl">Neuland Leaderboard</p>
+        <p className="text-2xl">{t("header.title")}</p>
         <h1
           className={
             "lg:text-7xl text-5xl font-plex-mono font-semibold text-center leading-[1.45]"
@@ -232,7 +223,7 @@ export default function Header({ inviteCode }: { inviteCode: string }) {
         <div className="flex items-center gap-2.5 border bg-background px-4 py-2.5">
           {diffDays === 0 ? (
             <span className="text-sm leading-none text-muted-foreground">
-              Der Wettbewerb ist beendet
+              {t("header.over")}
             </span>
           ) : (
             <>
@@ -240,7 +231,7 @@ export default function Header({ inviteCode }: { inviteCode: string }) {
                 {diffDays}
               </span>
               <span className="text-sm leading-none text-muted-foreground">
-                {diffDays === 1 ? "Tag" : "Tage"} übrig
+                {plural("header.daysLeft", diffDays)}
               </span>
             </>
           )}

@@ -12,13 +12,13 @@ export const fetchDashboardData = createServerFn({ method: "GET" })
       return {
         locked: true as const,
         unlockAt: UNLOCK_AT,
-        inviteCode: process.env.AOC_INVITE_CODE || "CODE NICHT VERFÜGBAR",
+        inviteCode: process.env.AOC_INVITE_CODE || "",
       };
     }
 
     return {
       locked: false as const,
       leaderboard: await getLeaderboardData(),
-      inviteCode: process.env.AOC_INVITE_CODE || "CODE NICHT VERFÜGBAR",
+      inviteCode: process.env.AOC_INVITE_CODE || "",
     };
   });

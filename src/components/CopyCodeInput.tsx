@@ -3,12 +3,14 @@ import { Check, Copy } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useI18n } from "@/src/i18n/i18n"
 
 interface CopyCodeInputProps {
     code: string
 }
 
 export function CopyCodeInput({ code }: CopyCodeInputProps) {
+    const { t } = useI18n()
     const [hasCopied, setHasCopied] = React.useState(false)
 
     const onCopy = async () => {
@@ -66,7 +68,7 @@ export function CopyCodeInput({ code }: CopyCodeInputProps) {
                     ) : (
                         <Copy className="h-4 w-4 text-muted-foreground" />
                     )}
-                    <span className="sr-only">kopieren</span>
+                    <span className="sr-only">{t("common.copy")}</span>
                 </Button>
             </div>
         </div>

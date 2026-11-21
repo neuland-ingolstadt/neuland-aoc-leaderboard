@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "@tanstack/react-router";
+import { useI18n } from "@/src/i18n/i18n";
+import type { MessageKey } from "@/src/i18n/messages";
 import { TopGlow } from "@/src/components/top-glow";
 import { SnowBackground } from "@/src/components/snow-background";
 import { Lock } from "lucide-react";
 import { InfoCards } from "@/components/layout/header";
 
-const UNITS = [
-  { label: "Tage", ms: 86_400_000 },
-  { label: "Stunden", ms: 3_600_000 },
-  { label: "Minuten", ms: 60_000 },
-  { label: "Sekunden", ms: 1_000 },
+const UNITS: { labelKey: MessageKey; ms: number }[] = [
+  { labelKey: "countdown.days", ms: 86_400_000 },
+  { labelKey: "countdown.hours", ms: 3_600_000 },
+  { labelKey: "countdown.minutes", ms: 60_000 },
+  { labelKey: "countdown.seconds", ms: 1_000 },
 ];
 
 export function CountdownLock({
@@ -20,6 +22,7 @@ export function CountdownLock({
   inviteCode: string;
 }) {
   const router = useRouter();
+  const { t } = useI18n();
   // null until mounted to avoid a server/client hydration mismatch
   const [now, setNow] = useState<number | null>(null);
 
@@ -35,10 +38,10 @@ export function CountdownLock({
     if (remaining === 0) router.invalidate();
   }, [remaining, router]);
 
-  const values = UNITS.map(({ label, ms }, i) => {
+  const values = UNITS.map(({ labelKey, ms }, i) => {
     const total = remaining ?? 0;
     const larger = i === 0 ? Infinity : UNITS[i - 1].ms;
-    return { label, value: Math.floor((total % larger) / ms) };
+    return { labelKey, value: Math.floor((total % larger) / ms) };
   });
 
   return (
@@ -57,7 +60,7 @@ export function CountdownLock({
               height={64}
               className="brightness-0 dark:invert"
             />
-            <p className="text-2xl">Neuland Leaderboard</p>
+            <p className="text-2xl">{t("header.title")}</p>
             <h1 className="lg:text-7xl text-5xl font-plex-mono font-semibold text-center">
               Advent Of
               <br />
@@ -66,15 +69,17 @@ export function CountdownLock({
           </div>
           <div className="w-full bg-background border">
             <div className="grid grid-cols-4 divide-x">
-              {values.map(({ label, value }) => (
+              {values.map(({ labelKey, value }) => (
                 <div
-                  key={label}
+                  key={labelKey}
                   className="flex flex-col items-center gap-1 px-2 py-3 md:px-4 md:py-4"
                 >
                   <span className="font-plex-mono font-semibold text-2xl md:text-4xl tabular-nums">
                     {remaining === null ? "--" : String(value).padStart(2, "0")}
                   </span>
-                  <span className="text-xs text-muted-foreground">{label}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {t(labelKey)}
+                  </span>
                 </div>
               ))}
             </div>
@@ -83,9 +88,7 @@ export function CountdownLock({
                 className="size-6 shrink-0 text-foreground dark:text-accent"
                 strokeWidth={1.5}
               />
-              <p className="text-muted-foreground">
-                Das Leaderboard wird am 1. Dezember freigeschaltet.
-              </p>
+              <p className="text-muted-foreground">{t("countdown.unlock")}</p>
             </div>
           </div>
         </div>

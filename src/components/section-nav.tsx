@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/src/i18n/i18n";
+import type { MessageKey } from "@/src/i18n/messages";
 
 export interface NavSection {
   id: string;
-  label: string;
+  labelKey: MessageKey;
 }
 
 // Small fixed bar (bottom on mobile, top on desktop) that scrolls to a dashboard section and highlights
 // the one currently in view.
 export function SectionNav({ sections }: { sections: NavSection[] }) {
+  const { t } = useI18n();
   const [activeId, setActiveId] = useState<string>();
 
   useEffect(() => {
@@ -43,11 +46,11 @@ export function SectionNav({ sections }: { sections: NavSection[] }) {
 
   return (
     <nav
-      aria-label="Statistiken"
+      aria-label={t("nav.label")}
       className="fixed inset-x-0 bottom-4 z-20 md:bottom-auto md:top-4 flex justify-center px-4 pointer-events-none"
     >
       <ul className="pointer-events-auto flex max-w-full gap-0.5 border bg-background/80 p-1 shadow-md backdrop-blur">
-        {sections.map(({ id, label }) => (
+        {sections.map(({ id, labelKey }) => (
           <li key={id}>
             <button
               type="button"
@@ -60,7 +63,7 @@ export function SectionNav({ sections }: { sections: NavSection[] }) {
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
-              {label}
+              {t(labelKey)}
             </button>
           </li>
         ))}
