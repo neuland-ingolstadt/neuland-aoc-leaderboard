@@ -5,7 +5,9 @@ let cachedData: Leaderboard | null = null;
 let lastFetchTime: number = 0;
 const CACHE_DURATION_MS = 20 * 60 * 1000; // 20 minutes
 
-export async function getLeaderboardData(): Promise<Leaderboard> {
+// Cached leaderboard from the AoC API. Falls back to the last good data if a refresh fails and
+// throws if there is nothing to show.
+async function loadLeaderboard(): Promise<Leaderboard> {
   const now = Date.now();
 
   if (cachedData && now - lastFetchTime < CACHE_DURATION_MS) {
@@ -27,7 +29,7 @@ export async function getLeaderboardData(): Promise<Leaderboard> {
 
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch from AoC API: ${response.status} ${response.statusText}`
+        `Failed to fetch from AoC API: ${response.status} ${response.statusText}`,
       );
     }
 
@@ -44,7 +46,29 @@ export async function getLeaderboardData(): Promise<Leaderboard> {
     if (cachedData) {
       return cachedData;
     }
+    throw error;
+  }
+}
+
+export async function getLeaderboardData(): Promise<Leaderboard> {
+  try {
+    return await loadLeaderboard();
+  } catch {
     // Fallback to mock data if fetch fails (e.g. during build)
     return data as unknown as Leaderboard;
+  }
+}
+
+// Names of everyone on the leaderboard (null for members without a name), or null if the real
+// data is not available. Never falls back to mock data, so the landing page cannot show made-up
+// participants.
+export async function getParticipants(): Promise<(string | null)[] | null> {
+  try {
+    const leaderboard = await loadLeaderboard();
+    return Object.values(leaderboard.members)
+      .map((member) => member.name)
+      .sort((a, b) => (a ?? "\uffff").localeCompare(b ?? "\uffff", "de"));
+  } catch {
+    return null;
   }
 }

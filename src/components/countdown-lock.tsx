@@ -18,9 +18,12 @@ const UNITS: { labelKey: MessageKey; ms: number }[] = [
 export function CountdownLock({
   unlockAt,
   inviteCode,
+  participants,
 }: {
   unlockAt: number;
   inviteCode: string;
+  // names of everyone who has joined so far, null if they are not available
+  participants: (string | null)[] | null;
 }) {
   const router = useRouter();
   const { t } = useI18n();
@@ -43,6 +46,12 @@ export function CountdownLock({
     if (remaining === 0 && waitedForUnlock.current) router.invalidate();
   }, [remaining, router]);
 
+  // pick up new sign-ups without a manual reload (the server caches the data for a while)
+  useEffect(() => {
+    const interval = setInterval(() => router.invalidate(), 5 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, [router]);
+
   const values = UNITS.map(({ labelKey, ms }, i) => {
     const total = remaining ?? 0;
     const larger = i === 0 ? Infinity : UNITS[i - 1].ms;
@@ -56,8 +65,8 @@ export function CountdownLock({
         <TopGlow />
       </div>
       <NavBar />
-      <div className="mx-auto grid w-full max-w-6xl content-center items-center gap-12 lg:grid-cols-2">
-        <div className="flex flex-col items-center gap-10">
+      <div className="mx-auto grid w-full max-w-6xl content-center items-center gap-x-12 gap-y-12 lg:grid-cols-2 lg:gap-y-10">
+        <div className="flex flex-col items-center gap-10 lg:col-start-1 lg:row-start-1">
           <div className="flex flex-col items-center gap-5 text-center">
             <img
               src="/img/neuland_icon.svg"
@@ -98,7 +107,39 @@ export function CountdownLock({
             </div>
           </div>
         </div>
-        <InfoCards inviteCode={inviteCode} className="md:grid-cols-1" />
+        <InfoCards
+          inviteCode={inviteCode}
+          className="md:grid-cols-1 lg:col-start-2 lg:row-span-2 lg:row-start-1"
+        />
+        {participants && (
+          <section
+            className="w-full lg:col-start-1 lg:row-start-2"
+            aria-label={t("landing.joined", { n: participants.length })}
+          >
+            <h2 className="mb-3 text-center text-sm font-medium">
+              {t("landing.joined", { n: participants.length })}
+            </h2>
+            {participants.length === 0 ? (
+              <p className="text-center text-sm text-muted-foreground">
+                {t("landing.none")}
+              </p>
+            ) : (
+              <ul className="flex flex-wrap justify-center gap-1.5">
+                {participants.map((name, i) => (
+                  <li
+                    key={i}
+                    className="border bg-background px-2.5 py-1 text-xs"
+                  >
+                    {name || t("common.noName")}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <p className="mt-3 text-center text-xs text-muted-foreground">
+              {t("landing.note")}
+            </p>
+          </section>
+        )}
       </div>
     </main>
   );

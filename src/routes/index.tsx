@@ -38,7 +38,11 @@ function Home() {
   const data = Route.useLoaderData();
   if (data.locked)
     return (
-      <CountdownLock unlockAt={data.unlockAt} inviteCode={data.inviteCode} />
+      <CountdownLock
+        unlockAt={data.unlockAt}
+        inviteCode={data.inviteCode}
+        participants={data.participants}
+      />
     );
   return (
     <Dashboard

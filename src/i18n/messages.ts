@@ -26,6 +26,9 @@ const de = {
   "countdown.short.minutes": "Min",
   "countdown.short.seconds": "Sek",
   "countdown.unlock": "Das Leaderboard wird am 1. Dezember freigeschaltet.",
+  "landing.joined": "Bereits angemeldet ({n})",
+  "landing.none": "Noch niemand angemeldet.",
+  "landing.note": "Neue Anmeldungen erscheinen nach ein paar Minuten.",
 
   "header.title": "Neuland Leaderboard",
   "header.endsIn": "Die Challenge endet in",
@@ -185,6 +188,9 @@ const en: Record<MessageKey, string> = {
   "countdown.short.minutes": "min",
   "countdown.short.seconds": "s",
   "countdown.unlock": "The leaderboard unlocks on December 1.",
+  "landing.joined": "Already signed up ({n})",
+  "landing.none": "Nobody has signed up yet.",
+  "landing.note": "New sign-ups show up after a few minutes.",
 
   "header.title": "Neuland Leaderboard",
   "header.endsIn": "The challenge ends in",

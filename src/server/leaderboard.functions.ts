@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { END_AT, UNLOCK_AT } from "@/src/lib/unlock";
 import type { Screen } from "@/src/lib/screen";
-import { getLeaderboardData } from "./leaderboard";
+import { getLeaderboardData, getParticipants } from "./leaderboard";
 
 export const fetchDashboardData = createServerFn({ method: "GET" })
   .validator((data: { screen?: Screen }) => data)
@@ -20,6 +20,8 @@ export const fetchDashboardData = createServerFn({ method: "GET" })
         locked: true as const,
         unlockAt: UNLOCK_AT,
         inviteCode: process.env.AOC_INVITE_CODE || "",
+        // only the names, so people see that their sign-up worked; no scores before the start
+        participants: await getParticipants(),
       };
     }
 
