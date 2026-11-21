@@ -69,25 +69,26 @@ export function InfoCards({
           {/* soft green glow behind the shirts */}
           <div className="absolute -right-10 top-1/2 hidden size-96 -translate-y-1/2 bg-[radial-gradient(closest-side,color-mix(in_oklch,var(--accent)_22%,transparent),transparent)] sm:block" />
           <div className="absolute inset-x-0 bottom-0 h-48 bg-[radial-gradient(ellipse_at_bottom,color-mix(in_oklch,var(--accent)_25%,transparent),transparent_70%)] sm:hidden" />
-          {/* desktop: three shirts stacked diagonally, sized by the card height */}
-          <div className="absolute inset-y-0 right-0 hidden w-[50%] sm:block">
+          {/* desktop: three shirts stacked diagonally. The box has a fixed aspect ratio and the card
+              height as its height, so the arrangement is the same whatever the text length is */}
+          <div className="absolute inset-y-0 right-0 hidden aspect-[5/8] sm:block">
             <img
               src="/img/shirts/shirt-2.png"
               alt=""
               loading="lazy"
-              className="absolute -right-[4%] -top-[7%] z-0 h-[56%] w-auto max-w-none"
+              className="absolute -right-[4%] -top-[7%] z-0 w-[78%] h-auto max-w-none"
             />
             <img
               src="/img/shirts/shirt-4.png"
               alt=""
               loading="lazy"
-              className="absolute left-[14%] top-[28%] z-10 h-[54%] w-auto max-w-none"
+              className="absolute left-[14%] top-[28%] z-10 w-[75%] h-auto max-w-none"
             />
             <img
               src="/img/shirts/shirt-3.png"
               alt=""
               loading="lazy"
-              className="absolute -bottom-[3%] -left-[3%] z-20 h-[50%] w-auto max-w-none drop-shadow-[-8px_10px_16px_rgba(0,0,0,0.65)]"
+              className="absolute -bottom-[3%] -left-[3%] z-20 w-[69%] h-auto max-w-none drop-shadow-[-8px_10px_16px_rgba(0,0,0,0.65)]"
             />
           </div>
           {/* Mobile: shirts peek in from the bottom edge */}
