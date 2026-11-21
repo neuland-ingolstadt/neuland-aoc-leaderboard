@@ -13,7 +13,7 @@ import { RankProgression } from "@/src/components/dashboard/rank-progression";
 import { SubmissionHeatmap } from "@/src/components/dashboard/submission-heatmap";
 import { LastUpdatedBadge } from "@/components/ui/last-updated-badge";
 
-import { SectionNav } from "@/src/components/section-nav";
+import { NavBar } from "@/src/components/nav-bar";
 import { TopGlow } from "@/src/components/top-glow";
 import { SnowBackground } from "@/src/components/snow-background";
 import { CountdownLock } from "@/src/components/countdown-lock";
@@ -118,7 +118,7 @@ function Dashboard({
           </p>
         </div>
       </div>
-      <SectionNav sections={SECTIONS} />
+      <NavBar sections={SECTIONS} />
     </>
   );
 }

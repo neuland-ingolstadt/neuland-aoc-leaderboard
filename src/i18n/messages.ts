@@ -15,7 +15,6 @@ const de = {
   "common.stars": "Sterne",
   "common.copy": "kopieren",
   "common.close": "Schließen",
-  "common.toggleTheme": "Design wechseln",
   "common.language": "Sprache",
 
   "countdown.days": "Tage",
@@ -52,6 +51,11 @@ const de = {
   "nav.ranking": "Rangliste",
   "nav.progression": "Rangverlauf",
   "nav.activity": "Aktivität",
+
+  "settings.open": "Einstellungen",
+  "settings.theme": "Design",
+  "settings.light": "Hell",
+  "settings.dark": "Dunkel",
 
   "updated.one": "Vor {n} Minute aktualisiert",
   "updated.other": "Vor {n} Minuten aktualisiert",
@@ -146,7 +150,6 @@ const en: Record<MessageKey, string> = {
   "common.stars": "stars",
   "common.copy": "copy",
   "common.close": "Close",
-  "common.toggleTheme": "Toggle theme",
   "common.language": "Language",
 
   "countdown.days": "Days",
@@ -182,6 +185,11 @@ const en: Record<MessageKey, string> = {
   "nav.ranking": "Ranking",
   "nav.progression": "Progression",
   "nav.activity": "Activity",
+
+  "settings.open": "Settings",
+  "settings.theme": "Theme",
+  "settings.light": "Light",
+  "settings.dark": "Dark",
 
   "updated.one": "Updated {n} minute ago",
   "updated.other": "Updated {n} minutes ago",

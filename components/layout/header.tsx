@@ -174,7 +174,9 @@ export function InfoCards({
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <CopyCodeInput code={inviteCode || t("join.codeUnavailable")} />
+                      <CopyCodeInput
+                        code={inviteCode || t("join.codeUnavailable")}
+                      />
                     </CardContent>
                   </Card>
                 </div>

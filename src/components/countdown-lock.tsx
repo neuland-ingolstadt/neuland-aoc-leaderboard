@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "@tanstack/react-router";
 import { useI18n } from "@/src/i18n/i18n";
 import type { MessageKey } from "@/src/i18n/messages";
+import { NavBar } from "@/src/components/nav-bar";
 import { TopGlow } from "@/src/components/top-glow";
 import { SnowBackground } from "@/src/components/snow-background";
 import { Lock } from "lucide-react";
@@ -50,6 +51,7 @@ export function CountdownLock({
         <SnowBackground />
         <TopGlow />
       </div>
+      <NavBar />
       <div className="mx-auto grid w-full max-w-6xl content-center items-center gap-12 lg:grid-cols-2">
         <div className="flex flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-5 text-center">

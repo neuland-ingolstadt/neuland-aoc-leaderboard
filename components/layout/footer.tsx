@@ -1,7 +1,5 @@
 import { Link, useSearch } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/ui/mode-toggle";
-import { LanguageToggle } from "@/src/components/language-toggle";
 import { useI18n } from "@/src/i18n/i18n";
 
 export default function Footer() {
@@ -38,8 +36,6 @@ export default function Footer() {
                 </Link>
               </Button>
             )}
-            <LanguageToggle />
-            <ModeToggle />
           </div>
         </div>
       </div>
