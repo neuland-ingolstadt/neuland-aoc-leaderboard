@@ -2,6 +2,8 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { LeaderboardMember } from "@/src/types/leaderboard";
 import { cn } from "@/lib/utils";
+import { EmptyState } from "@/src/components/dashboard/empty-state";
+import { ParticipantList } from "@/src/components/dashboard/participant-list";
 import { useI18n } from "@/src/i18n/i18n";
 
 interface Props {
@@ -27,14 +29,12 @@ export function ScorePodium({ members }: Props) {
   const maxScore = sorted[0]?.local_score ?? 0;
 
   if (maxScore === 0) {
+    // nobody has points yet: show who is taking part instead of a podium
     return (
-      <div className="border px-4 py-8 text-center text-sm text-muted-foreground">
-        {t("ranking.empty")
-          .split("\n")
-          .map((line, i) => (
-            <p key={i}>{line}</p>
-          ))}
-      </div>
+      <>
+        <EmptyState text={t("ranking.empty")} />
+        <ParticipantList members={members} />
+      </>
     );
   }
 

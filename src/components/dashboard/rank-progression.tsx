@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Mountain, Rocket, RollerCoaster, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { EmptyState } from "@/src/components/dashboard/empty-state";
 import { useI18n } from "@/src/i18n/i18n";
 import type { MessageKey } from "@/src/i18n/messages";
 import { Leaderboard } from "@/src/types/leaderboard";
@@ -277,9 +278,7 @@ export function RankProgression({ leaderboard, days = 12 }: Props) {
   }, []);
 
   if (lastDay === 0 || series.length === 0) {
-    return (
-      <p className="text-sm text-muted-foreground">{t("progression.empty")}</p>
-    );
+    return <EmptyState text={t("progression.empty")} />;
   }
 
   const activeId = selected ?? series[0].id;

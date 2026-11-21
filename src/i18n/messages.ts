@@ -87,7 +87,8 @@ const de = {
   "progression.title": "Rangverlauf",
   "progression.description":
     "Platzierung aller Teilnehmenden nach jedem Rätseltag. Wähle einen Namen aus, um den Verlauf hervorzuheben",
-  "progression.empty": "Noch nicht genügend Daten.",
+  "progression.empty":
+    "Noch keine Daten vorhanden.\nSobald die ersten Sterne gelöst sind, erscheint hier der Rangverlauf.",
   "progression.aria": "Verlauf der Platzierungen nach Tagen",
   "progression.axisDay": "Tag",
   "progression.axisRank": "Platz",
@@ -115,6 +116,14 @@ const de = {
   "heatmap.hours": "{from}–{to} Uhr",
   "heatmap.solutions.one": "{n} Lösung",
   "heatmap.solutions.other": "{n} Lösungen",
+
+  "participants.title": "Alle Teilnehmenden ({n})",
+  "participants.show": "anzeigen",
+  "participants.hide": "ausblenden",
+  "participants.name": "Name",
+  "participants.stars": "Sterne",
+  "participants.lastSolved": "Zuletzt gelöst",
+  "participants.none": "noch nichts",
 
   "footer.disclaimer":
     "Neuland Ingolstadt e.V. steht in keiner Verbindung mit dem Advent of Code Wettbewerb und ist nicht für den Inhalt des Wettbewerbs verantwortlich sondern bietet nur das Leaderboard mit Preisverleihung an.",
@@ -235,7 +244,8 @@ const en: Record<MessageKey, string> = {
   "progression.title": "Rank progression",
   "progression.description":
     "Rank of all participants after each puzzle day. Select a name to highlight their course",
-  "progression.empty": "Not enough data yet.",
+  "progression.empty":
+    "No data yet.\nThe rank progression will appear here as soon as the first stars are solved.",
   "progression.aria": "Course of the rankings by day",
   "progression.axisDay": "Day",
   "progression.axisRank": "Rank",
@@ -262,6 +272,14 @@ const en: Record<MessageKey, string> = {
   "heatmap.hours": "{from}:00–{to}:00",
   "heatmap.solutions.one": "{n} solution",
   "heatmap.solutions.other": "{n} solutions",
+
+  "participants.title": "All participants ({n})",
+  "participants.show": "show",
+  "participants.hide": "hide",
+  "participants.name": "Name",
+  "participants.stars": "Stars",
+  "participants.lastSolved": "Last solved",
+  "participants.none": "nothing yet",
 
   "footer.disclaimer":
     "Neuland Ingolstadt e.V. is not affiliated with the Advent of Code competition and is not responsible for its content, but only provides the leaderboard with a prize.",
