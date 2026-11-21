@@ -1,61 +1,61 @@
 # Neuland AoC Leaderboard
 
-Das Leaderboard für den [Advent of Code](https://adventofcode.com)-Wettbewerb von [Neuland Ingolstadt e.V.](https://neuland-ingolstadt.de).
+The leaderboard for the [Advent of Code](https://adventofcode.com) competition run by [Neuland Ingolstadt e.V.](https://neuland-ingolstadt.de).
 
-Die Seite zeigt vor dem Start einen Countdown samt Einladungscode und der Liste der Angemeldeten. Während des Wettbewerbs zeigt sie Rangliste, Rangverlauf und Aktivität. Nach dem Ende zeigt sie die Gewinner:innen. Die Seite gibt es auf Deutsch und Englisch, mit hellem und dunklem Theme.
+Before the start, the site shows a countdown with the invite code and the list of people who have signed up. During the competition it shows the ranking, rank progression and activity. After the end it shows the winners. The site is available in German and English, with light and dark themes.
 
-## Tech-Stack
+## Tech stack
 
-- [TanStack Start](https://tanstack.com/start) (React 19, TanStack Router) mit Vite und Nitro
+- [TanStack Start](https://tanstack.com/start) (React 19, TanStack Router) with Vite and Nitro
 - Tailwind CSS 4, Radix UI, Recharts
-- [Bun](https://bun.sh) als Paketmanager (Version in `.bun-version`)
+- [Bun](https://bun.sh) as package manager (version in `.bun-version`)
 
-## Lokal starten
+## Getting started
 
 ```bash
 bun install
 bun run dev
 ```
 
-Ohne Konfiguration (oder wenn der Abruf der AoC-API fehlschlägt) werden die Mock-Daten aus `src/mocks/` verwendet.
+Without configuration (or if fetching from the AoC API fails), the mock data from `src/mocks/` is used.
 
-## Konfiguration
+## Configuration
 
-Die Konfiguration erfolgt über Umgebungsvariablen:
+Configuration is done via environment variables:
 
-| Variable              | Beschreibung                                                                                          |
-| --------------------- | ----------------------------------------------------------------------------------------------------- |
-| `AOC_LEADERBOARD_URL` | JSON-URL des privaten AoC-Leaderboards, z. B. `https://adventofcode.com/2026/leaderboard/private/view/<id>.json` |
-| `AOC_SESSION_TOKEN`   | Optional: Session-Cookie von adventofcode.com. Nicht nötig, wenn die URL einen `view_key` enthält.    |
-| `AOC_INVITE_CODE`     | Einladungscode des Leaderboards, wird auf der Seite zum Kopieren angezeigt.                           |
+| Variable              | Description                                                                                                      |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `AOC_LEADERBOARD_URL` | JSON URL of the private AoC leaderboard, e.g. `https://adventofcode.com/2026/leaderboard/private/view/<id>.json` |
+| `AOC_SESSION_TOKEN`   | Optional: session cookie from adventofcode.com. Not needed if the URL contains a `view_key`.                     |
+| `AOC_INVITE_CODE`     | Invite code of the leaderboard, shown on the site so it can be copied.                                           |
 
-Die Leaderboard-Daten werden serverseitig geholt und 20 Minuten zwischengespeichert. Schlägt ein Update fehl, werden die zuletzt erfolgreich geladenen Daten ausgeliefert.
+Leaderboard data is fetched on the server and cached for 20 minutes. If a refresh fails, the last successfully fetched data is served.
 
-## Zeitplan und Ansichten
+## Schedule and views
 
-Start und Ende des Wettbewerbs stehen in `src/lib/unlock.ts` (Start: 1. Dezember 2026, 05:00 UTC, Ende: 13. Dezember 2026, 05:00 UTC). Vor dem Start werden keine Punktestände an den Client ausgeliefert.
+The start and end of the competition are defined in `src/lib/unlock.ts` (start: 1 December 2026, 05:00 UTC; end: 13 December 2026, 05:00 UTC). No scores are sent to the client before the start.
 
-Die Startseite folgt der Uhrzeit. Mit `/?screen=landing|dashboard|end` kann die Ansicht gewechselt werden. `landing` funktioniert überall, `dashboard` und `end` nur im Entwicklungsmodus.
+The start page follows the clock. You can switch the view with `/?screen=landing|dashboard|end`. `landing` works everywhere, `dashboard` and `end` only in development mode.
 
-## Skripte
+## Scripts
 
-| Befehl          | Beschreibung                       |
-| --------------- | ---------------------------------- |
-| `bun run dev`   | Entwicklungsserver                 |
-| `bun run build` | Produktions-Build nach `.output/`  |
-| `bun run start` | Produktions-Build starten          |
-| `bun run lint`  | ESLint                             |
+| Command         | Description                      |
+| --------------- | -------------------------------- |
+| `bun run dev`   | Development server               |
+| `bun run build` | Production build to `.output/`   |
+| `bun run start` | Start the production build       |
+| `bun run lint`  | ESLint                           |
 
-## Projektstruktur
+## Project structure
 
 ```
-components/   Layout- und UI-Basiskomponenten (shadcn/ui)
+components/   Layout and base UI components (shadcn/ui)
 src/
-  components/ Dashboard- und Seitenkomponenten
-  content/    Texte, z. B. die Teilnahmebedingungen
-  i18n/       Übersetzungen (de/en)
-  lib/        Hilfsfunktionen (Zeitplan, Datenaufbereitung)
-  mocks/      Beispieldaten
-  routes/     Seiten (TanStack Router)
-  server/     Serverfunktionen und AoC-API-Anbindung
+  components/ Dashboard and page components
+  content/    Texts, e.g. the terms of participation
+  i18n/       Translations (de/en)
+  lib/        Helpers (schedule, data processing)
+  mocks/      Sample data
+  routes/     Pages (TanStack Router)
+  server/     Server functions and AoC API integration
 ```
