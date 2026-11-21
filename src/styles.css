@@ -1,13 +1,20 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "@fontsource/ibm-plex-sans/latin-300.css";
+@import "@fontsource/ibm-plex-sans/latin-400.css";
+@import "@fontsource/ibm-plex-sans/latin-600.css";
+@import "@fontsource/ibm-plex-sans/latin-700.css";
+@import "@fontsource/ibm-plex-mono/latin-400.css";
+@import "@fontsource/ibm-plex-mono/latin-600.css";
+@import "@fontsource/ibm-plex-mono/latin-700.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -39,12 +46,12 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-sora: var(--font-sora);
-  --font-azeret: var(--font-azeret)
+  --font-plex-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-plex-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -57,7 +64,7 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(71.409% 0.21106 135.934);
+  --accent: oklch(0.72 0.2 152);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
@@ -81,9 +88,9 @@
 .dark {
   --background: oklch(0 0 0 / 0.96);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
+  --card: oklch(0.16 0 0);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
+  --popover: oklch(0.16 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
@@ -91,8 +98,8 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.899 0.248 134.446);
-  --accent-muted: oklch(67.088% 0.18108 134.088);
+  --accent: #23ff88;
+  --accent-muted: oklch(0.7 0.18 152);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
@@ -120,5 +127,83 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Accent text: black on a hand-drawn marker stripe (SVG), mint in light mode
+     and neon green in dark mode */
+  .accent-marker {
+    padding: 0.05em 0.45em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 40%22 preserveAspectRatio=%22none%22%3E%3Cpath fill=%22%23b6fad0%22 d=%22M6 3 L60 5 L130 1 L194 3 L200 10 L195 16 L200 23 L196 29 L200 35 L193 38 L130 39 L60 36 L8 39 L0 32 L5 26 L0 20 L6 14 L1 8 Z%22/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: oklch(0 0 0);
+  }
+
+  .dark .accent-marker {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 40%22 preserveAspectRatio=%22none%22%3E%3Cpath fill=%22%2323ff88%22 d=%22M6 3 L60 5 L130 1 L194 3 L200 10 L195 16 L200 23 L196 29 L200 35 L193 38 L130 39 L60 36 L8 39 L0 32 L5 26 L0 20 L6 14 L1 8 Z%22/%3E%3C/svg%3E");
+  }
+
+  /* Per-line variant of the marker: each line gets its own hand-drawn shape and
+     a slight tilt so stacked lines don't look copy-pasted */
+  .accent-marker-line {
+    position: relative;
+    display: inline-block;
+    isolation: isolate;
+    padding: 0.05em 0.45em;
+    color: oklch(0 0 0);
+  }
+
+  .accent-marker-line::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: #b6fad0;
+    -webkit-mask: var(--marker-shape) no-repeat 0 0 / 100% 100%;
+    mask: var(--marker-shape) no-repeat 0 0 / 100% 100%;
+    transform: rotate(var(--marker-tilt, 0deg));
+  }
+
+  .dark .accent-marker-line::before {
+    background-color: #23ff88;
+  }
+
+  .accent-marker-line.marker-a {
+    --marker-tilt: -0.6deg;
+    --marker-shape: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 40%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M6 3 L60 5 L130 1 L194 3 L200 10 L195 16 L200 23 L196 29 L200 35 L193 38 L130 39 L60 36 L8 39 L0 32 L5 26 L0 20 L6 14 L1 8 Z%22/%3E%3C/svg%3E");
+  }
+
+  .accent-marker-line.marker-b {
+    --marker-tilt: 0.7deg;
+    --marker-shape: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 40%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M2 6 L45 1 L100 4 L160 0 L198 5 L200 12 L194 19 L199 26 L197 33 L190 39 L140 37 L85 40 L30 37 L4 40 L0 30 L6 22 L1 15 Z%22/%3E%3C/svg%3E");
+  }
+}
+
+@keyframes top-glow-drift {
+  0% {
+    transform: translate3d(-5%, 0, 0) scale(1, 1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate3d(6%, 3%, 0) scale(1.08, 1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-5%, 0, 0) scale(1, 1);
+    opacity: 0.8;
+  }
+}
+
+.top-glow-blob {
+  animation: top-glow-drift 24s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-glow-blob {
+    animation: none;
   }
 }
