@@ -57,6 +57,19 @@ const de = {
   "settings.light": "Hell",
   "settings.dark": "Dunkel",
 
+  "end.winner": "Gewonnen hat",
+  "end.tie": "Gleichstand an der Spitze",
+  "end.stats": "{points} Punkte · {stars} Sterne",
+  "end.congrats":
+    "Herzlichen Glückwunsch! Als Gewinn darf sich die Gewinnerin oder der Gewinner ein T-Shirt aus unserem Merch Shop aussuchen. Bitte checke deine Nachrichten, wenn das Orga-Team dich kontaktiert.",
+  "end.tieText":
+    "Bei Punktgleichstand entscheidet der Verein, wer gewinnt. Mehr dazu in den <link>Teilnahmebedingungen</link>.",
+  "end.noWinner":
+    "Es wurden keine Punkte vergeben, daher gibt es keinen Gewinner.",
+  "end.results": "Finale Ergebnisse",
+  "end.show": "anzeigen",
+  "end.hide": "ausblenden",
+
   "updated.one": "Vor {n} Minute aktualisiert",
   "updated.other": "Vor {n} Minuten aktualisiert",
   "dashboard.loaded": "Daten zuletzt vom AoC Server geladen:",
@@ -190,6 +203,18 @@ const en: Record<MessageKey, string> = {
   "settings.theme": "Theme",
   "settings.light": "Light",
   "settings.dark": "Dark",
+
+  "end.winner": "The winner is",
+  "end.tie": "A tie at the top",
+  "end.stats": "{points} points · {stars} stars",
+  "end.congrats":
+    "Congratulations! The winner gets to pick a T-shirt from our merch shop as the prize. Please check your messages when the organizing team contacts you.",
+  "end.tieText":
+    "In the event of a tie, the club decides who wins. Find out more in the <link>terms of participation</link>.",
+  "end.noWinner": "No points were awarded, so there is no winner.",
+  "end.results": "Final results",
+  "end.show": "show",
+  "end.hide": "hide",
 
   "updated.one": "Updated {n} minute ago",
   "updated.other": "Updated {n} minutes ago",

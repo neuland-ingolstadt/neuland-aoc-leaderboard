@@ -1,15 +1,21 @@
 import { createServerFn } from "@tanstack/react-start";
-import { UNLOCK_AT } from "@/src/lib/unlock";
+import { END_AT, UNLOCK_AT } from "@/src/lib/unlock";
+import type { Screen } from "@/src/lib/screen";
 import { getLeaderboardData } from "./leaderboard";
 
 export const fetchDashboardData = createServerFn({ method: "GET" })
-  .validator((data: { dev?: boolean; showLanding?: boolean }) => data)
+  .validator((data: { screen?: Screen }) => data)
   .handler(async ({ data }) => {
-    // Don't send any data before the event starts (the dev preview is only honored in
-    // development builds). ?showLanding always shows the landing page, even after the start.
-    const preview = import.meta.env.DEV && data.dev;
-    const beforeStart = !preview && Date.now() < UNLOCK_AT;
-    if (data.showLanding || beforeStart) {
+    // The landing page can always be requested. The other screens show data before their time,
+    // so they are only honored in development builds.
+    const forced = import.meta.env.DEV ? data.screen : undefined;
+    const now = Date.now();
+    const locked =
+      data.screen === "landing" ||
+      (now < UNLOCK_AT && forced !== "dashboard" && forced !== "end");
+
+    // Don't send any data before the event starts
+    if (locked) {
       return {
         locked: true as const,
         unlockAt: UNLOCK_AT,
@@ -19,6 +25,8 @@ export const fetchDashboardData = createServerFn({ method: "GET" })
 
     return {
       locked: false as const,
+      // the winner view after the end of the challenge
+      ended: forced ? forced === "end" : now >= END_AT,
       leaderboard: await getLeaderboardData(),
       inviteCode: process.env.AOC_INVITE_CODE || "",
     };

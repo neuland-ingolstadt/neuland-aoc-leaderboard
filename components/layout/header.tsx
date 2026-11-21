@@ -189,7 +189,14 @@ export function InfoCards({
   );
 }
 
-export default function Header({ inviteCode }: { inviteCode: string }) {
+export default function Header({
+  inviteCode,
+  ended = false,
+}: {
+  inviteCode: string;
+  // after the end of the challenge the counter, join and info cards make no sense
+  ended?: boolean;
+}) {
   const { t, plural } = useI18n();
   const today = new Date();
   const diffDays = Math.max(
@@ -214,32 +221,46 @@ export default function Header({ inviteCode }: { inviteCode: string }) {
         />
         <p className="text-2xl">{t("header.title")}</p>
         <h1
-          className={
-            "lg:text-7xl text-5xl font-plex-mono font-semibold text-center leading-[1.45]"
-          }
+          className={cn(
+            "lg:text-7xl text-5xl font-plex-mono font-semibold text-center",
+            ended ? "leading-tight" : "leading-[1.45]",
+          )}
         >
-          <span className="accent-marker-line marker-a">Advent Of</span>
-          <br />
-          <span className="accent-marker-line marker-b">Code 2026</span>
-        </h1>
-        <div className="flex items-center gap-2.5 border bg-background px-4 py-2.5">
-          {diffDays === 0 ? (
-            <span className="text-sm leading-none text-muted-foreground">
-              {t("header.over")}
-            </span>
+          {/* after the end only the winner carries the marker */}
+          {ended ? (
+            <>
+              Advent Of
+              <br />
+              Code 2026
+            </>
           ) : (
             <>
-              <span className="font-plex-mono text-2xl font-semibold leading-none tabular-nums">
-                {diffDays}
-              </span>
-              <span className="text-sm leading-none text-muted-foreground">
-                {plural("header.daysLeft", diffDays)}
-              </span>
+              <span className="accent-marker-line marker-a">Advent Of</span>
+              <br />
+              <span className="accent-marker-line marker-b">Code 2026</span>
             </>
           )}
-        </div>
+        </h1>
+        {!ended && (
+          <div className="flex items-center gap-2.5 border bg-background px-4 py-2.5">
+            {diffDays === 0 ? (
+              <span className="text-sm leading-none text-muted-foreground">
+                {t("header.over")}
+              </span>
+            ) : (
+              <>
+                <span className="font-plex-mono text-2xl font-semibold leading-none tabular-nums">
+                  {diffDays}
+                </span>
+                <span className="text-sm leading-none text-muted-foreground">
+                  {plural("header.daysLeft", diffDays)}
+                </span>
+              </>
+            )}
+          </div>
+        )}
       </div>
-      <InfoCards inviteCode={inviteCode} />
+      {!ended && <InfoCards inviteCode={inviteCode} />}
     </div>
   );
 }

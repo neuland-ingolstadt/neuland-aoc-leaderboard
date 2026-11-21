@@ -1,25 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Header from "@/components/layout/header";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { ScorePodium } from "@/src/components/dashboard/score-podium";
-import { RankProgression } from "@/src/components/dashboard/rank-progression";
-import { SubmissionHeatmap } from "@/src/components/dashboard/submission-heatmap";
-import { LastUpdatedBadge } from "@/components/ui/last-updated-badge";
+import { DashboardCards } from "@/src/components/dashboard/dashboard-cards";
+import { FinalResults } from "@/src/components/dashboard/final-results";
+import { WinnerCard } from "@/src/components/dashboard/winner-card";
 
 import { NavBar } from "@/src/components/nav-bar";
 import { TopGlow } from "@/src/components/top-glow";
 import { SnowBackground } from "@/src/components/snow-background";
 import { CountdownLock } from "@/src/components/countdown-lock";
 import type { Leaderboard } from "@/src/types/leaderboard";
-import { useI18n } from "@/src/i18n/i18n";
 import type { MessageKey } from "@/src/i18n/messages";
+import { parseScreen, type Screen } from "@/src/lib/screen";
 import { fetchDashboardData } from "@/src/server/leaderboard.functions";
 
 const SECTIONS: { id: string; labelKey: MessageKey }[] = [
@@ -30,33 +21,16 @@ const SECTIONS: { id: string; labelKey: MessageKey }[] = [
 ];
 
 interface SearchParams {
-  // ?dev: show the dashboard before the start (development builds only)
-  dev?: true;
-  // ?showLanding: show the landing page even after the start
-  showLanding?: true;
+  screen?: Screen;
 }
 
-// "?flag", "?flag=true" and "?flag=1" all switch a flag on
-const isFlag = (value: unknown) =>
-  value === true ||
-  value === "" ||
-  value === "true" ||
-  value === 1 ||
-  value === "1";
-
 export const Route = createFileRoute("/")({
-  validateSearch: (search: Record<string, unknown>): SearchParams => ({
-    ...(isFlag(search.dev) && { dev: true as const }),
-    ...(isFlag(search.showLanding) && { showLanding: true as const }),
-  }),
-  loaderDeps: ({ search }) => ({
-    dev: search.dev,
-    showLanding: search.showLanding,
-  }),
-  loader: ({ deps }) =>
-    fetchDashboardData({
-      data: { dev: deps.dev, showLanding: deps.showLanding },
-    }),
+  validateSearch: (search: Record<string, unknown>): SearchParams => {
+    const screen = parseScreen(search.screen);
+    return screen ? { screen } : {};
+  },
+  loaderDeps: ({ search }) => ({ screen: search.screen }),
+  loader: ({ deps }) => fetchDashboardData({ data: { screen: deps.screen } }),
   component: Home,
 });
 
@@ -67,26 +41,26 @@ function Home() {
       <CountdownLock unlockAt={data.unlockAt} inviteCode={data.inviteCode} />
     );
   return (
-    <Dashboard parsedData={data.leaderboard} inviteCode={data.inviteCode} />
+    <Dashboard
+      parsedData={data.leaderboard}
+      inviteCode={data.inviteCode}
+      ended={data.ended}
+    />
   );
 }
 
 function Dashboard({
   parsedData,
   inviteCode,
+  ended,
 }: {
   parsedData: Leaderboard;
   inviteCode: string;
+  ended: boolean;
 }) {
-  const { t, locale } = useI18n();
   const lastUpdated = parsedData.lastUpdated
     ? new Date(parsedData.lastUpdated)
     : new Date();
-
-  const memberList = Object.values(parsedData.members);
-  const memberListSortedByScore = memberList.slice().sort((a, b) => {
-    return b.local_score - a.local_score;
-  });
 
   return (
     <>
@@ -94,54 +68,23 @@ function Dashboard({
         <SnowBackground />
         <TopGlow />
       </div>
-      <Header inviteCode={inviteCode} />
+      <Header inviteCode={inviteCode} ended={ended} />
       <div className={"mx-auto w-full max-w-5xl px-1 md:px-5"}>
         <div>
-          <div className={"flex flex-col gap-4"}>
-            <Card id="rangliste" className="scroll-mt-4 md:scroll-mt-20">
-              <CardHeader className="max-sm:grid-cols-1!">
-                <CardTitle>{t("ranking.title")}</CardTitle>
-                <CardDescription>{t("ranking.description")}</CardDescription>
-                <CardAction className="max-sm:col-start-1 max-sm:row-span-1 max-sm:row-start-auto max-sm:mt-1 max-sm:justify-self-start">
-                  <LastUpdatedBadge date={lastUpdated} />
-                </CardAction>
-              </CardHeader>
-              <CardContent>
-                <ScorePodium members={memberListSortedByScore} />
-              </CardContent>
-            </Card>
-
-            <Card id="rangverlauf" className="scroll-mt-4 md:scroll-mt-20">
-              <CardHeader>
-                <CardTitle>{t("progression.title")}</CardTitle>
-                <CardDescription>
-                  {t("progression.description")}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <RankProgression leaderboard={parsedData} />
-              </CardContent>
-            </Card>
-
-            <Card id="aktivitaet" className="scroll-mt-4 md:scroll-mt-20">
-              <CardHeader>
-                <CardTitle>{t("heatmap.title")}</CardTitle>
-                <CardDescription>{t("heatmap.description")}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <SubmissionHeatmap leaderboard={parsedData} />
-              </CardContent>
-            </Card>
-          </div>
-          <p className="pt-5 pb-16 md:pb-0 text-[9px] text-center text-muted-foreground">
-            {t("dashboard.loaded")}{" "}
-            {lastUpdated.toLocaleTimeString(locale, {
-              timeZone: "Europe/Berlin",
-            })}
-          </p>
+          {ended ? (
+            <div className="flex flex-col gap-4">
+              <WinnerCard leaderboard={parsedData} />
+              <FinalResults leaderboard={parsedData} />
+            </div>
+          ) : (
+            <DashboardCards
+              leaderboard={parsedData}
+              lastUpdated={lastUpdated}
+            />
+          )}
         </div>
       </div>
-      <NavBar sections={SECTIONS} />
+      <NavBar sections={ended ? undefined : SECTIONS} />
     </>
   );
 }
