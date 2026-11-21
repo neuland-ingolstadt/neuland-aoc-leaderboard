@@ -29,11 +29,34 @@ const SECTIONS: { id: string; labelKey: MessageKey }[] = [
   { id: "aktivitaet", labelKey: "nav.activity" },
 ];
 
+interface SearchParams {
+  // ?dev: show the dashboard before the start (development builds only)
+  dev?: true;
+  // ?showLanding: show the landing page even after the start
+  showLanding?: true;
+}
+
+// "?flag", "?flag=true" and "?flag=1" all switch a flag on
+const isFlag = (value: unknown) =>
+  value === true ||
+  value === "" ||
+  value === "true" ||
+  value === 1 ||
+  value === "1";
+
 export const Route = createFileRoute("/")({
-  validateSearch: (search: Record<string, unknown>): { dev?: true } =>
-    search.dev === true || search.dev === "true" ? { dev: true } : {},
-  loaderDeps: ({ search }) => ({ dev: search.dev }),
-  loader: ({ deps }) => fetchDashboardData({ data: { dev: deps.dev } }),
+  validateSearch: (search: Record<string, unknown>): SearchParams => ({
+    ...(isFlag(search.dev) && { dev: true as const }),
+    ...(isFlag(search.showLanding) && { showLanding: true as const }),
+  }),
+  loaderDeps: ({ search }) => ({
+    dev: search.dev,
+    showLanding: search.showLanding,
+  }),
+  loader: ({ deps }) =>
+    fetchDashboardData({
+      data: { dev: deps.dev, showLanding: deps.showLanding },
+    }),
   component: Home,
 });
 

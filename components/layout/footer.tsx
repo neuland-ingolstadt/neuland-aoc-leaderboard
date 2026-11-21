@@ -1,9 +1,7 @@
-import { Link, useSearch } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
 import { useI18n } from "@/src/i18n/i18n";
 
 export default function Footer() {
-  const { dev } = useSearch({ strict: false }) as { dev?: boolean };
   const { t } = useI18n();
   return (
     <div className="w-full border-t border-border mt-8">
@@ -28,15 +26,6 @@ export default function Footer() {
           >
             {t("footer.terms")}
           </Link>
-          <div className="flex items-center gap-2">
-            {import.meta.env.DEV && (
-              <Button asChild variant="outline" size="sm">
-                <Link to="/" search={{ dev: dev ? undefined : true }}>
-                  Dev: {dev ? "Landing Page" : "Dashboard"}
-                </Link>
-              </Button>
-            )}
-          </div>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "@tanstack/react-router";
 import { useI18n } from "@/src/i18n/i18n";
 import type { MessageKey } from "@/src/i18n/messages";
@@ -27,16 +27,20 @@ export function CountdownLock({
   // null until mounted to avoid a server/client hydration mismatch
   const [now, setNow] = useState<number | null>(null);
 
+  // true if the page was opened before the unlock, so it should switch over once it passes
+  const waitedForUnlock = useRef(false);
+
   useEffect(() => {
+    waitedForUnlock.current = unlockAt > Date.now();
     setNow(Date.now());
     const interval = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [unlockAt]);
 
   const remaining = now === null ? null : Math.max(0, unlockAt - now);
 
   useEffect(() => {
-    if (remaining === 0) router.invalidate();
+    if (remaining === 0 && waitedForUnlock.current) router.invalidate();
   }, [remaining, router]);
 
   const values = UNITS.map(({ labelKey, ms }, i) => {
