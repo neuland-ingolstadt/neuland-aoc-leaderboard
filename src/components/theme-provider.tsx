@@ -5,8 +5,9 @@ type Theme = "light" | "dark";
 const STORAGE_KEY = "theme";
 const DEFAULT_THEME: Theme = "dark";
 
-// Runs before hydration so the correct class is set without a flash.
-export const themeInitScript = `(function(){try{var t=localStorage.getItem("${STORAGE_KEY}");if(t!=="light"&&t!=="dark")t="${DEFAULT_THEME}";var c=document.documentElement.classList;c.remove("light","dark");c.add(t);document.documentElement.style.colorScheme=t;}catch(e){}})();`;
+// Runs before hydration so the correct class is set without a flash. Without a saved choice the
+// device setting (prefers-color-scheme) decides.
+export const themeInitScript = `(function(){try{var t=localStorage.getItem("${STORAGE_KEY}");if(t!=="light"&&t!=="dark")t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";var c=document.documentElement.classList;c.remove("light","dark");c.add(t);document.documentElement.style.colorScheme=t;}catch(e){}})();`;
 
 const listeners = new Set<() => void>();
 
@@ -19,27 +20,50 @@ function subscribe(listener: () => void) {
 function getSnapshot(): Theme {
   return document.documentElement.classList.contains("light")
     ? "light"
-    : DEFAULT_THEME;
+    : "dark";
 }
 
 function getServerSnapshot(): Theme {
   return DEFAULT_THEME;
 }
 
-function setTheme(next: Theme) {
+function applyTheme(next: Theme) {
   const root = document.documentElement;
   root.classList.remove("light", "dark");
   root.classList.add(next);
   root.style.colorScheme = next;
+  listeners.forEach((listener) => listener());
+}
+
+function setTheme(next: Theme) {
+  applyTheme(next);
   try {
     localStorage.setItem(STORAGE_KEY, next);
   } catch {
     // storage unavailable (e.g. private mode): theme just won't persist
   }
-  listeners.forEach((listener) => listener());
+}
+
+function hasSavedTheme() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved === "light" || saved === "dark";
+  } catch {
+    return false;
+  }
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  // Follow the device while the user has not picked a theme themselves
+  React.useEffect(() => {
+    const query = window.matchMedia("(prefers-color-scheme: dark)");
+    const onChange = (event: MediaQueryListEvent) => {
+      if (!hasSavedTheme()) applyTheme(event.matches ? "dark" : "light");
+    };
+    query.addEventListener("change", onChange);
+    return () => query.removeEventListener("change", onChange);
+  }, []);
+
   return <>{children}</>;
 }
 
@@ -47,7 +71,7 @@ export function useTheme() {
   const theme = React.useSyncExternalStore(
     subscribe,
     getSnapshot,
-    getServerSnapshot
+    getServerSnapshot,
   );
   return { theme, setTheme };
 }
